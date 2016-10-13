@@ -1,0 +1,113 @@
+body {
+	background-image: url('https://web.fe.up.pt/~arestivo/page/img/exercises/css/stripe.png');
+	background-attachment: local;
+	background-repeat: repeat-y;
+	margin: 0;
+	margin-left: 41px;
+}
+
+#header {
+	color: white;
+	background-color: black;
+	padding: 8px;
+}
+
+#header h2 {
+	font-size: 95%;
+	margin: 0;
+	margin-left: 10px;
+	margin-bottom: 8px;
+}
+
+#header h1 {
+	margin: 0;
+	padding-left: 8px;
+	padding-top: 16px;
+}
+
+#menu {
+	background-color: #333;
+	padding-top: 8px;
+	padding-bottom: 8px;
+}
+
+#menu ul {
+	margin: 0;
+	padding-left: 8px;
+}
+
+#menu li {
+	display: inline;
+	background-color: white;
+	padding-left: 10px;
+	padding-right: 10px;
+	margin: 3px;
+}
+
+#menu a {
+	color: black;
+	text-decoration: none;
+	font-size: 85%;
+}
+
+#content, #footer {
+	margin: 5px;
+	margin-right: 23em;
+}
+
+#content h3 {
+	font-size: 175%;
+	margin: 10px;
+}
+
+#content img {
+	float: right;
+	margin: 10px;
+}
+
+.introduction {
+	font-style: italic;
+}
+
+#content p {
+	font-size: 87%;
+	margin-left: 10px;
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
+#content p a {
+	color: #722;
+	text-decoration: none;
+}
+
+#content ul {
+	background-color: #333;
+	padding-left: 10px;
+	padding-top: 3px;
+	padding-bottom: 4px;
+}
+
+#content li {
+	display: inline;
+	padding-right: 20px;
+}
+
+
+#content ul a {
+	color: white;
+	text-decoration: none;
+	font-size: 95%;
+}
+
+#footer {
+	float: right;
+	margin-bottom: 0;
+	margin-top: 0;
+}
+
+#footer p {
+	font-size: 80%;
+	margin-bottom: 0;
+	margin-top: 0;
+}
