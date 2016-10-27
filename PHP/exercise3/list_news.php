@@ -1,9 +1,10 @@
-<html><head>
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<!DOCTYPE html>
+<html lang="en-GB">
+	<head>
 		<title>CSS Exercise</title>
 		<meta charset="UTF-8">
 		<link rel="stylesheet" href="news_ficheiros/style1.css">
-	</head>
+		</head>
 	<body>
   	<div id="header">
 			<h1>Online Newspaper</h1>
@@ -36,11 +37,12 @@
 					            <li><a href="https://web.fe.up.pt/%7Earestivo/page/files/exercises/css/comentarios1.html">comments (2)</a></li>
 					            <li><a href="https://web.fe.up.pt/%7Earestivo/page/files/exercises/css/partilhar1.html">share</a></li>
 				        </ul>';
+					echo '</div>';
         }
       ?>
     </div>
 		<div id="footer">
 			<p>CSS Exercises @ FEUP - 2013</p>
 		</div>
-  </body>
+	</body>
 </html>
