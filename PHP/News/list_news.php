@@ -25,6 +25,7 @@
 				include_once('database/news.php');
 
 				$result = getAllNews();
+
       ?>
     </div>
 		<div id="footer">
