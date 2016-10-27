@@ -21,7 +21,7 @@
 		</div>
 		<div id="content">
       <?php
-        $db = new PDO('sqlite:news.db');
+				include_once('database/connection.php');
 
         $stmt = $db->prepare('SELECT * FROM news');
         $stmt->execute();  
