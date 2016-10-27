@@ -3,7 +3,7 @@
 	<head>
 		<title>CSS Exercise</title>
 		<meta charset="UTF-8">
-		<link rel="stylesheet" href="news_ficheiros/style1.css">
+		<link rel="stylesheet" href="css/style1.css">
 		</head>
 	<body>
   	<div id="header">
