@@ -1,0 +1,52 @@
+body {
+    width: 100%;
+    margin: 0 auto;
+}
+
+#header_page {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    background-color: #333;
+}
+
+#header_page img {
+    margin: 10px;
+    margin-left: 20px;
+    width: 50px;
+    height: 50px;
+    float: left;
+}
+
+ul#log_site {
+    display: inline;
+    list-style-type: none;
+}
+
+ul#log_site li {
+    float: right;
+}
+
+ul#log_site li form {
+    display: block;
+    color: white;
+    text-align: center;
+    text-decoration: none;
+}
+
+/* Change the link color to #111 (black) on hover */
+ul#log_site input:hover {
+    background-color: #111;
+}
+
+ul#log_site input {
+    background-color: #333; /* Green */
+    border: none;
+    color: white;
+    padding: 26px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+}

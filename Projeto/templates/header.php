@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8"/>
+		<title>AELIUS</title>
+		<link rel="stylesheet" href="css/Style.css">
+	</head>
+	<body>
+		<div id="header_page">
+			<img src="images/logo.png" alt="AELIUS"/>
+			<ul id="log_site">
+				<?php
+					if (isset($_SESSION['username'])) {
+						echo '<li>';
+							include ('templates/logout.php');
+						echo '</li>';
+					}
+					else {
+						echo '<li>';
+							include ('templates/login.php');
+						echo '</li>';
+						echo '<li>';
+							include ('templates/register.php');
+						echo '</li>';
+					}
+				?>
+			</ul>    
+		</div>
