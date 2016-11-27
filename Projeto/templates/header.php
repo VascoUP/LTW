@@ -1,12 +1,6 @@
-<!DOCTYPE html>
-<html>
-	<head>
-		<meta charset="UTF-8"/>
-		<title>AELIUS</title>
-		<link rel="stylesheet" href="css/Style.css">
 	</head>
 	<body>
-		<div id="header_page">
+		<header>
 			<img src="images/logo.png" alt="AELIUS"/>
 			<ul id="log_site">
 				<?php
@@ -25,4 +19,4 @@
 					}
 				?>
 			</ul>    
-		</div>
+		</header>

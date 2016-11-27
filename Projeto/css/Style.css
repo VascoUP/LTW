@@ -3,7 +3,7 @@ body {
     margin: 0 auto;
 }
 
-#header_page {
+header {
     list-style-type: none;
     margin: 0;
     padding: 0;
@@ -11,11 +11,11 @@ body {
     background-color: #333;
 }
 
-#header_page img {
-    margin: 10px;
-    margin-left: 20px;
-    width: 50px;
-    height: 50px;
+header img {
+    margin: 7px;
+    margin-left: 15px;
+    width: 40px;
+    height: 40px;
     float: left;
 }
 
@@ -41,12 +41,85 @@ ul#log_site input:hover {
 }
 
 ul#log_site input {
-    background-color: #333; /* Green */
+    background-color: #333;
     border: none;
     color: white;
-    padding: 26px 32px;
+    padding: 18px 22px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
+}
+
+
+#search_bar {
+    width: 100%;
+    padding: 2em 0em;
+    display: inline-block;
+    text-align: center;    
+    -webkit-transition: padding 1s;
+    transition: padding 1s;
+}
+
+#search_bar:hover {
+    padding: 6em 0em;
+}
+
+#search_bar h2 {
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    font-size: 200%;
+}
+
+#search_values {
+	display: inline;
+}
+
+#search_submit {
+    padding: 5px 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+#search_submit:hover {
+    background-color: #e8e8e8;
+}
+
+#search_bar select:hover {
+    background-color: #e8e8e8;
+}
+
+#search_values input {
+    background-color: white;
+    background-image: url('../images/search.png');
+    background-size: 15px;
+    background-position: 5px 5px;
+    background-repeat: no-repeat;
+
+    width: 30em;
+    height: 20px;
+    padding-left: 25px;
+}
+
+#search_values select {
+    padding: 5px 1em;
+    border: none;
+    border-radius: 4px;
+    background-color: #f1f1f1;
+}
+
+#search_bar {
+    background-image: url('../images/background_search.jpg');
+    background-position: center;
+    background-size: cover;
+}
+
+
+footer {
+    margin: 0;
+    padding: 5px 0px;
+    overflow: hidden;
+    background-color: #333;
+
 }
