@@ -1,6 +1,7 @@
 body {
     width: 100%;
     margin: 0 auto;
+    background: #ddd;
 }
 
 header {
@@ -51,7 +52,6 @@ ul#log_site input {
     font-size: 16px;
 }
 
-
 #search_bar {
     width: 100%;
     padding: 2em 0em;
@@ -59,6 +59,10 @@ ul#log_site input {
     text-align: center;    
     -webkit-transition: padding 1s;
     transition: padding 1s;
+
+    -webkit-box-shadow: 0px 0px 8px 0px #000000;
+       -moz-box-shadow: 0px 0px 8px 0px #000000;
+            box-shadow: 0px 0px 8px 0px #000000;
 }
 
 #search_bar:hover {
@@ -72,7 +76,7 @@ ul#log_site input {
 }
 
 #search_values {
-	display: inline;
+    display: inline;
 }
 
 #search_submit {
@@ -115,11 +119,62 @@ ul#log_site input {
     background-size: cover;
 }
 
+#restaurants_list {
+    width: 70%;
+    background: white;
+    margin: 0 auto;
+    margin-bottom: 1em;
+    margin-top: 1em;
+    padding: 0em;
+    list-style-type: none;
+
+    -webkit-box-shadow: 0px 0px 8px 0px #888;
+    -moz-box-shadow: 0px 0px 8px 0px #888;
+    box-shadow: 0px 0px 8px 0px #888;
+}
+
+#restaurant_opt {
+    padding:2em;
+}
+
+#restaurant_opt:hover {
+    background: #efefef;
+}
+
+#restaurant_opt img {
+    width: 70px;
+    height: 70px;
+    float: left;
+}
+
+#restaurant_name {
+    display: inline;
+}
+
+#restaurant_score {
+    display: inline;
+    float: right;
+}
+
+#outOf {
+    display: inline;
+    float: right;
+}
 
 footer {
-    margin: 0;
-    padding: 5px 0px;
     overflow: hidden;
     background-color: #333;
-
 }
+
+footer p {
+    float: left;
+}
+
+footer #google_translate_element {
+    width: 20em;
+    margin: 12px 16px 0px 0px;
+    display: inline-block;
+    float: right;
+}
+
+

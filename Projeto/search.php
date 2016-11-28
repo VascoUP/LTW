@@ -10,5 +10,6 @@
 <?php
 	include ('templates/header.php');
 	include ('templates/search_form.php');
+	include ('templates/list_restaurants.php');
   	include ('templates/footer.php');
 ?>
