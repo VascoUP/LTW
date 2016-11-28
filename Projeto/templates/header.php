@@ -1,3 +1,4 @@
+		<script type="text/javascript" src="scripts/headerButtons.js"></script>	
 	</head>
 	<body>
 		<header>

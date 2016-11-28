@@ -1,5 +1,4 @@
 <div id="restaurant_opt">
-	
 	<img src="images/logo.png" alt="photo">
 	<h3 id="restaurant_name"> Name </h3>
 	<h3 id="outOf" > /10 </h3>
