@@ -1,3 +1,3 @@
-<form action="action_logout.php">
-  <?=$_SESSION['username']?> <input type="submit" value="Logout">
+<form id="Logout_Button">
+  <?=$_SESSION['username']?> <input type="button" value="Logout">
 </form>
