@@ -10,7 +10,7 @@
 	include ('templates/header.php');
 	include ('templates/search_form.php');
 
-	include ('templates/list_restaurants.php');
+	include ('templates/restaurant_photo.php');
 
 	include ('templates/login_form.php');
 	include ('templates/register_form.php');
