@@ -3,4 +3,4 @@
 	<head>
 		<meta charset="UTF-8"/>
 		<title>AELIUS</title>
-		<link rel="stylesheet" href="css/Style.css">
+		<link rel="stylesheet" href="css/style.css">

@@ -32,6 +32,9 @@ header img {
 	padding-bottom:50px;
 }
 
+
+/* Header related */
+
 ul#log_site {
 	display: inline;
 	list-style-type: none;
@@ -48,7 +51,6 @@ ul#log_site li form {
 	text-decoration: none;
 }
 
-/* Change the link color to #111 (black) on hover */
 ul#log_site input:hover {
 	background-color: #111;
 }
@@ -173,6 +175,28 @@ ul#log_site input {
 	margin-bottom: 2em;
 }
 
+.Restaurant_Opt {
+	padding:2em;
+}
+
+.Restaurant_Opt:hover {
+	background: #efefef;
+}
+
+.Restaurant_Opt img {
+	width: 70px;
+	height: 70px;
+	float: left;
+}
+
+
+/* Restaurant's page related */
+
+#Restaurant_Page {
+	width: 70%;
+	margin: auto; 
+}
+
 .Restaurant_Photo  {
 	display: flex;
 	flex-direction: column;
@@ -181,9 +205,7 @@ ul#log_site input {
 	background-position: center;
 	background-size: cover;
 
-	width: 70%;
-	height: 250px;
-	margin: auto;    
+	height: 250px; 
 
 	-webkit-box-shadow: 0px 0px 8px 0px #888;
 	-moz-box-shadow: 0px 0px 8px 0px #888;
@@ -225,19 +247,59 @@ ul#log_site input {
 	background-color: rgba(30, 30, 30, 0.7);
 }
 
-.Restaurant_Opt {
-	padding:2em;
+#Restaurant_Overview {
+	background-color: white;
+
+	overflow: auto;
+
+	-webkit-box-shadow: 0px 0px 8px 0px #888;
+	-moz-box-shadow: 0px 0px 8px 0px #888;
+	box-shadow: 0px 0px 8px 0px #888;
 }
 
-.Restaurant_Opt:hover {
-	background: #efefef;
+#Overview_Col1, #Overview_Col2 {
+	display: inline-block;
+	vertical-align:top;
+	width: 45%;
+	margin: 10px 2%;
 }
 
-.Restaurant_Opt img {
-	width: 70px;
-	height: 70px;
-	float: left;
+#Overview_Col1 * , #Overview_Col2 * {
+	text-align: center;
 }
+
+#Ov_Categories {
+	padding: 0;
+	list-style-type: none;
+}
+
+#Overview_Map {
+	width: 100%;
+}
+
+#Overview_Map p {
+	margin: auto;
+}
+
+.Overview_Title {
+	font-size: 140%;
+	font-weight: bold;
+	margin-bottom: 5px;
+}
+
+.Overview_Title ~ * {
+	margin: 5px;
+}
+
+#Phone_Number {
+	font-weight: bold;
+	color: green;
+}
+
+#Ov_Closed {
+	color: red;
+}
+
 
 .Restaurant_Name {
 	display: inline-block;
@@ -269,12 +331,13 @@ ul#log_site input {
 
 footer {	
 	width: 100%;
-	overflow: auto;	
+	overflow: none;	
 	height:50px;
 	position:absolute;
 	bottom:0;
 	left:0;
 	background-color: #333;
+	color: white;
 }
 
 footer p {
@@ -289,62 +352,64 @@ footer #google_translate_element {
 }
 
 .Absolute_Center {
-    top: 0;
-    width: 25%;
-    min-width: 220px;
-    height: 40%;
-    min-height: 220px;
-    position: fixed;
-    left: 75%;
-    margin-left: -37.5%;
-    text-align: center;
-    background: white;   
+	top: 0;
+	width: 25%;
+	min-width: 220px;
+	height: 40%;
+	min-height: 220px;
+	position: fixed;
+	left: 75%;
+	margin-left: -37.5%;
+	text-align: center;
+	background: white;   
 
-    -webkit-box-shadow: 0px 0px 8px 0px #888;
-    -moz-box-shadow: 0px 0px 8px 0px #888;
-    box-shadow: 0px 0px 8px 0px #888;  
+	-webkit-box-shadow: 0px 0px 8px 0px #888;
+	-moz-box-shadow: 0px 0px 8px 0px #888;
+	box-shadow: 0px 0px 8px 0px #888;  
 }
 
 #login_form h3 {
-    margin: 0;
-    padding: 20px 0px;
+	margin: 0;
+	padding: 20px 0px;
 }
 
 #login_form p {
-    margin: 0;
-    padding: 10px 0px;
+	margin: 0;
+	padding: 10px 0px;
 }
 
 .style_button {
-    padding: 5px 1em;
-    border: none;
-    border-radius: 4px;
-    background-color: #f1f1f1;
+	padding: 5px 1em;
+	border: none;
+	border-radius: 4px;
+	background-color: #f1f1f1;
 }
 
 .style_button:hover {
-    background-color: #e8e8e8;
+	background-color: #e8e8e8;
 }
 
 .class_form .style_button {
-    display: block;
-    margin: 10px auto;
+	display: block;
+	margin: 10px auto;
 }
 
 .Black_Screen {
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    position: fixed;
-    background: #000;
-    opacity: 0.8;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	position: fixed;
+	background: #000;
+	opacity: 0.8;
 }
 
 
 .Icon_Text {    
-    background-color: white;
-    background-repeat: no-repeat;
+	background-color: white;
+	background-repeat: no-repeat;
 }
 
-
+.Curved_Edges {
+	border-radius: 5px;
+}

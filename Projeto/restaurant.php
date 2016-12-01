@@ -12,9 +12,14 @@
 	<div id="content">
 <?php
 	include ('templates/search_form.php');
-
+?>
+	<div id="Restaurant_Page">
+<?php
 	include ('templates/restaurant_photo.php');
-
+	include ('templates/restaurant_overview.php');
+?>
+	</div>
+<?php
 	include ('templates/login_form.php');
 	include ('templates/register_form.php');
 ?>
