@@ -1,274 +1,291 @@
+html,
 body {
-    width: 100%;
-    margin: 0 auto;
-    background: #ddd;
+	margin:0;
+	padding:0;
+  	width:100%;
+	height:100%;
+	background: #ddd;
 }
 
 header {
-    list-style-type: none;
-    margin: 0;
-    padding: 0;
-    overflow: hidden;
-    background-color: #333;
+	list-style-type: none;
+	margin: 0;
+	padding: 0;
+	overflow: hidden;
+	background-color: #333;
 }
 
 header img {
-    margin: 7px;
-    margin-left: 15px;
-    width: 40px;
-    height: 40px;
-    float: left;
+	margin: 7px;
+	margin-left: 15px;
+	width: 40px;
+	height: 40px;
+	float: left;
+}
+
+#wrapper {
+	min-height: 100%;
+	position:relative;
+}
+
+#content {
+	padding-bottom:50px;
 }
 
 ul#log_site {
-    display: inline;
-    list-style-type: none;
+	display: inline;
+	list-style-type: none;
 }
 
 ul#log_site li {
-    float: right;
+	float: right;
 }
 
 ul#log_site li form {
-    display: block;
-    color: white;
-    text-align: center;
-    text-decoration: none;
+	display: block;
+	color: white;
+	text-align: center;
+	text-decoration: none;
 }
 
 /* Change the link color to #111 (black) on hover */
 ul#log_site input:hover {
-    background-color: #111;
+	background-color: #111;
 }
 
 ul#log_site input {
-    background-color: #333;
-    border: none;
-    color: white;
-    padding: 18px 22px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
+	background-color: #333;
+	border: none;
+	color: white;
+	padding: 18px 22px;
+	text-align: center;
+	text-decoration: none;
+	display: inline-block;
+	font-size: 16px;
 }
 
 
 /* Search bar related */
 
 #search_bar {
-    width: 100%;
-    padding: 2em 0em;
-    display: inline-block;
-    text-align: center;
-    -webkit-transition: padding 1s;
-    transition: padding 1s;
+	width: 100%;
+	padding: 2em 0em;
+	display: inline-block;
+	text-align: center;
+	-webkit-transition: padding 1s;
+	transition: padding 1s;
 
-    -webkit-box-shadow: 0px 0px 8px 0px #000000;
-       -moz-box-shadow: 0px 0px 8px 0px #000000;
-            box-shadow: 0px 0px 8px 0px #000000;
+	-webkit-box-shadow: 0px 0px 8px 0px #000000;
+	-moz-box-shadow: 0px 0px 8px 0px #000000;
+	    box-shadow: 0px 0px 8px 0px #000000;
 }
 
 #search_bar:hover {
-    padding: 6em 0em;
+	padding: 6em 0em;
 }
 
 #search_bar h2 {
-    color: white;
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    font-size: 200%;
+	color: white;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-size: 200%;
 }
 
 #search_values {
-    display: inline;
+	display: inline;
 }
 
 #search_bar select:hover {
-    background-color: #e8e8e8;
+	background-color: #e8e8e8;
 }
 
 #search_values input {
-    width: 30em;
-    height: 20px;
+	width: 30em;
+	height: 20px;
 }
 
 #Search_Icon {
-    background-image: url('../images/search.png');
-    background-size: 15px;
-    background-position: 5px 5px;
-    padding-left: 20px;
+	background-image: url('../images/search.png');
+	background-size: 15px;
+	background-position: 5px 5px;
+	padding-left: 20px;
 }
 
 #Register_Pass_Icon {
-    background-image: url('../images/key.png');
-    background-size: 15px;
-    background-position: 2px 1px;
-    padding-left: 20px;
+	background-image: url('../images/key.png');
+	background-size: 15px;
+	background-position: 2px 1px;
+	padding-left: 20px;
 }
 
 #Register_User_Icon {
-    background-image: url('../images/person.png');
-    background-size: 20px;
-    background-position: 0px -2px;
-    padding-left: 20px;
+	background-image: url('../images/person.png');
+	background-size: 20px;
+	background-position: 0px -2px;
+	padding-left: 20px;
 }
 
 #Login_Pass_Icon {
-    background-image: url('../images/key.png');
-    background-size: 15px;
-    background-position: 2px 1px;
-    padding-left: 20px;
+	background-image: url('../images/key.png');
+	background-size: 15px;
+	background-position: 2px 1px;
+	padding-left: 20px;
 }
 
 #Login_User_Icon {
-    background-image: url('../images/person.png');
-    background-size: 20px;
-    background-position: 0px -2px;
-    padding-left: 25px;
+	background-image: url('../images/person.png');
+	background-size: 20px;
+	background-position: 0px -2px;
+	padding-left: 25px;
 }
 
 #search_values select {
-    padding: 5px 1em;
-    border: none;
-    border-radius: 4px;
-    background-color: #f1f1f1;
+	padding: 5px 1em;
+	border: none;
+	border-radius: 4px;
+	background-color: #f1f1f1;
 }
 
 #search_bar {
-    background-image: url('../images/background_search.jpg');
-    background-position: center;
-    background-size: cover;
+	background-image: url('../images/background_search.jpg');
+	background-position: center;
+	background-size: cover;
 }
 
 
 /* List of restaurants related */
 
 #restaurants_list {
-    width: 70%;
-    background: white;
-    margin: 0 auto;
-    margin-bottom: 1em;
-    margin-top: 1em;
-    padding: 0em;
-    list-style-type: none;
+	width: 70%;
+	background: white;
+	margin: 0 auto;
+	margin-bottom: 1em;
+	margin-top: 1em;
+	padding: 0em;
+	list-style-type: none;
 
-    -webkit-box-shadow: 0px 0px 8px 0px #888;
-    -moz-box-shadow: 0px 0px 8px 0px #888;
-    box-shadow: 0px 0px 8px 0px #888;
+	-webkit-box-shadow: 0px 0px 8px 0px #888;
+	-moz-box-shadow: 0px 0px 8px 0px #888;
+	box-shadow: 0px 0px 8px 0px #888;
 }
 
 .Margin_Top_Bottom {
-    margin-top: 2em;
-    margin-bottom: 2em;
+	margin-top: 2em;
+	margin-bottom: 2em;
 }
 
 .Restaurant_Photo  {
-    display: flex;
-    flex-direction: column;
+	display: flex;
+	flex-direction: column;
 
-    background-image: url('../images/background_search.jpg');
-    background-position: center;
-    background-size: cover;
+	background-image: url('../images/background_search.jpg');
+	background-position: center;
+	background-size: cover;
 
-    width: 70%;
-    height: 250px;
-    margin: auto;    
+	width: 70%;
+	height: 250px;
+	margin: auto;    
 
-    -webkit-box-shadow: 0px 0px 8px 0px #888;
-    -moz-box-shadow: 0px 0px 8px 0px #888;
-    box-shadow: 0px 0px 8px 0px #888;
+	-webkit-box-shadow: 0px 0px 8px 0px #888;
+	-moz-box-shadow: 0px 0px 8px 0px #888;
+	box-shadow: 0px 0px 8px 0px #888;
 }
 
 .Restaurant_Photo .Restaurant_Basic_Info {
-    padding: 1em 2em;
-    margin-top: auto;
-    color: white;
+	padding: 1em 2em;
+	margin-top: auto;
+	color: white;
 
-    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-    font-size: 150%;
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-size: 150%;
 }
 
 .Restaurant_Photo .Restaurant_Name {
-    margin: 0;
-    font-size: 170%;
+	margin: 0;
+	font-size: 170%;
 }
 
 .Restaurant_Photo .Max_Score ~ h3 {
-    margin-top: 8px;
-    margin-bottom: 0;
+	margin-top: 8px;
+	margin-bottom: 0;
 }
 
 .Restaurant_Photo .Max_Score {
-    margin-top: 12px;
-    margin-bottom: 0;
+	margin-top: 12px;
+	margin-bottom: 0;
 }
 
 .Restaurant_Basic_Info {
-    background-color: rgba(30, 30, 30, 0);
+	background-color: rgba(30, 30, 30, 0);
 
-    -webkit-transition: background-color 0.5s;
-    transition: background-color 0.5s;
+	-webkit-transition: background-color 0.5s;
+	transition: background-color 0.5s;
 }
 
 .Restaurant_Basic_Info:hover {
-    background-color: rgba(30, 30, 30, 0.7);
+	background-color: rgba(30, 30, 30, 0.7);
 }
 
 .Restaurant_Opt {
-    padding:2em;
+	padding:2em;
 }
 
 .Restaurant_Opt:hover {
-    background: #efefef;
+	background: #efefef;
 }
 
 .Restaurant_Opt img {
-    width: 70px;
-    height: 70px;
-    float: left;
+	width: 70px;
+	height: 70px;
+	float: left;
 }
 
 .Restaurant_Name {
-    display: inline-block;
+	display: inline-block;
 }
 
 .Score {
-    display: inline;
-    float: right;
+	display: inline;
+	float: right;
 }
 
 .Score h3 {
-    display: inline;
-    float: right;
+	display: inline;
+	float: right;
 }
 
 .Max_Score {
-    font-size: 80%;
+	font-size: 80%;
 }
 
 #restaurant_score {
-    display: inline;
-    float: right;
+	display: inline;
+	float: right;
 }
 
 #outOf {
-    display: inline;
-    float: right;
+	display: inline;
+	float: right;
 }
 
-footer {
-    overflow: hidden;
-    background-color: #333;
+footer {	
+	width: 100%;
+	overflow: auto;	
+	height:50px;
+	position:absolute;
+	bottom:0;
+	left:0;
+	background-color: #333;
 }
 
 footer p {
-    float: left;
+	float: left;
 }
 
 footer #google_translate_element {
-    width: 20em;
-    margin: 12px 16px 0px 0px;
-    display: inline-block;
-    float: right;
+	width: 20em;
+	margin: 12px 16px 0px 0px;
+	display: inline-block;
+	float: right;
 }
 
 .Absolute_Center {

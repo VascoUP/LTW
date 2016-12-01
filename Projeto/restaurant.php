@@ -8,11 +8,17 @@
 		crossorigin="anonymous"></script>
 <?php
 	include ('templates/header.php');
+?>
+	<div id="content">
+<?php
 	include ('templates/search_form.php');
 
 	include ('templates/restaurant_photo.php');
 
 	include ('templates/login_form.php');
 	include ('templates/register_form.php');
+?>
+	</div>
+<?php
   	include ('templates/footer.php');
 ?>

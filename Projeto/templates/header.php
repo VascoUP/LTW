@@ -1,6 +1,7 @@
-		<script type="text/javascript" src="scripts/headerButtons.js"></script>	
-	</head>
-	<body>
+	<script type="text/javascript" src="scripts/headerButtons.js"></script>	
+</head>
+<body>
+	<div id="wrapper">
 		<header>
 			<img src="images/logo.png" alt="AELIUS"/>
 			<ul id="log_site">
