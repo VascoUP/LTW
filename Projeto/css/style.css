@@ -179,6 +179,11 @@ ul#log_site input {
 	padding:2em;
 }
 
+.Restaurant_Opt h3 {
+	margin-top: 20px;
+	margin-bottom: 20px;
+}
+
 .Restaurant_Opt:hover {
 	background: #efefef;
 }
@@ -226,14 +231,8 @@ ul#log_site input {
 	font-size: 170%;
 }
 
-.Restaurant_Photo .Max_Score ~ h3 {
-	margin-top: 8px;
-	margin-bottom: 0;
-}
-
-.Restaurant_Photo .Max_Score {
-	margin-top: 12px;
-	margin-bottom: 0;
+.Restaurant_Basic_Info .Score {
+	margin-top: 10px;
 }
 
 .Restaurant_Basic_Info {
@@ -241,6 +240,8 @@ ul#log_site input {
 
 	-webkit-transition: background-color 0.5s;
 	transition: background-color 0.5s;
+
+	border-radius: 0px 0px 5px 5px;
 }
 
 .Restaurant_Basic_Info:hover {
@@ -297,9 +298,12 @@ ul#log_site input {
 }
 
 #Ov_Closed {
-	color: red;
+	color: #cb202d;
 }
 
+.Ov_Category {
+	color: #cb202d;
+}
 
 .Restaurant_Name {
 	display: inline-block;
@@ -308,6 +312,10 @@ ul#log_site input {
 .Score {
 	display: inline;
 	float: right;
+}
+
+.Score * {
+	margin: 0;
 }
 
 .Score h3 {
@@ -412,4 +420,12 @@ footer #google_translate_element {
 
 .Curved_Edges {
 	border-radius: 5px;
+}
+
+.Sexy_Border {
+	width: 90%;
+	height: 1px;
+	margin: 5px auto;
+	background: rgba(150, 150, 150, 0.7);
+	background: -webkit-radial-gradient(center, 40% 40px, rgba(150, 150, 150, 1), rgba(255, 255, 255, 0))
 }

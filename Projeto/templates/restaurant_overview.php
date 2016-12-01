@@ -7,7 +7,7 @@
 		<div id="Overview_Categories">
 			<p class="Overview_Title" id="Categories_Title">Categories</p>
 			<ul id="Ov_Categories">
-				<li>Breakfast</li>
+				<li class="Ov_Category">Breakfast</li>
 			</ul>
 		</div>
 	</div>
@@ -22,6 +22,8 @@
 			<p id="Op_Hours_Weekend">8:00h to 23:00h</p>
 			<p id="Ov_Closed">Closed at Sundays and Mondays</p>
 		</div>
+	</div>
+	<div class="Sexy_Border">
 	</div>
 	<div id="Overview_Map">
 		<h2>Address</h2>
