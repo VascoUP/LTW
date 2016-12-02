@@ -4,5 +4,5 @@
 	<?php 
 		include ('templates/score.php')
 	?>
-	<p id="restaurant_street_name"> rua Hey Hey </p>
+	<p class="restaurant_street_name"> rua Hey Hey </p>
 </div>

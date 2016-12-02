@@ -26,7 +26,7 @@
 	<div class="Sexy_Border">
 	</div>
 	<div id="Overview_Map">
-		<h2>Address</h2>
-		<p>This will be a map</p>
+		<h2>Address</h2> 
+		<div id="map"></div>
 	</div>
 </div>
