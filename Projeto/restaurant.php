@@ -6,6 +6,7 @@
 	<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   
 		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 		
 		crossorigin="anonymous"></script>
+	<script src="scripts/search.js"></script>
 	<script src="scripts/restaurant.js"></script>	
 	<script src="scripts/init_map.js"></script>
 	<script async defer
@@ -18,8 +19,7 @@
 <?php
 	include ('templates/search_form.php');
 	include ('templates/restaurant_page.php');
-	include ('templates/login_form.php');
-	include ('templates/register_form.php');
+	include ('templates/reg_log_form.php');
 ?>
 	</div>
 <?php

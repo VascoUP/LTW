@@ -1,21 +1,11 @@
 var categories = [ 'Restaurants', 'Categories' ];
 
-$(document).ready( function() { loadDocument() } )
+$(document).ready( function() { search_categories() } )
 
-function loadDocument () {
+function search_categories() {
 	var categories_select = $('#search_bar').children().children('select');
 	console.debug(categories_select);
-	loadCategories(categories_select);	
-
-	/*$.getJSON('products.php', 
-		function( data ) {
-			products = data;
-
-			loadProducts(products_select);	
-		});
-
-	window.alert($('#products input'));
-	*/
+	loadCategories(categories_select);
 }
 
 function loadCategories ( select ) {

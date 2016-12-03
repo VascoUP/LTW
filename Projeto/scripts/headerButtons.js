@@ -1,6 +1,6 @@
-$(document).ready( function() { loadDocument() } )
+$(document).ready( function() { hearder_buttons() } )
 
-function loadDocument () {
+function hearder_buttons () {
 	loadHeaderHandlers( $('header').children('ul').last().children('li') );
 	$('.Black_Screen').first().click(
 		function() {
@@ -49,9 +49,3 @@ function loginButton () {
 function logoutButton () {
 	console.debug('Logout');
 }
-
-/*
-function addLine () {
-	var line = $('#products').children().first().html();
-	$('#products').children('input').before( $('<div class=\"line\">' + line + '</div>') );
-}*/
