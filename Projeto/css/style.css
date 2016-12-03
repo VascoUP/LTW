@@ -54,6 +54,10 @@ header img {
 	background-color: #111;
 }
 
+#log_site input:active  {
+	background-color: #000;
+}
+
 #log_site input {
 	background-color: #333;
 	border: none;
@@ -96,6 +100,10 @@ header img {
 
 #search_bar select:hover {
 	background-color: #e8e8e8;
+}
+
+#search_bar select:active {
+	background-color: #d4d4d4;
 }
 
 #search_values input {
@@ -186,6 +194,11 @@ header img {
 	background: #efefef;
 }
 
+.Restaurant_Opt:active  {
+	background: #e0e0e0;
+}
+
+
 .Restaurant_Opt img {
 	width: 70px;
 	height: 70px;
@@ -267,9 +280,15 @@ header img {
 	user-select: none;
 }
 
+#sticky-element.sticky {
+	position: fixed;
+	top: 0;
+	width: 70%;
+}
+
 .Selected_Item {
 	padding: 0;
-	background-color: red;
+	background-color: #eec606;
 	height: 5px;
 	width: 100%;
 }
@@ -282,6 +301,14 @@ header img {
 
 	-webkit-transition: opacity 1s;
 	transition: opacity 1s;
+}
+
+#sticky-anchor{
+	height: 1px;
+}
+
+#Restaurant_Nav {
+	margin: 0;
 }
 
 #Restaurant_Nav li:hover .Unselected_Item {
@@ -449,6 +476,10 @@ footer #google_translate_element {
 	background-color: #e8e8e8;
 }
 
+.style_button:active  {
+	background-color: #d0d0d0;
+}
+
 .class_form .style_button {
 	display: block;
 	margin: 10px auto;
@@ -484,4 +515,52 @@ footer #google_translate_element {
 
 .Text_Align_Center {
 	text-align: center;
+}
+
+.Hide_Link_Display {
+	color: black;
+    	text-decoration: none;
+}
+
+#Add_Score, #Submit_Review {
+	display: none;
+}
+
+#Add_Score {
+	width: 85%;
+	margin: auto;
+	background-color: #eee;
+}
+
+#Add_Score ul {
+	padding: 10px  0;
+	list-style: none;
+}
+
+#Review_Form {
+	width: 90%;
+	padding: 5%;
+	text-align: center;
+
+	-webkit-transition: height 1s;
+	transition: height 1s;
+}
+
+#Review_Comment {
+	width: 85%;
+	margin: auto;
+}
+
+#Add_Score li {
+	width: 25px;
+	height: 25px;
+	margin: 2px 2px 0px -5px;
+	display: inline-block;
+	vertical-align: middle;
+	background-color: #aaa;
+}
+
+#Add_Score #Total_Score {
+	height: auto;
+	background-color: #eee;
 }

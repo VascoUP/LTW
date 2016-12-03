@@ -2,24 +2,27 @@
 <?php
 	include ('templates/restaurant_photo.php');
 ?>
-	<ul class="Curved_Edges Margin_Top_Bottom Default_Info_Box Text_Align_Center" id="Restaurant_Nav">
-		<li id="Rst_Menu_Ov">
-			<p>Overview</p>
-			<div class="Selected_Item"></div>
-		</li>
-		<li id="Rst_Menu_Mn">
-			<p>Menu</p>
-			<div class="Unselected_Item"></div>
-		</li>
-		<li id="Rst_Menu_Rv">
-			<p>Reviews</p>
-			<div class="Unselected_Item"></div>
-		</li>
-		<li id="Rst_Menu_Pht">
-			<p>Photos</p>
-			<div class="Unselected_Item"></div>
-		</li>
-	</ul>
+	<div id="sticky-anchor"></div>
+	<div id="sticky-element">
+		<ul class="Curved_Edges Default_Info_Box Text_Align_Center" id="Restaurant_Nav">
+			<li id="Rst_Menu_Ov">
+				<p>Overview</p>
+				<div class="Selected_Item"></div>
+			</li>
+			<li id="Rst_Menu_Mn">
+				<p>Menu</p>
+				<div class="Unselected_Item"></div>
+			</li>
+			<li id="Rst_Menu_Rv">
+				<p>Reviews</p>
+				<div class="Unselected_Item"></div>
+			</li>
+			<li id="Rst_Menu_Pht">
+				<p>Photos</p>
+				<div class="Unselected_Item"></div>
+			</li>
+		</ul>
+	</div>
 
 	<div class="Curved_Edges Margin_Top_Bottom Default_Info_Box" id="Restaurant_Overview">
 		<div class="Text_Align_Center" id="Overview_Col1">
@@ -50,8 +53,12 @@
 		</div>
 		<div class="Text_Align_Center" id="Overview_Map">
 			<h2 class="Text_Align_Center">Address</h2> 
-			<div id="map"></div>
-		</div>
+			<div id="map"></div>	
+			<script src="scripts/init_map.js"></script>
+			<script async defer
+				src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz6lPZunWs-mrqaJL_30X7753DuWkEBWs&callback=initMap">
+			</script>
+				</div>
 	</div>
 
 	<div class="Curved_Edges Margin_Top_Bottom Default_Info_Box" id="Restaurant_Menu">
@@ -59,7 +66,27 @@
 	</div>
 
 	<div class="Curved_Edges Margin_Top_Bottom Default_Info_Box" id="Restaurant_Reviews">
-		<h2 class="Text_Align_Center">Reviews</h2>
+		<div class="Restaurant_Review">
+			<!-- Add comment and score -->
+
+			<div class="Review_Reply"> 
+				<!-- Add reply -->
+			</div>
+		</div>
+		<form id="Review_Form">
+			<div id="Add_Score">
+				<ul>
+					<li id="Score1" class="Curved_Edges Unselected_Score"></li>
+					<li id="Score2" class="Curved_Edges Unselected_Score"></li>
+					<li id="Score3" class="Curved_Edges Unselected_Score"></li>
+					<li id="Score4" class="Curved_Edges Unselected_Score"></li>
+					<li id="Score5" class="Curved_Edges Unselected_Score"></li>
+					<li id="Total_Score">0</li>
+				</ul>
+			</div>
+			<textarea id="Review_Comment" rows="1" placeholder="Write a review..." class="Unselected_TextArea"></textarea>
+			<input type="button" value="Submit" id="Submit_Review" class="style_button Unselected_Button">
+		</form>
 	</div>	
 
 	<div class="Curved_Edges Margin_Top_Bottom Default_Info_Box" id="Restaurant_Photos">

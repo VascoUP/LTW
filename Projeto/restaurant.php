@@ -7,11 +7,7 @@
 		integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 		
 		crossorigin="anonymous"></script>
 	<script src="scripts/search.js"></script>
-	<script src="scripts/restaurant.js"></script>	
-	<script src="scripts/init_map.js"></script>
-	<script async defer
-		src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDz6lPZunWs-mrqaJL_30X7753DuWkEBWs&callback=initMap">
-	</script>
+	<script src="scripts/restaurant.js"></script>
 <?php
 	include ('templates/header.php');
 ?>
