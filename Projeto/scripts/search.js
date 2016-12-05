@@ -4,7 +4,6 @@ $(document).ready( function() { search_categories() } )
 
 function search_categories() {
 	var categories_select = $('#search_bar').children().children('select');
-	console.debug(categories_select);
 	loadCategories(categories_select);
 }
 

@@ -55,6 +55,8 @@ function show_overview() {
 	if( selected_tab == '#Rst_Menu_Ov' )
 		return;
 
+	//window.location.href = window.location.href + "#opt=Rst_Menu_Ov";
+
 	$(selected_tab).children(".Selected_Item").attr("class","Unselected_Item");
 
 	var div_id = get_info_id(selected_tab);
@@ -73,6 +75,8 @@ function show_overview() {
 function show_menu() {	
 	if( selected_tab == '#Rst_Menu_Mn' )
 		return;
+
+	//window.location.href = window.location.href + "#opt=Rst_Menu_Mn";
 
 	$(selected_tab).children(".Selected_Item").attr("class","Unselected_Item");
 
@@ -93,6 +97,8 @@ function show_reviews() {
 	if( selected_tab == '#Rst_Menu_Rv' )
 		return;
 
+	//window.location.href = window.location.href + "#opt=Rst_Menu_Rv";
+
 	$(selected_tab).children(".Selected_Item").attr("class","Unselected_Item");
 
 	var div_id = get_info_id(selected_tab);
@@ -111,6 +117,8 @@ function show_reviews() {
 function show_photos() {
 	if( selected_tab == '#Rst_Menu_Pht' )
 		return;
+
+	//window.location.href = window.location.href + "#opt=Rst_Menu_Pht";
 
 	$(selected_tab).children(".Selected_Item").attr("class","Unselected_Item");
 
@@ -251,7 +259,6 @@ function comment_area() {
 }
 
 function review_handlers() {
-	console.debug($('#Review_Comment'));
 	$('#Review_Comment').click( function() {
 			comment_area();
 		});

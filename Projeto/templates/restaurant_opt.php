@@ -1,4 +1,4 @@
-<a href="restaurant.php" class="Hide_Link_Display">
+<a href="restaurant.php" onclick="location.href=this.href+'?id=1';return false;" class="Hide_Link_Display">
 	<div class="Restaurant_Opt">
 		<img src="images/logo.png" alt="photo">
 		<h3 class="Restaurant_Name"> Restaurant </h3>
