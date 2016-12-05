@@ -64,8 +64,10 @@ function url_add_value (type, value) {
 }
 
 function menu_buttons () {
-	$('#Restaurant_Nav li').click( function() {
+	$('#Restaurant_Nav li').click( function(event) {
 			show_by_id('#' + $(this).attr("id"));
+			console.debug(event);
+			event.preventDefault();
 		});
 }
 

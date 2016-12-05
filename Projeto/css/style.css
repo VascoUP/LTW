@@ -116,6 +116,7 @@ header img {
 	background-size: 15px;
 	background-position: 5px 5px;
 	padding-left: 20px;
+	border: none;
 }
 
 #Register_Pass_Icon {
