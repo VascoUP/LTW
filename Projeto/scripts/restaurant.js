@@ -4,35 +4,68 @@ var score_clicked = 'Score0';
 $(document).ready( function() { load_restaurant(); } )
 
 function load_restaurant () {
+
+	var nSelected = get_type_value('opt');
+	if( nSelected != "" )
+		show_by_id(nSelected);
+
 	menu_buttons();
 	review_handlers();
+
 	$(function() {
     		$(window).scroll(sticky_relocate);
     		sticky_relocate();
 	});
 }
 
-function sticky_relocate() {
-	var window_top = $(window).scrollTop();
-	var div_top = $('#sticky-anchor').offset().top;
-	if (window_top > div_top)
-		$('#sticky-element').addClass('sticky');
-	else
-		$('#sticky-element').removeClass('sticky');
+function get_type_value (type) {
+	var hash = location.hash.replace(/^.*?#/, '');
+	var pairs = hash.split('&');
+
+	for( var i = 0; i < pairs.length; i++ ) {
+		var split_pair = pairs[i].split('=');
+		if( split_pair[0] == type )
+			return '#' + split_pair[1];
+	}
+	return "";
+}
+
+function url_add_value (type, value) {	
+
+	var hash = location.hash.replace(/^.*?#/, '');
+	if( hash == '' ) {
+		window.location.href = window.location.href + 
+				"#" + type + 
+				"=" + value;
+		return ;
+	}
+
+	var pairs = hash.split('&');
+	var division_char = '';
+
+	window.location.hash="";
+
+	for( var i = 0; i < pairs.length; i++ ) {
+		var split_pair = pairs[i].split('=');
+
+		if( split_pair[0] != type ) {
+			window.location.href = window.location.href + 
+						division_char + split_pair[0] + 
+						"=" + split_pair[1];
+		
+			if( division_char == '' )
+				division_char = '&';
+		}
+	}
+
+	window.location.href = window.location.href + 
+			division_char + type + 
+			"=" + value;
 }
 
 function menu_buttons () {
-	$('#Rst_Menu_Ov').click( function() {
-			show_overview();
-		});
-	$('#Rst_Menu_Mn').click( function() {
-			show_menu();
-		});
-	$('#Rst_Menu_Rv').click( function() {
-			show_reviews();
-		});
-	$('#Rst_Menu_Pht').click( function() {
-			show_photos();
+	$('#Restaurant_Nav li').click( function() {
+			show_by_id('#' + $(this).attr("id"));
 		});
 }
 
@@ -51,11 +84,26 @@ function get_info_id ( opt_id ) {
 	}
 }
 
+function show_by_id(id) {
+	switch(id) {
+		case '#Rst_Menu_Ov':
+			return show_overview();
+		case '#Rst_Menu_Mn':
+			return show_menu();
+		case '#Rst_Menu_Rv':
+			return show_reviews();
+		case '#Rst_Menu_Pht':
+			return show_photos();
+		default:
+			return ;
+	}
+}
+
 function show_overview() {
 	if( selected_tab == '#Rst_Menu_Ov' )
 		return;
-
-	//window.location.href = window.location.href + "#opt=Rst_Menu_Ov";
+	
+	url_add_value('opt', 'Rst_Menu_Ov');
 
 	$(selected_tab).children(".Selected_Item").attr("class","Unselected_Item");
 
@@ -76,7 +124,7 @@ function show_menu() {
 	if( selected_tab == '#Rst_Menu_Mn' )
 		return;
 
-	//window.location.href = window.location.href + "#opt=Rst_Menu_Mn";
+	url_add_value('opt', 'Rst_Menu_Mn');
 
 	$(selected_tab).children(".Selected_Item").attr("class","Unselected_Item");
 
@@ -97,7 +145,7 @@ function show_reviews() {
 	if( selected_tab == '#Rst_Menu_Rv' )
 		return;
 
-	//window.location.href = window.location.href + "#opt=Rst_Menu_Rv";
+	url_add_value('opt', 'Rst_Menu_Rv');
 
 	$(selected_tab).children(".Selected_Item").attr("class","Unselected_Item");
 
@@ -118,7 +166,7 @@ function show_photos() {
 	if( selected_tab == '#Rst_Menu_Pht' )
 		return;
 
-	//window.location.href = window.location.href + "#opt=Rst_Menu_Pht";
+	url_add_value('opt', 'Rst_Menu_Pht');
 
 	$(selected_tab).children(".Selected_Item").attr("class","Unselected_Item");
 
@@ -133,6 +181,15 @@ function show_photos() {
 	$(div_id).show();
 
 	$(selected_tab).children(".Unselected_Item").attr("class","Selected_Item");
+}
+
+function sticky_relocate() {
+	var window_top = $(window).scrollTop();
+	var div_top = $('#sticky-anchor').offset().top;
+	if (window_top > div_top)
+		$('#sticky-element').addClass('sticky');
+	else
+		$('#sticky-element').removeClass('sticky');
 }
 
 function get_score_color(id) {
