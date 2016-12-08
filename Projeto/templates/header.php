@@ -1,4 +1,4 @@
-	<script type="text/javascript" src="scripts/headerButtons.js"></script>	
+	<script type="text/javascript" src="scripts/logButtons.js"></script>	
 </head>
 <body>
 	<div id="wrapper">

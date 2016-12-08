@@ -1,6 +1,8 @@
 <?php
+	include_once ('config/init.php');  
 	include ('templates/head.php');
 ?>
+
     <script type="text/javascript" src="scripts/registrationForm.js"></script>	
 </head>
 <body>
