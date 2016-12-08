@@ -32,18 +32,19 @@ function loadHeaderHandlers ( liElems ) {
 
 function hideForms () {
 	$('.Black_Screen').first().hide();
-	$('#Reg_Form').first().hide();
 	$('#Login_Form').first().hide();
 }
 
 function registerButton () {
-	$('.Black_Screen').first().show('hidden');
-	$('#Reg_Form').first().show('hidden');
+	console.debug(window.location.href);
+    var url = (window.location.href).substring( 0, (window.location.href).lastIndexOf( "/" ) + 1) + "RegForm.php"
+    console.debug(url);
+    window.location.href = url;
 }
 
 function loginButton () {
 	$('.Black_Screen').first().show('hidden');
-	$('#Reg_Form').first().show('hidden');
+	$('#Login_Form').first().show('hidden');
 }
 
 function logoutButton () {

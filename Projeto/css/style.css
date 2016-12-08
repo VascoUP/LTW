@@ -119,20 +119,6 @@ header img {
 	border: none;
 }
 
-#Register_Pass_Icon {
-	background-image: url('../images/key.png');
-	background-size: 15px;
-	background-position: 2px 1px;
-	padding-left: 20px;
-}
-
-#Register_User_Icon {
-	background-image: url('../images/person.png');
-	background-size: 20px;
-	background-position: 0px -2px;
-	padding-left: 20px;
-}
-
 #Login_Pass_Icon {
 	background-image: url('../images/key.png');
 	background-size: 15px;
@@ -440,6 +426,12 @@ footer #google_translate_element {
 	float: right;
 }
 
+.Register_Center {
+    overflow: auto;
+    margin: 0 auto;
+    width: 50%;
+}
+
 .Absolute_Center {
 	top: 0;
 	width: 25%;
@@ -564,4 +556,9 @@ footer #google_translate_element {
 #Add_Score #Total_Score {
 	height: auto;
 	background-color: #eee;
+}
+
+.Reg_Form {
+    width: 200px;
+    height: 200px;
 }

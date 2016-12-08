@@ -15,7 +15,7 @@
 <?php
 	include ('templates/search_form.php');
 	include ('templates/restaurant_page.php');
-	include ('templates/reg_log_form.php');
+	include ('templates/LoginForm.php');
 ?>
 	</div>
 <?php
