@@ -1,33 +1,52 @@
 <?php
-	include ('/config/init.php');
 	include ('templates/head.php');
 ?>
     <script type="text/javascript" src="scripts/registrationForm.js"></script>	
 </head>
 <body>
-    <div id="Reg_Form" class="Register_Center Text_Align_Center">
-        <form class="class_form">
-            <h3> Register </h3>
-            <label for="regProfilePic">
-                <img class="imgRegProfilePic" src="images/no-user-image.jpg">
-            </label>
+    <div id="Reg_Form" class="Register_Center">
+        <h1 class="Text_Align_Center"> Sign Up </h1>
+        <form class="class_form" method="POST" action="action_register.php" onsubmit="return Validate()" name="vform">
+            <div class="Text_Align_Center">
+                <label for="regProfilePic">
+                    <img id="imgRegProfilePic" width=200 height=200 src="images/no-user-image.jpg">
+                </label>
             <input hidden id="regProfilePic" type="file" onchange="loadFile(event)">
-            <p>Username</p>
-            <input type="text" name="username" placeholder="Username"/>
-            <p>Password</p>
-            <input type="password" name="password" placeholder="Password"/>
-            <p>Full Name</p>
-            <input type="text" name="firstname"/>
-            <input type="text" name="lastname"/>
-            <p>Email</p>
-            <input type="e-mail" name="email"/>
-            <p>Age</p>
-            <input type="text" name="age"/>
-            <p>Bios</p>
-            <textarea rows="4" cols="50" name="bios"> </textarea>
-            <p>Address</p>
-            <input type="text" name="address"/>
-            <input class="style_button" type="button" value="Register" />
+            </div>
+            <div>
+                <label for="regUsername"> Username: 
+                    <input id="regUsername" type="text" name="username" placeholder="Username" required="required" />
+                </label>
+            </div>
+            <div>
+                <label for="regFullName"> Name: 
+                    <input id="regFullName" type="text" name="firstname" placeholder="First Name" required="required"/>
+                    <input id="regFullName" type="text" name="lastname" placeholder="Last Name" required="required"/>
+                </label>
+            </div>
+            <div>
+                <label for="regEmail"> Email: 
+                    <input id="regEmail" type="e-mail" name="email" placeholder="Email" required="required"/>
+                </label>
+            </div>
+            <div>
+                <input type="radio" name="userType" value="reviewer" checked="checked">Reviewer
+                <input type="radio" name="userType" value="owner">Owner
+            </div>
+            <div>
+                <label for="regPassword"> Password: 
+                    <input id="regPassword" type="password" name="password" placeholder="Password" required="required"/>
+                </label>
+            </div>
+            <div>
+                <label for="regConfirmPassword"> Confirm Password: 
+                    <input id="regConfirmPassword" type="password" name="passwordConfirm" placeholder="Confirm Password" required="required"/>
+                </label>
+                <div id="passwordConfirmError" class="valError"></div>
+            </div>
+            <div>
+                <input class="style_button" type="submit" value="Register" />
+            </div>
         </form>
     </div>
 </body>

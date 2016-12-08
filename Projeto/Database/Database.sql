@@ -8,16 +8,11 @@
 CREATE TABLE User (
 	User_ID NUMBER PRIMARY KEY,
 	User_name CHAR[50] NOT NULL,
-    Password CHAR[50] NOT NULL,
-	Full_name CHAR[100] NOT NULL,
+	FirstName CHAR[20] NOT NULL,
+	LastName CHAR[20] NOT NULL,
     Email CHAR[50] NOT NULL,
-	Age NUMBER,
+    Password CHAR[50] NOT NULL,
 	Profile_picture NUMBER,
-	Bios CHAR[200],
-	Address_ID NUMBER,
-	FOREIGN KEY(Address_ID) REFERENCES Address(ID)
-		ON DELETE SET NULL
-		ON UPDATE CASCADE
 );
 
 CREATE TABLE Owner (
