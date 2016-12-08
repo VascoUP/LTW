@@ -6,25 +6,24 @@
 .headers on
 
 CREATE TABLE User (
-	User_ID NUMBER PRIMARY KEY,
-	User_name CHAR[50] NOT NULL,
+	Username CHAR[50] PRIMARY KEY,
 	FirstName CHAR[20] NOT NULL,
 	LastName CHAR[20] NOT NULL,
     Email CHAR[50] NOT NULL,
-    Password CHAR[50] NOT NULL,
-	Profile_picture NUMBER,
+    Password CHAR[255] NOT NULL,
+	Profile_picture NUMBER
 );
 
 CREATE TABLE Owner (
-	User_ID NUMBER PRIMARY KEY,
-	FOREIGN KEY(User_ID) REFERENCES User(User_ID)
+	Username CHAR[50] PRIMARY KEY,
+	FOREIGN KEY(Username) REFERENCES User(Username)
 		ON DELETE SET NULL
 		ON UPDATE CASCADE
 );
 
 CREATE TABLE Reviewer (
-	User_ID NUMBER PRIMARY KEY,
-	FOREIGN KEY(User_ID) REFERENCES User(User_ID)
+	Username CHAR[50] PRIMARY KEY,
+	FOREIGN KEY(Username) REFERENCES User(Username)
 		ON DELETE SET NULL
 		ON UPDATE CASCADE
 );
@@ -39,22 +38,22 @@ CREATE TABLE Address (
 CREATE TABLE Picture (
 	ID NUMBER PRIMARY KEY,
 	Restaurant_ID NUMBER,
-	User_ID NUMBER,
+	Username CHAR[50],
 	FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(ID)
 		ON DELETE SET NULL
 		ON UPDATE CASCADE,
-	FOREIGN KEY(User_ID) REFERENCES User(User_ID)
+	FOREIGN KEY(Username) REFERENCES User(Username)
 		ON DELETE SET NULL
 		ON UPDATE CASCADE
 );
 
 CREATE TABLE Review (
 	ID NUMBER PRIMARY KEY,
-	User_ID NUMBER,
+	Username CHAR[50],
 	Score NUMBER,
 	DateReview Date,
 	Restaurant_ID NUMBER,
-	FOREIGN KEY(User_ID) REFERENCES Reviewer(Use_ID)
+	FOREIGN KEY(Username) REFERENCES Reviewer(Username)
 		ON DELETE SET NULL
 		ON UPDATE CASCADE,
 	FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(ID)
@@ -64,11 +63,11 @@ CREATE TABLE Review (
 
 CREATE TABLE Comment (
 	ID NUMBER PRIMARY KEY,
-	User_ID NUMBER,
+	Username CHAR[50],
 	Review_ID NUMBER,
 	Content CHAR[1000],
 	CommentDate Date,
-	FOREIGN KEY(User_ID) REFERENCES Owner(User_ID)
+	FOREIGN KEY(Username) REFERENCES Owner(Username)
 		ON DELETE SET NULL
 		ON UPDATE CASCADE,
 	FOREIGN KEY(Review_ID) REFERENCES Review(ID)
@@ -108,10 +107,10 @@ CREATE TABLE Category (
 /* Association Tables */
 
 CREATE TABLE OwnerRestaurant(
-	Owner_ID NUMBER,
+	Username CHAR[50],
 	Restaurant_ID NUMBER,
-	PRIMARY KEY(Owner_ID, Restaurant_ID),
-	FOREIGN KEY(Owner_ID) REFERENCES Owner(User_ID)
+	PRIMARY KEY(Username, Restaurant_ID),
+	FOREIGN KEY(Username) REFERENCES Owner(Username)
 		ON DELETE SET NULL
 		ON UPDATE CASCADE,
 	FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(ID)
