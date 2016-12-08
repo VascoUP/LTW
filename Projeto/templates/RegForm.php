@@ -1,4 +1,7 @@
-<script type="text/javascript" src="scripts/registrationForm.js"></script>	
+<script type="text/javascript" src="scripts/registrationForm.js"></script>
+<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   
+        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="         
+        crossorigin="anonymous"></script>	
 </head>
 <body>
     <div id="Reg_Form" class="Register_Center">
@@ -12,9 +15,9 @@
             </div>
             <div>
                 <label for="regUsername"> Username: 
-                    <input id="regUsername" type="text" name="username" placeholder="Username" required="required" />
+                    <input id="regUsername" type="text" onkeyup="checkUser(this.value)" name="username" placeholder="Username" required="required" />
                 </label>
-                <span id="usernameError" class="regError"> </span>
+                <span id="usernameError" class="regError"> Check Availability </span>
             </div>
             <div>
                 <label for="regFullName"> Name: 
