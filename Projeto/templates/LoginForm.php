@@ -1,4 +1,4 @@
-<div hidden class="Black_Screen"></div>
+<div hidden class="black_screen"></div>
 <div hidden id="Login_Form" class="Absolute_Center Text_Align_Center">
 	<form class="class_form" id="login_form">
 		<h3> Login </h3>

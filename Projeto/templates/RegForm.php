@@ -14,7 +14,7 @@
                 <label for="regUsername"> Username: 
                     <input id="regUsername" type="text" name="username" placeholder="Username" required="required" />
                 </label>
-                <div id="usernameError" class"regError"> </div>
+                <span id="usernameError" class="regError"> </span>
             </div>
             <div>
                 <label for="regFullName"> Name: 
