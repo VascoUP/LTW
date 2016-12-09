@@ -1,10 +1,10 @@
 var selected_tab = '#Rst_Menu_Ov';
 var score_clicked = 'Score0';
+var products = [];
 
 $(document).ready( function() { load_restaurant(); } )
 
 function load_restaurant () {
-
 	var nSelected = get_type_value('opt');
 	if( nSelected != "" )
 		show_by_id(nSelected);
@@ -66,7 +66,6 @@ function url_add_value (type, value) {
 function menu_buttons () {
 	$('#Restaurant_Nav li').click( function(event) {
 			show_by_id('#' + $(this).attr("id"));
-			console.debug(event);
 			event.preventDefault();
 		});
 }

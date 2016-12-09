@@ -163,7 +163,7 @@ create trigger updateScore
 PRAGMA FOREIGN_KEYS = ON;
 
 INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (0, 'NULL', 0, 0);
-INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (1, 'Praça da Liberdade 126, 4000 Porto', 41.1467, -8.61084);
+INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (1, 'Praca da Liberdade 126, 4000 Porto', 41.1467, -8.61084);
 INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (2, 'Rua Ateneu Comercial do Porto , 22/24', 41.148, -8.60782);
 
 INSERT INTO Category (ID, Category) VALUES (1, 'Appetizers');
@@ -180,3 +180,7 @@ INSERT INTO Category (ID, Category) VALUES (11, 'Desserts');
 
 INSERT INTO Restaurant (ID, Name, NScores, TotalScores, Price, OpenHours, Description, Address_ID) VALUES (1, 'MacDonalds', 0, 0, 10, 'Por descobrir', 'Bad Food', 1);
 INSERT INTO Restaurant (ID, Name, NScores, TotalScores, Price, OpenHours, Description, Address_ID) VALUES (2, 'Abadia do Porto', 0, 0, 10, 'Por descobrir', 'Situado na zona histórica da cidade Invicta, o restaurante Abadia do Porto, foi fundado em 1939. Diz-se que o nome terá origem nas abadias, onde os peregrinos, que demandavam de Santiago de Compostela, repousavam algumas horas, dormindo e comendo antes de encetar mais uma etapa da longa caminhada com o objectivo religioso. Desde à muitos anos que o Abadia do Porto é conhecido pelas excelentes refeições que serve, sendo local de passagem obrigatória para inúmeras individualidades, tais como: Francisco Sá Carneiro, Aníbal Cavaco Silva, José Saramago, Sophia Loren, entre muitos outros. O Abadia do Porto serve diariamente pratos como: Cabrito Assado, Bacalhau Gomes de Sá, Tripas à moda do Porto, Pataniscas de Bacalhau, Bife à Abadia, Filetes de Pescada, entre outros e a acompanhar, o seu famoso esparregado. O Restaurante Abadia do Porto tem acesso para deficientes e WC respectivo.', 2);
+
+INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 8);
+INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 10);
+INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 9);

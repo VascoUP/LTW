@@ -1,5 +1,7 @@
 <?php
-	include_once('config/init.php');  
+	include_once('config/init.php');
+	include_once('Database/getRestaurantInfo.php');
+
 	include ('templates/head.php');
 ?>
 <!-- Include scripts here -->
