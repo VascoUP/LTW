@@ -11,7 +11,6 @@ CREATE TABLE User (
 	LastName CHAR[20] NOT NULL,
     Email CHAR[50] NOT NULL,
     Password CHAR[255] NOT NULL,
-	Profile_picture NUMBER
 );
 
 CREATE TABLE Owner (
@@ -78,10 +77,10 @@ CREATE TABLE Comment (
 CREATE TABLE Restaurant (
 	ID NUMBER PRIMARY KEY,
 	Name CHAR[20] NOT NULL,
+	PhoneNumber CHAR[50] NOT NULL,
 	NScores NUMBER,
 	TotalScores NUMBER,
 	Price NUMBER,
-	OpenHours CHAR[500],
 	Description CHAR[5000],
 	Address_ID NUMBER,
 	FOREIGN KEY(Address_ID) REFERENCES Address(ID)
@@ -104,7 +103,26 @@ CREATE TABLE Category (
 	Category CHAR[50]
 );
 
+CREATE TABLE OpenHour (
+	ID NUMBER PRIMARY KEY,
+	Day CHAR[50],
+	OpenTime CHAR[50],
+	CloseTime CHAR[50]
+);
+
 /* Association Tables */
+
+CREATE TABLE RestaurantOpenHours(
+	OpenHour_ID NUMBER,
+	Restaurant_ID NUMBER,
+	PRIMARY KEY(OpenHour_ID, Restaurant_ID),
+	FOREIGN KEY(OpenHour_ID) REFERENCES OpenHour(OpenHour_ID)
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(ID)
+		ON DELETE SET NULL
+		ON UPDATE CASCADE
+);
 
 CREATE TABLE OwnerRestaurant(
 	Username CHAR[50],
@@ -155,6 +173,7 @@ create trigger updateScore
 				TotalScores = TotalScores + new.Score
 		where ID = new.Restaurant_ID;
 	end;
+
 
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
 /*                                                            Insertions                                                              */
