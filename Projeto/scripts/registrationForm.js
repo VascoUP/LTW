@@ -11,33 +11,26 @@ function Validate() {
 	var username = document.forms['vform']['username'];
 
 	//Get div for error display
+	var $passwordbox = $('#regPassword');
+	var $confirmPasswordbox = $('#regConfirmPassword');
 	var passwordConfirmError = document.getElementById('passwordConfirmError');
 
 	//Validate Password
 	if(password.value != confirmPassword.value) {
-		password.style.border = "1px solid red";
-		confirmPassword.style.border = "1px solid red";
+		$passwordbox.css('box-shadow', '0px 0px 5px red');
+		$confirmPasswordbox.css('box-shadow', '0px 0px 5px red');
 		passwordConfirmError.innerHTML = "The two passwords do not match.";
 		return false;
 	}
 
-	var isUserTaken;
+	var isUserTaken = document.getElementById('usernameError').textContent;
+	if(isUserTaken == 'This username is taken.' || isUserTaken == 'Please only use letters and/or numbers.')
+		return false;
 
-	//This should not be used, but I don't know how to do it any other way
-	var userRequest = $.ajax({
-			type:"POST",
-			url:"Database/user.php",
-			async: false,
-			data:{
-				action: 'isUserTaken',
-				username: username.value,
-			},
-			success: function(data) {
-				isUserTaken = data;
-			}
-	});
-
-	if(isUserTaken == 'This username is taken.') return false;
+	var isValidEmail = document.getElementById('emailError').textContent;
+	if(isValidEmail == '') 
+		checkEmail(document.getElementById('regEmail').value);
+	if(isValidEmail == 'Not a valid email.') return false;
 
 	return true;
 }
@@ -45,26 +38,78 @@ function Validate() {
 function checkUser(value) {
 
 	var $usernameError = $('#usernameError');
+	var $validUser;
 
-	if(value != '')
+	if(value != '') {
+
 		$.ajax({
 			type:"POST",
-			url:"Database/user.php",
-			data:{
-				action: 'isUserTaken',
-				username: value,
+			url: "functions/validationFunctions.php",
+			async: false,
+			data: {
+				action: 'validateUsername',
+				username: value
 			},
-			success: function(data) {
-				if(data == 'This username is available.')
-					$usernameError.css('color', 'green');
-				else 
-					$usernameError.css('color', 'red');
-				$usernameError.text(data);
+			success: function(isValid) {
+				$validUser = JSON.parse(isValid).success;
 			}
 		});
+
+		if($validUser) {
+			$.ajax({
+				type:"POST",
+				url:"Database/user.php",
+				data:{
+					action: 'isUserTaken',
+					username: value
+				},
+				success: function(data) {
+					if(data == 'This username is available.')
+						$usernameError.css('color', 'green');
+					else 
+						$usernameError.css('color', 'red');
+					$usernameError.text(data);
+				}
+			});
+		} else {
+			console.log($validUser);
+			$usernameError.css('color', 'red');
+			$usernameError.text('Please only use letters and/or numbers.');
+		}
+	}
 	else {
 		$usernameError.css('color', 'red');
 		$usernameError.text('Please enter an username.');
+	}
+}
+
+function checkEmail(value) {
+
+	var $emailError = $('#emailError');
+	var $email = $('#regEmail');
+
+	if(value != '')
+		$.ajax({
+				type:"POST",
+				url:"functions/validationFunctions.php",
+				async:false,
+				data:{
+					action: 'validateEmail',
+					email: value
+				},
+				success: function(data) {
+					if(data == 'Valid email.')
+						$emailError.css('color', 'green');
+					else { 
+						$email.css('box-shadow', '0px 0px 5px red');
+						$emailError.css('color', 'red');
+					}
+					$emailError.text(data);
+				}
+		});
+	else {
+		$emailError.css('color', 'red');
+		$emailError.text('Please enter an email.');
 	}
 }
 

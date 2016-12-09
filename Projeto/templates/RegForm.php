@@ -27,8 +27,9 @@
             </div>
             <div>
                 <label for="regEmail"> Email: 
-                    <input id="regEmail" type="e-mail" name="email" placeholder="Email" required="required"/>
+                    <input id="regEmail" type="e-mail" name="email" placeholder="email@domail.com" onblur="checkEmail(this.value)" required="required"/>
                 </label>
+                <span id="emailError" class="regError"></span>
             </div>
             <div>
                 <input type="radio" name="userType" value="reviewer" checked="checked">Reviewer

@@ -1,0 +1,38 @@
+<?php
+
+	if(isset($_POST['action']) && function_exists($_POST['action'])) {
+
+		$action = $_POST['action'];
+
+		switch($action) {
+			case 'validateEmail':
+				$email = $_POST['email'];
+				return $action($email);
+			case 'validateUsername':
+				$username = $_POST['username'];
+				return $action($username);
+			default:
+				return;
+		}
+  	} 
+
+	function validateEmail($email) {
+		if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+			echo 'Not a valid email.';
+		else
+			echo 'Valid email.';
+	}
+
+	function validateUsername($username) {
+		$answer = array();
+
+		if (!preg_match("/^[a-zA-Z0-9 ]*$/", $username)) {
+			$answer['success'] = false;
+		} else
+			$answer['success'] =  true;
+
+		header('Content-Type', 'application/json');
+		echo json_encode($answer);
+	}
+
+?>
