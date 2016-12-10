@@ -11,5 +11,20 @@
 
 	createUser($username, $firstName, $lastName, $email, $password, $userType);
 
+	if (isset($_FILES['regProfilePic'])) {
+		$profilePicName = $_FILES['regProfilePic']['name'];
+		$profilePicTempName = $_FILES['regProfilePic']['temp_name'];
+
+		if(isset($profilePicName)) {
+			if(!empty($profilePicName)) {
+				echo 'here';
+				$extension = strtolower(substr($profilePicName, strpos($profilePicName, '.')));
+				$name = $username.$extension;
+				move_uploaded_file($profilePicTempName, 'Database/ProfilePictures/'.$name);
+			}
+		}
+	} else
+		echo 'Not set.'
+
 	header('Location: restaurant.php');
 ?>

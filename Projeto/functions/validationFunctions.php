@@ -11,6 +11,9 @@
 			case 'validateUsername':
 				$username = $_POST['username'];
 				return $action($username);
+			case 'validateName':
+				$name = $_POST['name'];
+				return $action($name);
 			default:
 				return;
 		}
@@ -27,6 +30,18 @@
 		$answer = array();
 
 		if (!preg_match("/^[a-zA-Z0-9 ]*$/", $username)) {
+			$answer['success'] = false;
+		} else
+			$answer['success'] =  true;
+
+		header('Content-Type', 'application/json');
+		echo json_encode($answer);
+	}
+
+	function validateName($name) {
+		$answer = array();
+
+		if (!preg_match("/^[a-zA-Z ]*$/", $name)) {
 			$answer['success'] = false;
 		} else
 			$answer['success'] =  true;

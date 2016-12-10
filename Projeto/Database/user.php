@@ -12,13 +12,11 @@
     $options = ['cost' => 12];
     $hash = password_hash($password, PASSWORD_DEFAULT, $options);
 
-    $stmt = $conn->prepare('INSERT INTO User (Username, FirstName, LastName, Email, Password, Profile_picture) 
-                              VALUES (?, ?, ?, ?, ?, 0)');
+    $stmt = $conn->prepare('INSERT INTO User (Username, FirstName, LastName, Email, Password) 
+                              VALUES (?, ?, ?, ?, ?)');
     $stmt->execute(array($username, $firstname, $lastname, $email, $hash));
 
-    echo $userType;
-
-    if($userType == 'reviewer')
+    if($usertype == 'reviewer')
       $stmt2 = $conn->prepare('INSERT INTO Reviewer (Username) VALUES (?)');
     else 
       $stmt2 = $conn->prepare('INSERT INTO Owner (Username) VALUES (?)');
@@ -33,7 +31,7 @@
     $stmt = $conn->prepare('SELECT * FROM User WHERE username = ?');
     $stmt->execute(array($username));
     $user = $stmt->fetch();
-    return ($user !== false && password_verify($password, $user['password']));
+    return ($user !== false && password_verify($password, $user['Password']));
   }
 
   function isUserTaken($username) {    
@@ -41,7 +39,7 @@
     $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $conn->prepare('SELECT * FROM User WHERE Username =? LIMIT 1');
+    $stmt = $conn->prepare('SELECT * FROM User WHERE Username = ? LIMIT 1');
     $stmt->execute(array($username));
 
     $results = $stmt->fetch();

@@ -1,3 +1,3 @@
-<form id="Logout_Button" class="Text_Align_Center">
-	<input type="button" value="Logout">
+<form id="Logout_Button" class="Text_Align_Center" action="action_logout.php">
+	<input type="submit" value="Logout">
 </form>
