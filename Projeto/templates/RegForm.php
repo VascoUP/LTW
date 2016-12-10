@@ -6,29 +6,29 @@
 <body>
     <div id="Reg_Form" class="Register_Center">
         <h1 class="Text_Align_Center"> Sign Up </h1>
-        <form class="class_form" method="POST" action="action_register.php" onsubmit="return Validate()" name="vform">
+        <form class="class_form" method="POST" action="action_register.php" enctype="multipart/form-data" onsubmit="return Validate()" name="vform">
             <div class="Text_Align_Center">
                 <label for="regProfilePic">
                     <img id="imgRegProfilePic" width=200 height=200 src="images/no-user-image.jpg">
                 </label>
-                <input hidden id="regProfilePic" type="file" accept="image/x-png,image/jpeg" enctype="multipart/form-data" name="regProfilePic" onchange="loadFile(event)">
+                <input hidden id="regProfilePic" type="file" accept="image/png,image/jpeg" name="regProfilePic" onchange="loadFile(event)">
                 <div id="imgError" class="valError"></div> 
             </div>
             <div>
                 <label for="regUsername"> Username: 
-                    <input id="regUsername" type="text" onkeyup="checkUser(this.value)" name="username" placeholder="Username" required="required" autocomplete="off"/>
+                    <input id="regUsername" type="text" onblur="checkUser(this.value)" name="username" placeholder="Username" required="required" autocomplete="off"/>
                 </label>
                 <span id="usernameError"> Check Availability </span>
             </div>
             <div>
                 <label for="regFullName"> Name: 
-                    <input id="regFirstName" type="text" onkeyup="checkFirstName(this.value)" name="firstname" placeholder="First Name" required="required" autocomplete="off"/>
-                    <input id="regLastName" type="text" onkeyup="checkLastName(this.value)" name="lastname" placeholder="Last Name" required="required" autocomplete="off"/>
+                    <input id="regFirstName" type="text" onblur="checkFirstName(this.value)" name="firstname" placeholder="First Name" required="required" autocomplete="off"/>
+                    <input id="regLastName" type="text" onblur="checkLastName(this.value)" name="lastname" placeholder="Last Name" required="required" autocomplete="off"/>
                 </label>
             </div>
             <div>
                 <label for="regEmail"> Email: 
-                    <input id="regEmail" type="e-mail" name="email" placeholder="email@domail.com" onkeyup="checkEmail(this.value)" required="required" autocomplete="off"/>
+                    <input id="regEmail" type="e-mail" name="email" placeholder="email@domail.com" onblur="checkEmail(this.value)" required="required" autocomplete="off"/>
                 </label>
             </div>
             <div>

@@ -137,14 +137,15 @@ function checkEmail(value) {
 					action: 'validateEmail',
 					email: value
 				},
-				success: function(data) {
-					if(data == 'Valid email.') {
-						$validEmail = true;
+				success: function(isValid) {
+					$validEmail = JSON.parse(isValid).success;
+
+					if($validEmail)
 						$email.css('box-shadow', '0px 0px 5px green');
-					}
-					else { 
+					
+					else
 						$email.css('box-shadow', '0px 0px 5px red');
-					}
+					
 				}
 		});
 

@@ -20,7 +20,7 @@
 		</header>
 		<?php
 			include ('templates/search_form.php');
-			if (! isset($_SESSION['username'])) {
+			if (!isset($_SESSION['username'])) {
 				echo '<ul id="log_site">';
 					echo '<li>';
 						include ('templates/register.php');
@@ -33,13 +33,11 @@
 					echo '</li>';
 				echo '</ul>';
 			} else {
-		?>
-				<div id="welcome_sign">
-					<h3>Welcome back!</h3>
-				</div>
-		<?php
+				echo '<ul id="log_site">';
+				echo '<li>';
+					include ('templates/logout.php');
+				echo '</li>';
 			}
-		
 		include ('templates/LoginForm.php');
 		?>
 	</body>

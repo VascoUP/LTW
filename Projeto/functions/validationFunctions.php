@@ -20,10 +20,15 @@
   	} 
 
 	function validateEmail($email) {
+		$answer = array();
+
 		if(!filter_var($email, FILTER_VALIDATE_EMAIL))
-			echo 'Not a valid email.';
+			$answer['success'] = false;
 		else
-			echo 'Valid email.';
+			$answer['success'] =  true;
+
+		header('Content-Type', 'application/json');
+		echo json_encode($answer);
 	}
 
 	function validateUsername($username) {
