@@ -181,7 +181,7 @@ create trigger updateScore
 PRAGMA FOREIGN_KEYS = ON;
 
 INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (0, 'NULL', 0, 0);
-INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (1, 'Praça da Liberdade 126, 4000 Porto', 41.1467, -8.61084);
+INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (1, 'Praca da Liberdade 126, 4000 Porto', 41.1467, -8.61084);
 INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (2, 'Rua Ateneu Comercial do Porto , 22/24', 41.148, -8.60782);
 
 INSERT INTO Category (ID, Category) VALUES (1, 'Appetizers');
@@ -310,3 +310,7 @@ INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (3, 2);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (4, 2);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (5, 2);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (6, 2);
+
+INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 8);
+INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 10);
+INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 9);
