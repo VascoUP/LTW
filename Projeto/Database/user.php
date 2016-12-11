@@ -28,7 +28,7 @@
   function verifyUser($username, $password) {
     global $conn;
 
-    $stmt = $conn->prepare('SELECT * FROM User WHERE username = ?');
+    $stmt = $conn->prepare('SELECT * FROM User WHERE username = ? LIMIT 1');
     $stmt->execute(array($username));
     $user = $stmt->fetch();
     return ($user !== false && password_verify($password, $user['Password']));
@@ -57,7 +57,18 @@
     $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
     $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
-    $stmt = $conn->prepare('SELECT ProfilePicture FROM User WHERE username = ?');
+    $stmt = $conn->prepare('SELECT ProfilePicture FROM User WHERE username = ? LIMIT 1');
+    $stmt->execute(array($username));
+
+    $result = $stmt->fetch();
+    
+    echo json_encode($result);
+  }
+
+  function getUserInfo($username) {
+    global $conn;
+
+    $stmt = $conn->prepare('SELECT * FROM User WHERE username = ? LIMIT 1');
     $stmt->execute(array($username));
 
     $result = $stmt->fetch();
