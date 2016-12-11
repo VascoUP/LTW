@@ -1,53 +1,42 @@
-<script type="text/javascript" src="scripts/registrationForm.js"></script>
-<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   
-        integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="         
-        crossorigin="anonymous"></script>	
+    <link rel="stylesheet" href="css/registerForm.css">
+    <script   src="https://code.jquery.com/jquery-3.1.1.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+    crossorigin="anonymous"></script>
+    <script type="text/javascript" src="scripts/registrationForm.js"></script>	
 </head>
 <body>
-    <div id="Reg_Form" class="Register_Center">
-        <h1 class="Text_Align_Center"> Sign Up </h1>
-        <form class="class_form" method="POST" action="action_register.php" enctype="multipart/form-data" onsubmit="return Validate()" name="vform">
-            <div class="Text_Align_Center">
-                <label for="regProfilePic">
-                    <img id="imgRegProfilePic" width=200 height=200 src="images/no-user-image.jpg">
-                </label>
-                <input hidden id="regProfilePic" type="file" accept="image/png,image/jpeg" name="regProfilePic" onchange="loadFile(event)">
-                <div id="imgError" class="valError"></div> 
+    <div id="reg-form">
+        <form method="POST" action="action_register.php" enctype="multipart/form-data" onsubmit="return Validate()" name="vform">
+            <div hidden id='img-error'></div>
+            <div id="img-reg-div">
+                <img id="reg-profile-picture" src="images/no-user-image.jpg">
+                <input hidden id="reg-file" type="file" accept="image/png,image/jpeg" name="regProfilePic" onchange="loadFile(event)">
             </div>
-            <div>
-                <label for="regUsername"> Username: 
-                    <input id="regUsername" type="text" onblur="checkUser(this.value)" name="username" placeholder="Username" required="required" autocomplete="off"/>
-                </label>
-                <span id="usernameError"> Check Availability </span>
+            <div id="user-reg-div">
+                <input id="reg-username" type="text" onblur="checkUser(this.value)" name="username" placeholder="Username" required="required" autocomplete="off"/>
+                <span id="check-user"> Check availability</span>
             </div>
-            <div>
-                <label for="regFullName"> Name: 
-                    <input id="regFirstName" type="text" onblur="checkFirstName(this.value)" name="firstname" placeholder="First Name" required="required" autocomplete="off"/>
-                    <input id="regLastName" type="text" onblur="checkLastName(this.value)" name="lastname" placeholder="Last Name" required="required" autocomplete="off"/>
-                </label>
+            <div id="input-reg-div">
+                <input id="reg-first-name" type="text" onblur="checkFirstName(this.value)" name="firstname" placeholder="First Name" required="required" autocomplete="off"/>
+                <input id="reg-last-name" type="text" onblur="checkLastName(this.value)" name="lastname" placeholder="Last Name" required="required" autocomplete="off"/>
             </div>
-            <div>
-                <label for="regEmail"> Email: 
-                    <input id="regEmail" type="e-mail" name="email" placeholder="email@domail.com" onblur="checkEmail(this.value)" required="required" autocomplete="off"/>
-                </label>
+            <div id="input-reg-div">
+                <input id="reg-email" type="e-mail" name="email" placeholder="email@domail.com" onblur="checkEmail(this.value)" required="required" autocomplete="off"/>
             </div>
-            <div>
-                <input type="radio" name="userType" value="reviewer" checked="checked">Reviewer
-                <input type="radio" name="userType" value="owner">Owner
+            <div id="input-reg-div">
+                <input id="reg-reviewer" type="radio" name="userType" value="reviewer" checked="checked">
+                <label for="reg-reviewer" id="label-reg-reviewer">Reviewer</label>
+                <input id="reg-owner" type="radio" name="userType" value="owner">
+                <label for="reg-owner" id="label-reg-owner">Owner</label>
             </div>
-            <div>
-                <label for="regPassword"> Password: 
-                    <input id="regPassword" type="password" name="password" placeholder="Password" required="required"/>
-                </label>
+            <div id="input-reg-div">
+                <input id="reg-password" type="password" name="password" placeholder="Password" required="required"/>
             </div>
-            <div>
-                <label for="regConfirmPassword"> Confirm Password: 
-                    <input id="regConfirmPassword" type="password" name="passwordConfirm" placeholder="Confirm Password" required="required"/>
-                </label>
-                <div id="passwordConfirmError" class="valError"></div>
+            <div id="input-reg-div">
+                <input id="reg-confirm-password" type="password" name="passwordConfirm" placeholder="Confirm Password" required="required"/>
+                <div id="password-confirm-error" class="valError"></div>
             </div>
-            <div>
-                <input class="style_button" type="submit" value="Register" />
+            <div id="input-reg-div">
+                <input id="signup-button" type="submit" value="✓" />
             </div>
         </form>
     </div>

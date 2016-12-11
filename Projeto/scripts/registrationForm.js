@@ -1,61 +1,75 @@
+$(document).ready( function() { 
+	$("#reg-profile-picture").click(function () {
+    	$("#reg-file").trigger('click');
+	});
+});
+
 function loadFile(event) {
-    var image = document.getElementById('imgRegProfilePic');
+    var image = document.getElementById('reg-profile-picture');
     image.src = URL.createObjectURL(event.target.files[0]);
 
-    var $imageError = document.getElementById('imgError');
+    var $imageError = $('#img-error');
 
-    var imageExtension = document.getElementById('regProfilePic').files[0].name.split('.').pop().toLowerCase();
-    var imageFile = document.getElementById('regProfilePic').files[0].size;
+    var imageExtension = document.getElementById('reg-file').files[0].name.split('.').pop().toLowerCase();
+    var imageFile = document.getElementById('reg-file').files[0].size;
 
-	if(!checkImageExtension(imageExtension))
-		$imageError.innerHTML = "Only jpg/png files are allowed.";
+	if(!checkImageExtension(imageExtension)) {
+		$imageError.text("Only jpg/png files are allowed.");
+		$imageError.fadeIn(1000);
+	}
 	else
-		$imageError.innerHTML = "";
-
-	if(!checkImageSize(imageFile))
-		$imageError.innerHTML = "The image is too big. Max 20MB.";
-	else
-		$imageError.innerHTML = "";
+		if(!checkImageSize(imageFile)) {
+			$imageError.text("The image is too big. Max 20MB.");
+			$imageError.fadeIn(1000);
+		}
+		else {
+			$imageError.innerHTML = "";
+			$imageError.fadeOut(1000);
+		}
 }
 
 function Validate() {
 	//Get the password values
 	var password = document.forms['vform']['password'];
 	var confirmPassword = document.forms['vform']['passwordConfirm'];
+	console.log("1");
 
 	var username = document.forms['vform']['username'];
 
 	//Get div for error display
-	var $passwordbox = $('#regPassword');
-	var $confirmPasswordbox = $('#regConfirmPassword');
-	var passwordConfirmError = document.getElementById('passwordConfirmError');
-	var $imageError = document.getElementById('imgError');
-
+	var $passwordbox = $('#reg-password');
+	var $confirmPasswordbox = $('#reg-confirm-password');
+	var passwordConfirmError = document.getElementById('password-confirm-error');
+	var $imageError = document.getElementById('img-error');
 	//Allowed file extensions
-	var imageExtension = document.getElementById('regProfilePic').value.split('.').pop().toLowerCase();
-	if(!checkImageExtension(imageExtension))
-		return false;
 
-	//Check image size
-	var imageFile = document.getElementById('regProfilePic').files[0].size;
-	if(!checkImageSize(imageFile))
-		return false;
+	if(document.getElementById('reg-file').value) {
+		var imageExtension = document.getElementById('reg-file').value.split('.').pop().toLowerCase();
+		if(!checkImageExtension(imageExtension))
+			return false;
+
+		//Check image size
+		var imageFile = document.getElementById('reg-file').files[0].size;
+		if(!checkImageSize(imageFile))
+			return false;
+	}
 
 	//Check is username is valid
-	if(!checkUser(document.getElementById('regUsername').value))
+	if(!checkUser(document.getElementById('reg-username').value))
 		return false;
 
 	//Check if the First Name and the Last Name is valid
-	if(!checkFirstName(document.getElementById('regFirstName').value))
+	if(!checkFirstName(document.getElementById('reg-first-name').value))
 		return false;
 
-	if(!checkLastName(document.getElementById('regLastName').value))
+	if(!checkLastName(document.getElementById('reg-last-name').value))
 		return false;
 
 	//Checks if email is valid
-	if(!checkEmail(document.getElementById('regEmail').value))
+	if(!checkEmail(document.getElementById('reg-email').value))
 		return false;
 
+	console.log("1");
 	//Validate Password
 	if(password.value != confirmPassword.value) {
 		$passwordbox.css('box-shadow', '0px 0px 5px red');
@@ -63,14 +77,15 @@ function Validate() {
 		passwordConfirmError.innerHTML = "The two passwords do not match.";
 		return false;
 	}
+	console.log("1");
 
 	return true;
 }
 
 function checkUser(value) {
 
-	var $usernameError = $('#usernameError');
-	var $username = $('#regUsername');
+	var $usernameError = $('#check-user');
+	var $username = $('#reg-username');
 	var $validUser = false;
 
 	if(value != '') {
@@ -125,7 +140,7 @@ function checkUser(value) {
 
 function checkEmail(value) {
 
-	var $email = $('#regEmail');
+	var $email = $('#reg-email');
 	var $validEmail = false;
 
 	if(value != '')
@@ -153,7 +168,7 @@ function checkEmail(value) {
 }
 
 function checkFirstName(value) {
-	var $firstname = $('#regFirstName');
+	var $firstname = $('#reg-first-name');
 	var $valid = false;
 
 	if(value != '')
@@ -178,7 +193,7 @@ function checkFirstName(value) {
 }
 
 function checkLastName(value) {
-	var $lastname = $('#regLastName');
+	var $lastname = $('#reg-last-name');
 	var $valid = false;
 
 	if(value != '')
