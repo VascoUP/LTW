@@ -1,11 +1,10 @@
-<div hidden class="black_screen"></div>
-<div hidden id="Login_Form" class="Absolute_Center Text_Align_Center">
+<div hidden class="black-screen">
+</div>
+<div hidden id="login-form">
+	<img id="login-profile-picture" src="images/no-user-image.jpg">
 	<form class="class_form" id="login_form" method="POST" action="action_login.php">
-		<h3> Login </h3>
-		<p>Username</p>
-		<input id="Login_User_Icon" type="text" name="username" placeholder="Username"/>
-		<p>Password</p>
-		<input id="Login_Pass_Icon" type="password" name="password" placeholder="Password"/>
-		<input class="style_button" type="submit" value="Login" />
+		<input id="login-username" type="text" name="username" placeholder="Username" onblur="loadFile(this.value)"/>
+		<input id="login-password" type="password" name="password" placeholder="Password"/>
+		<input id="signin-button" type="submit" value="Sign in" />
 	</form>
 </div>

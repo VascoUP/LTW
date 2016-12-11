@@ -9,6 +9,7 @@
             <div hidden id='img-error'></div>
             <div id="img-reg-div">
                 <img id="reg-profile-picture" src="images/no-user-image.jpg">
+                <label id="choose-image" for="reg-file"> Choose an image</label>
                 <input hidden id="reg-file" type="file" accept="image/png,image/jpeg" name="regProfilePic" onchange="loadFile(event)">
             </div>
             <div id="user-reg-div">

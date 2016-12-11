@@ -7,7 +7,8 @@ $(document).ready( function() {
 function loadFile(event) {
     var image = document.getElementById('reg-profile-picture');
     image.src = URL.createObjectURL(event.target.files[0]);
-
+    console.log(event.target.files[0]);
+    
     var $imageError = $('#img-error');
 
     var imageExtension = document.getElementById('reg-file').files[0].name.split('.').pop().toLowerCase();
@@ -69,7 +70,6 @@ function Validate() {
 	if(!checkEmail(document.getElementById('reg-email').value))
 		return false;
 
-	console.log("1");
 	//Validate Password
 	if(password.value != confirmPassword.value) {
 		$passwordbox.css('box-shadow', '0px 0px 5px red');
@@ -77,7 +77,6 @@ function Validate() {
 		passwordConfirmError.innerHTML = "The two passwords do not match.";
 		return false;
 	}
-	console.log("1");
 
 	return true;
 }
@@ -89,45 +88,50 @@ function checkUser(value) {
 	var $validUser = false;
 
 	if(value != '') {
-
-		$.ajax({
-			type:"POST",
-			url: "functions/validationFunctions.php",
-			async: false,
-			data: {
-				action: 'validateUsername',
-				username: value
-			},
-			success: function(isValid) {
-				$validUser = JSON.parse(isValid).success;
-			}
-		});
-
-		if($validUser) {
-			$.ajax({
-				type:"POST",
-				url:"Database/user.php",
-				data:{
-					action: 'isUserTaken',
-					username: value
-				},
-				success: function(data) {
-					if(data == 'This username is available.') {
-						$username.css('box-shadow', '0px 0px 5px green');
-						$usernameError.css('color', 'green');
-					}
-					else {
-						$validUser = false;
-						$username.css('box-shadow', '0px 0px 5px red');
-						$usernameError.css('color', 'red');
-					}
-					$usernameError.text(data);
-				}
-			});
-		} else {
+		if($.isNumeric(value[0])) {
 			$username.css('box-shadow', '0px 0px 5px red');
 			$usernameError.css('color', 'red');
-			$usernameError.text('Please only use letters and/or numbers.');
+			$usernameError.text('The first character must be a letter');
+		} else {
+			$.ajax({
+				type:"POST",
+				url: "functions/validationFunctions.php",
+				async: false,
+				data: {
+					action: 'validateUsername',
+					username: value
+				},
+				success: function(isValid) {
+					$validUser = JSON.parse(isValid).success;
+				}
+			});
+
+			if($validUser) {
+				$.ajax({
+					type:"POST",
+					url:"Database/user.php",
+					data:{
+						action: 'isUserTaken',
+						username: value
+					},
+					success: function(data) {
+						if(data == 'This username is available.') {
+							$username.css('box-shadow', '0px 0px 5px green');
+							$usernameError.css('color', 'green');
+						}
+						else {
+							$validUser = false;
+							$username.css('box-shadow', '0px 0px 5px red');
+							$usernameError.css('color', 'red');
+						}
+						$usernameError.text(data);
+					}
+				});
+			} else {
+				$username.css('box-shadow', '0px 0px 5px red');
+				$usernameError.css('color', 'red');
+				$usernameError.text('Please only use letters and/or numbers.');
+			}
 		}
 	}
 	else {

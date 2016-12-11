@@ -9,7 +9,8 @@ CREATE TABLE User (
 	FirstName CHAR[20] NOT NULL,
 	LastName CHAR[20] NOT NULL,
     Email CHAR[50] NOT NULL,
-    Password CHAR[255] NOT NULL
+    Password CHAR[255] NOT NULL,
+    ProfilePicture CHAR[60]
 );
 
 CREATE TABLE Owner (

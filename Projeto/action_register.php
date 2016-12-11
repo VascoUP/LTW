@@ -9,8 +9,6 @@
 	$email = $_POST['email'];
 	$userType = $_POST['userType'];
 
-	createUser($username, $firstName, $lastName, $email, $password, $userType);
-
 	if (isset($_FILES['regProfilePic'])) {
 		$profilePicName = $_FILES['regProfilePic']['name'];
 		$profilePicTempName = $_FILES['regProfilePic']['tmp_name'];
@@ -22,7 +20,11 @@
 				move_uploaded_file($profilePicTempName, 'Database/ProfilePictures/'.$name);
 			}
 		}
-	}
+		createUser($username, $firstName, $lastName, $email, $password,$userType, $name);
+	} else 
+		createUser($username, $firstName, $lastName, $email, $password,$userType, "NULL");
+
+
 
 	header('Location: initial.php');
 ?>

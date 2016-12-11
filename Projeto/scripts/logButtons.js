@@ -2,7 +2,7 @@ $(document).ready( function() { hearder_buttons() } )
 
 function hearder_buttons () {
 	loadHeaderHandlers( $('#log_site').children('li') );
-	$('.black_screen').first().click(
+	$('.black-screen').first().click(
 		function() {
 			hideForms();
 		});
@@ -31,22 +31,51 @@ function loadHeaderHandlers ( liElems ) {
 }
 
 function hideForms () {
-	$('.black_screen').first().hide();
-	$('#Login_Form').first().hide();
+	$('.black-screen').first().fadeOut(300);
+	$('#login-form').first().fadeOut(300);
 }
 
 function registerButton () {
-	console.debug(window.location.href);
     var url = (window.location.href).substring( 0, (window.location.href).lastIndexOf( "/" ) + 1) + "RegForm.php"
     console.debug(url);
     window.location.href = url;
 }
 
 function loginButton () {
-	$('.black_screen').first().show('hidden');
-	$('#Login_Form').first().show('hidden');
+	$('.black-screen').first().fadeIn(300);
+	$('#login-form').first().fadeIn(300);
 }
 
 function logoutButton () {
 	console.debug('Logout');
+}
+
+function loadFile(value) {
+	var $profilePicture = $('#login-profile-picture');
+
+    if(value != "") {
+    	$.ajax({
+			type:"POST",
+			url: "Database/user.php",
+			data: {
+				action: 'getProfilePicture',
+				username: value
+			},
+			success: function(data) {
+				$picture = JSON.parse(data).ProfilePicture;
+				var url = "Database/ProfilePictures/".concat($picture);
+				if($picture && $picture != "NULL") {
+					$profilePicture.fadeOut(0).attr('src', url).fadeIn(500);
+				} else {
+					if($profilePicture.attr('src') != 'images/no-user-image.jpg') {
+    					$profilePicture.fadeOut(0).attr('src', 'images/no-user-image.jpg').fadeIn(250);
+    				}
+				}
+			}
+		});
+    } else {
+    	if($profilePicture.attr('src') != 'images/no-user-image.jpg') {
+    		$profilePicture.fadeOut(0).attr('src', 'images/no-user-image.jpg').fadeIn(250);
+    	}
+    }
 }
