@@ -3,8 +3,17 @@
   if(isset($_POST['action']) && function_exists($_POST['action'])) {
     $action = $_POST['action'];
     $username = $_POST['username'];
-    return $action($username);
-  } 
+
+    switch($action) {
+
+      case 'verifyUser': 
+        $password = $_POST['password'];
+        return $action($username, $password);
+
+      default:
+        return $action($username);
+    }
+  }
 
   function createUser($username, $firstname, $lastname, $email, $password, $usertype, $profilepicture) {
     global $conn;
@@ -26,18 +35,23 @@
   }
 
   function verifyUser($username, $password) {
-    global $conn;
+    require_once('connection.php');
+    $answer = array();
 
     $stmt = $conn->prepare('SELECT * FROM User WHERE username = ? LIMIT 1');
     $stmt->execute(array($username));
     $user = $stmt->fetch();
-    return ($user !== false && password_verify($password, $user['Password']));
+
+    if($user !== false && password_verify($password, $user['Password']))
+      $answer['success'] = true;
+    else
+      $answer['success'] = false;
+
+    echo json_encode($answer);
   }
 
   function isUserTaken($username) {    
-    $conn = new PDO('sqlite:Database.db');
-    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require_once('connection.php');
 
     $stmt = $conn->prepare('SELECT * FROM User WHERE Username = ? LIMIT 1');
     $stmt->execute(array($username));
@@ -51,11 +65,7 @@
   }
 
   function getProfilePicture($username) {
-    //Don't know why dis is not working
-    //global $conn;
-    $conn = new PDO('sqlite:Database.db');
-    $conn->setAttribute(PDO::ATTR_DEFAULT_FETCH_MODE, PDO::FETCH_ASSOC); 
-    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    require_once('connection.php');
 
     $stmt = $conn->prepare('SELECT ProfilePicture FROM User WHERE username = ? LIMIT 1');
     $stmt->execute(array($username));

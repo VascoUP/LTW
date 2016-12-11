@@ -20,9 +20,9 @@
 				move_uploaded_file($profilePicTempName, 'Database/ProfilePictures/'.$name);
 			}
 		}
-		createUser($username, $firstName, $lastName, $email, $password,$userType, $name);
+		createUser($username, $firstName, $lastName, $email, $password, $userType, $name);
 	} else 
-		createUser($username, $firstName, $lastName, $email, $password,$userType, "NULL");
+		createUser($username, $firstName, $lastName, $email, $password, $userType, "NULL");
 
 
 

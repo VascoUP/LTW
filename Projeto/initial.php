@@ -6,11 +6,17 @@
 <html>
 	<head>
 		<meta charset="UTF-8"/>
-		<title>AELIUS</title>
+		<title>Aelius</title>
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/initialStyle.css">
-		<script   src="https://code.jquery.com/jquery-3.1.1.min.js"   
-			integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 		
+		<link rel="stylesheet" href="css/loginForm.css">
+		<script 
+			src="https://code.jquery.com/jquery-3.1.1.min.js" 
+			integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 
+			crossorigin="anonymous"></script>
+		<script
+			src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+			integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
 			crossorigin="anonymous"></script>	
 		<script src="scripts/search.js"></script>	
 		<script src="scripts/logButtons.js"></script>
@@ -18,7 +24,7 @@
 	<body>
 		<header>
 			<img src="images/logo.png" alt="AELIUS"/>
-			<h1>AELIUS</h1>
+			<h1>Aelius</h1>
 		</header>
 		<?php
 			include ('templates/search_form.php');

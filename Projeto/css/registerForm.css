@@ -169,7 +169,7 @@ input[type=radio] {
 
 input[type=radio]:checked + #label-reg-reviewer:before,
 input[type=radio]:checked + #label-reg-owner:before {
-    background-color: rgb(200,200,200);
+    background-color: rgb(42,143,189);
 }
 
 #signup-button {

@@ -448,16 +448,6 @@ footer #google_translate_element {
 	box-shadow: 0px 0px 8px 0px #888;  
 }
 
-#login_form h3 {
-	margin: 0;
-	padding: 20px 0px;
-}
-
-#login_form p {
-	margin: 0;
-	padding: 10px 0px;
-}
-
 .style_button {
 	padding: 5px 1em;
 	border: none;
@@ -476,16 +466,6 @@ footer #google_translate_element {
 .class_form .style_button {
 	display: block;
 	margin: 10px auto;
-}
-
-.black_screen {
-	width: 100%;
-	height: 100%;
-	top: 0;
-	left: 0;
-	position: fixed;
-	background: #000;
-	opacity: 0.8;
 }
 
 .icon_text {    
