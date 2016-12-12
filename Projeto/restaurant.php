@@ -1,7 +1,6 @@
 <?php
 	include_once('config/init.php');
-	include_once('Database/getRestaurantInfo.php');
-
+	include_once('Database/restaurant.php');
 	include ('templates/head.php');
 ?>
 <!-- Include scripts here -->
@@ -14,7 +13,8 @@
 <?php
 	include ('templates/search_form.php');
 	include ('templates/restaurant_page.php');
-	include ('templates/LoginForm.php');
+	if(!isset($_SESSION['username']))
+		include ('templates/LoginForm.php');
 ?>
 	</div>
 <?php
