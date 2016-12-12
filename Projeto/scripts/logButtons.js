@@ -117,7 +117,6 @@ function validateLogin() {
 	if($usernameText != "" && $passwordText == "") {
 		$password.css("box-shadow", "0px 0px 5px red");
 		$password.effect("shake", {distance: 5});
-		return $validUser;
 	}
 
 	if($usernameText == "" && $passwordText == "") {
@@ -128,4 +127,8 @@ function validateLogin() {
 	}
 
 	return $validUser;
+}
+
+function showScrollDown() {
+	$('#ProfileScrollDown').toggle(200);
 }

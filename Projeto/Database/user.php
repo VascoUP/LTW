@@ -21,8 +21,7 @@
     $options = ['cost' => 12];
     $hash = password_hash($password, PASSWORD_DEFAULT, $options);
 
-    $stmt = $conn->prepare('INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) 
-                              VALUES (?, ?, ?, ?, ?, ?)');
+    $stmt = $conn->prepare('INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES (?, ?, ?, ?, ?, ?)');
     $stmt->execute(array($username, $firstname, $lastname, $email, $hash, $profilepicture));
 
     if($usertype == 'reviewer')

@@ -32,7 +32,6 @@ input {
 
 #reg-form {
     background: white;
-    background: rgba(255,255,255,1);
     width: 600px;
     position: relative;
     top: 150px;

@@ -1,6 +1,14 @@
 <?php
 	include_once('config/init.php');
-	global $conn;
+
+	if(isset($_SESSION['username'])) {
+		$stmt = $conn->prepare('SELECT ProfilePicture FROM User WHERE username = ? LIMIT 1');
+		$stmt->execute(array($_SESSION['username']));
+
+		$result = $stmt->fetch();
+
+		$url = "Database/ProfilePictures/".$result['ProfilePicture'];
+	}
 ?>
 <!DOCTYPE html>
 <html>
@@ -24,9 +32,17 @@
 	<body>
 		<header>
 			<img src="images/logo.png" alt="AELIUS"/>
+			<?php 
+				if(isset($_SESSION['username'])) {
+   					echo '<img src="'.$url.'" id="UserProfileHeader" class="ProfileHeader" onclick="showScrollDown()"/>';
+				} else 
+				 	echo '<img src="images/no-user-image-header.png"  
+				 		class="ProfileHeader" onclick="loginButton()"/>';
+			?>
 			<h1>Aelius</h1>
 		</header>
 		<?php
+			include ('templates/profileScrollDown.php');
 			include ('templates/search_form.php');
 			if (!isset($_SESSION['username'])) {
 				echo '<ul id="log_site">';
