@@ -86,7 +86,7 @@ function validateLogin() {
 	$passwordText = $('#login-password').val();
 
 	var $validUser = false;
-
+	
 	if($usernameText != "" && $passwordText != "") {
 		$.ajax({
 			type:"POST",

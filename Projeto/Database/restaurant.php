@@ -20,12 +20,21 @@
 	function getSearchRestaurants($string) {
 		global $conn;
 
-		$stmt = $conn->prepare('SELECT * FROM Restaurant WHERE Name LIKE \'%?%\'');
-		$stmt->execute(array($string));
+		$search = '%'.$string.'%';
 
-		$result = $stmt->fetchAll();
+		$stmt = $conn->prepare("SELECT * FROM Restaurant WHERE Name LIKE ?");
+		$stmt->execute(array($search));
 
-		echo json_encode($result);
+		return $stmt->fetchAll();
+	}
+
+	function getAddress($ID) {
+		global $conn;
+
+		$stmt = $conn->prepare("SELECT StreetName FROM Address WHERE ID = ? LIMIT 1");
+		$stmt->execute(array($ID));
+
+		return $stmt->fetch();
 	}
 
 ?>
