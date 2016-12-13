@@ -315,3 +315,6 @@ INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (6, 2);
 INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 8);
 INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 10);
 INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 9);
+INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (2, 1);
+INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (2, 3);
+INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (2, 4);

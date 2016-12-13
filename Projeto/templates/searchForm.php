@@ -8,9 +8,9 @@
 			<option value="Category">
 				Category
 			</option>
-			<option value="Category">
+			<option value="City">
 				City
 			</option>
-		</select><input id="searchInput" class="icon_text" type="text" name="restaurant" placeholder="Search..."/><input id="searchBarButton" type="submit" value="Search"/>
+		</select><input id="searchInput" class="icon_text" type="text" name="searchString" placeholder="Search..."/><input id="searchBarButton" type="submit" value="Search"/>
 	</div>
 </form>

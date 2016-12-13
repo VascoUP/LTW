@@ -15,12 +15,23 @@
 		return $stmt->fetch();
 	}
 
-	function getSearchRestaurants($string) {
+	function getRestaurantsByName($string) {
 		global $conn;
 
 		$search = '%'.$string.'%';
 
 		$stmt = $conn->prepare("SELECT * FROM Restaurant WHERE Name LIKE ?");
+		$stmt->execute(array($search));
+
+		return $stmt->fetchAll();
+	}
+
+	function getRestaurantsByCategory($string) {
+		global $conn;
+
+		$search = '%'.$string.'%';
+
+		$stmt = $conn->prepare("SELECT DISTINCT Restaurant.ID, Restaurant.Name, Restaurant.NScores, Restaurant.TotalScores, Restaurant.Address_ID FROM Restaurant, Category, RestaurantCategory WHERE RestaurantCategory.Restaurant_ID = Restaurant.ID AND RestaurantCategory.Category_ID = Category.ID and Category.Category LIKE ?");
 		$stmt->execute(array($search));
 
 		return $stmt->fetchAll();
