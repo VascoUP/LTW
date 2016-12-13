@@ -23,6 +23,11 @@ header img {
 	float: left;
 }
 
+select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
+}
+
 #wrapper {
 	min-height: 100%;
 	position:relative;
@@ -71,81 +76,73 @@ header img {
 
 /* Search bar related */
 
-#search_bar {
-	width: 100%;
-	padding: 2em 0em;
-	display: inline-block;
-
-	-webkit-transition: padding 1s;
-	transition: padding 1s;
-
-	-webkit-box-shadow: 0px 0px 8px 0px #000000;
-	-moz-box-shadow: 0px 0px 8px 0px #000000;
-	box-shadow: 0px 0px 8px 0px #000000;
+#searchBar h2 {
+	visibility: hidden;
+	margin: 0;
+	padding: 0;
 }
 
-#search_bar:hover {
-	padding: 6em 0em;
+#searchOption {
+	width: 8%;
+
+	border: 1px solid #000;
+	padding: 7px 5px;
+	text-align: left;
+
+	background: url('../images/down-arrow.png') no-repeat 95% center;
+	background-color: white; 
+	background-size: 15%;
+
+	border-top-left-radius: 10px;
+    -webkit-border-top-left-radius: 10px;
+    -moz-border-top-left-radius: 10px;
+    -o-border-top-left-radius: 10px;
+
+    border-bottom-left-radius: 10px;
+    -webkit-border-bottom-left-radius: 10px;
+    -moz-border-bottom-left-radius: 10px;
+    -o--border-bottom-left-radius: 10px;
+	
+	appearance: none;
+	-webkit-appearance: none;
+	-moz-appearance: none;
+	-o-appearance: none;
+	box-sizing: border-box;
+
+	cursor: pointer;
 }
 
-#search_bar h2 {
-	color: white;
-	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-	font-size: 200%;
+#searchInput {
+	width: 55%;
+
+	background: url(../images/search.png) no-repeat 1% center;
+	background-size: 2%;
+	background-color: white; 
+	border: 1px solid #000;
+	border-right: none;
+	border-left: none;
+	padding: 8px 30px;
 }
 
-#search_values {
-	display: inline;
-}
+#searchBarButton {
+	width: 5%;
 
-#search_bar select:hover {
-	background-color: #e8e8e8;
-}
+	background: rgba(42,143,189,0.9);
+	border: 1px solid #000;
+	padding: 8px 5px;
 
-#search_bar select:active {
-	background-color: #d4d4d4;
-}
+	border-top-right-radius: 10px;
+    -webkit-border-top-right-radius: 10px;
+    -moz-border-top-right-radius: 10px;
+    -o-border-top-right-radius: 10px;
 
-#search_values input {
-	width: 30em;
-	height: 20px;
-}
+    border-bottom-right-radius: 10px;
+    -webkit-border-bottom-right-radius: 10px;
+    -moz-border-bottom-right-radius: 10px;
+    -o-border-bottom-right-radius: 10px;
 
-#search_icon {
-	background-image: url('../images/search.png');
-	background-size: 15px;
-	background-position: 5px 5px;
-	padding-left: 20px;
-	border: none;
+    cursor: pointer;
 }
-
-#Login_Pass_Icon {
-	background-image: url('../images/key.png');
-	background-size: 15px;
-	background-position: 2px 1px;
-	padding-left: 20px;
-}
-
-#Login_User_Icon {
-	background-image: url('../images/person.png');
-	background-size: 20px;
-	background-position: 0px -2px;
-	padding-left: 25px;
-}
-
-#search_values select {
-	padding: 5px 1em;
-	border: none;
-	border-radius: 4px;
-	background-color: #f1f1f1;
-}
-
-#search_bar {
-	background-image: url('../images/background_search.jpg');
-	background-position: center;
-	background-size: cover;
-}
-
 
 /* List of restaurants related */
 

@@ -94,13 +94,7 @@
 	function getMenus($ID) {
 		global $conn;
 
-		$stmt = $conn->prepare('SELECT Food, Price, Category 
-					FROM MenuRestaurant, Menu, Category 
-					WHERE Restaurant_ID = ? & 
-						MenuRestaurant.Menu_ID = Menu.ID &
-						Category_ID = Category.ID
-					GROUP BY Food
-					ORDER BY Category, Price');
+		$stmt = $conn->prepare('SELECT Menu.Food, Menu.Price, Category.Category FROM Restaurant, Menu, Category, MenuRestaurant WHERE Restaurant.ID = ? and MenuRestaurant.Restaurant_ID = Restaurant.ID and MenuRestaurant.Menu_ID = Menu.ID and Menu.Category_ID = Category.ID order by lower(Category.Category)');
 		$stmt->execute(array($ID));
 
 		return $stmt->fetchAll();
