@@ -14,6 +14,7 @@
 					?>
 					<p class="restaurant_street_name"> <?php 
 						$Address = getAddress($restaurant['Address_ID']);
+						echo $Address['StreetName'];
 					?></p>
 				</div>	
 			</a>
