@@ -566,3 +566,180 @@ footer #google_translate_element {
 .valError {
 	color: Red;
 }
+
+/* Profile content */
+
+.profile_content {
+	min-width: 1200px;
+	width: auto;
+	width: 1200px;
+	padding-bottom:50px;
+	margin: auto;
+	overflow: auto;
+}
+
+.dashboard {
+	height: auto;
+	margin: 15px;
+}
+
+#profile-photo {
+	display: block;
+	float: left;
+	margin: 20px;
+}
+
+#profile-username {
+	display: block;
+	margin: 5px;
+	
+}
+
+#profile-bio {
+	display: block;
+	margin: 5px;
+	position: relative;
+	left: -15px;
+	
+}
+
+#left-dashboard {
+	display: block;
+	width: 375px;
+	float: left;
+}
+
+#main {
+	width: 750px;
+	float: left;
+}
+
+.tabcontent {
+	display: none;	
+}
+
+.profile-stats {
+	display: block;
+	margin: 20px;
+	margin-top: 0;
+}
+.profile-stats a{
+    text-decoration: none;
+	color : #000000;
+    font-weight: lighter;
+}
+.profile-stats a:hover {
+    font-weight:bold;
+}
+.profile-stats a:active {
+    font-weight:bold;
+}
+
+#Stat_Nav {
+	display:table;
+	list-style: none;
+
+	width: 100%;
+	height: 25px;
+	padding: 0;
+
+	overflow: auto;
+
+	font-size: 150%;
+	font-weight: bold;    
+
+	-webkit-touch-callout: none;
+	-webkit-user-select: none;
+	-khtml-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
+#Stat_Nav {
+	margin: 0;
+}
+
+#Stat_Nav li:hover .Unselected_Item {
+	opacity: 0.8;
+	background-color: #aaa;
+}
+
+#Stat_Nav li {
+    	display:table-cell;
+	background-color: white;
+}
+
+#Stat_Nav p {
+	margin: 5px;
+}
+
+#Stat_Nav li:target div {
+  display: block;
+}
+
+#Stat_Nav div {
+  display: none;
+}
+
+.Favourite_Restaurant_Photo  {
+	display: flex;
+	flex-direction: column;
+
+	background-image: url('../images/background_search.jpg');
+	background-position: center;
+	background-size: cover;
+
+	height: 125px; 
+
+	-webkit-box-shadow: 0px 0px 8px 0px #888;
+	-moz-box-shadow: 0px 0px 8px 0px #888;
+	box-shadow: 0px 0px 8px 0px #888;
+}
+
+.Favourite_Restaurant_Photo .Restaurant_Basic_Info {
+	padding: 1em 2em;
+	margin-top: auto;
+	color: white;
+
+	text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+	font-size: 150%;
+}
+
+.Favourite_Restaurant_Photo .Restaurant_Name {
+	margin: 0;
+	font-size: 170%;
+}
+
+.review {
+	margin: 20px;
+}
+
+.Restaurant_Reviewed {
+	float: left;
+	font-size:150%;
+	font-weight: bold;
+	font-variant: small-caps;
+}
+
+.Review_Date {
+	float: right;
+	font-size: 80%;
+	font-style: italic;
+	color: #787878;
+}
+
+.Review_Score {
+	float: left;
+	margin: 17px;
+	font-size:200%;
+	font-weight: bold;
+}
+
+.Review_Score p{
+	margin: 0;
+}
+
+.Review_Text p {
+	margin-top:0;
+}
