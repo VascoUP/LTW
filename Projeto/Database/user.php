@@ -85,6 +85,17 @@
     echo json_encode($result);
   }
 
+  function getUserInfoPhp($username) {
+    global $conn;
+
+    $stmt = $conn->prepare('SELECT * FROM User WHERE username = ? LIMIT 1');
+    $stmt->execute(array($username));
+
+    $result = $stmt->fetch();
+    
+    return $result;
+  }
+
   function isUserOwner($username) {
     global $conn;
 
@@ -94,6 +105,16 @@
     $result = $stmt->fetch();
 
     return json_encode($result); 
+  }
+
+  function getUserReviews($username) {
+    global $conn;
+
+    $stmt = $conn->prepare('SELECT * FROM Review WHERE username = ?');
+    $stmt->execute(array($username));
+
+    $result = $stmt->fetchAll();
+    return $result;
   }
 
 ?>

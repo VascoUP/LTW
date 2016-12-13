@@ -6,6 +6,15 @@
 		return $action($restaurant);
 	} 
 
+	function getRestaurantName($restaurantID) {
+		global $conn;
+
+		$stmt = $conn->prepare('SELECT Name FROM Restaurant WHERE ID = ? LIMIT 1');
+		$stmt->execute(array($restaurantID));
+
+		return $stmt->fetch();
+	}
+
 	function getRestaurantInfo($restaurantID) {
 		global $conn;
 
