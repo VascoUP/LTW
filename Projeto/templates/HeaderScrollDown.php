@@ -2,7 +2,9 @@
 	<ul>
 		<?php 
 			if(isset($_SESSION["username"])) {
-				echo '<input id="ScrollOptionsButton" type="submit" value="Your Profile" onclick="">';
+				$username = $_SESSION["username"];
+				echo "<a id='ScrollOptionsButton' href='profile.php?username=$username'>Your Profile</a>";
+						//value='Your Profile' action='user.php?username=$username'>";
 
 				$stmtType = $conn->prepare('SELECT * FROM Owner WHERE username = ?');
 				$stmtType->execute(array($_SESSION['username']));

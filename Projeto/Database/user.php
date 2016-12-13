@@ -85,4 +85,15 @@
     echo json_encode($result);
   }
 
+  function isUserOwner($username) {
+    global $conn;
+
+    $stmt = $conn->prepare('SELECT * FROM Owner WHERE username = ?');
+    $stmt->execute(array($username));
+
+    $result = $stmt->fetch();
+
+    return json_encode($result); 
+  }
+
 ?>
