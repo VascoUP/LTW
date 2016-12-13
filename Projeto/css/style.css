@@ -372,6 +372,26 @@ header img {
 	display: none;
 }
 
+.Table_Category {
+	margin: auto;
+	font-size: 120%;
+	font-weight: bold;
+}
+
+.Menu_Table {
+	width: 70%;
+	margin: auto;
+	margin-bottom: 2em;
+}
+
+.Menu_Food {
+	text-align: left;
+}
+
+.Menu_Price {
+	text-align: right;
+}
+
 .Restaurant_Name {
 	display: inline-block;
 }

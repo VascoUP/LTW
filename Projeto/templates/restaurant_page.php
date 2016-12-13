@@ -1,6 +1,6 @@
 <?php
-
 	$restaurantID = $_GET['id'];
+
 	$restaurant = getRestaurantInfo($restaurantID);
 
 	$restaurantAddress = getAddress($restaurant['Address_ID']);
@@ -8,6 +8,8 @@
 	$restaurantCategories = getRestaurantCategories($restaurantID);
 
 	$restaurantOpenHours = getRestaurantOpenHours($restaurantID);
+
+	$restaurantMenus = getMenus($restaurantID);
 ?>
 
 <div id="Restaurant_Page">
@@ -109,6 +111,31 @@
 
 	<div class="Curved_Edges Margin_Top_Bottom Default_Info_Box" id="Restaurant_Menu">
 		<h2 class="Text_Align_Center">Menu</h2>
+		<?php
+			$category = "";
+			$class_table = "Menu_Table";
+			$class_category = "Table_Category";
+			$class_food = "Menu_Food";
+			$class_price = "Menu_Price";
+
+			foreach($restaurantMenus as $row) {
+				if( $row['Category'] != $category ) {
+					if( $category != "" ) {
+						echo "</table>";
+						echo "<div class='Sexy_Border'></div>";
+					}
+
+					$category = $row['Category'];
+
+					echo "<p class='$class_category Text_Align_Center'>$category</p>";
+					echo "<table class='$class_table'>";
+				}
+
+				$food = $row['Food'];
+				$price = $row['Price'];
+				echo "<tr><td class='$class_food'>$food</td><td class='$class_price'>$price</td></tr>";
+			}
+		?>
 	</div>
 
 	<div class="Curved_Edges Margin_Top_Bottom Default_Info_Box" id="Restaurant_Reviews">
