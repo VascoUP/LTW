@@ -80,7 +80,7 @@
 
 				<?php
 					foreach($restaurantOpenHours as $openHour)
-						echo '<p id="Op_Hours_Week">'.getOpenHour($openHour['OpenHour_ID'])['Day'].":<br>".getOpenHour($openHour['OpenHour_ID'])['OpenTime']." to ".getOpenHour($openHour['OpenHour_ID'])['CloseTime']."</p>";
+						echo '<p class="Op_Hours_Week">'.getOpenHour($openHour['OpenHour_ID'])['Day'].":<br>".getOpenHour($openHour['OpenHour_ID'])['OpenTime']." to ".getOpenHour($openHour['OpenHour_ID'])['CloseTime']."</p>";
 				?>
 			</div>
 		</div>
@@ -135,6 +135,8 @@
 				$price = $row['Price'];
 				echo "<tr><td class='$class_food'>$food</td><td class='$class_price'>$price</td></tr>";
 			}
+			if( $category != "" )
+				echo "</table>";
 		?>
 	</div>
 
