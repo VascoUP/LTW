@@ -10,19 +10,19 @@ function hearder_buttons () {
 
 function loadHeaderHandlers ( liElems ) {
 	for( var i = 0; i < liElems.length; i++ ) {	
-		var type = $(liElems[i]).children('form').attr('id');
+		var type = $(liElems[i]).children('input').attr('id');
 		if( type == 'Logout_Button' ) {
 			$(liElems[i]).children('form').click(
 				function() {
 					logoutButton();
 			});
-		} else if( type == 'Login_Button') {
-			$(liElems[i]).children('form').click(
+		} else if( type == 'loginButton') {
+			$(liElems[i]).children('input').click(
 				function() {
 					loginButton();
 			});
 		} else if( type == 'Reg_Button') {
-			$(liElems[i]).children('form').click(
+			$(liElems[i]).children('input').click(
 				function() {
 					registerButton();
 			});
@@ -41,12 +41,8 @@ function registerButton () {
 }
 
 function loginButton () {
-	$('.black-screen').first().fadeIn(300);
+	$('.black-screen').first().fadeIn(200);
 	$('#login-form').first().fadeIn(300);
-}
-
-function logoutButton () {
-	console.debug('Logout');
 }
 
 function loadFile(value) {
@@ -131,4 +127,15 @@ function validateLogin() {
 
 function showScrollDown() {
 	$('#ProfileScrollDown').toggle(200);
+}
+
+function toggleButtons() {
+	$('#HeaderRegister').toggle(200);
+	$('#HeaderLogin').toggle(200);
+}
+
+function showSearchDropdown() {
+	$('.searchOption').each(function(index) {
+		$(this).toggle(100);
+	});
 }

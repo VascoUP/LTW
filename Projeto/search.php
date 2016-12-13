@@ -14,7 +14,7 @@
 	$searchString = $_GET['restaurant'];
 	$restaurants = getSearchRestaurants($searchString);
 
-	include ('templates/search_form.php');
+	include ('templates/searchForm.php');
 	include ('templates/listRestaurants.php');
 	if(!isset($_SESSION['username']))
 		include ('templates/LoginForm.php');

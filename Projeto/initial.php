@@ -17,8 +17,22 @@
 		<title>Aelius</title>
 		<link rel="stylesheet" href="css/normalize.css">
 		<link rel="stylesheet" href="css/initialStyle.css">
+		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 		<link rel="stylesheet" href="css/loginForm.css">
-		<script 
+	</head>
+	<body>
+		<header>
+			<?php
+			include ("templates/HeaderButtons.php");
+			include ('templates/HeaderScrollDown.php');
+			?>
+		</header>
+		<?php
+			include ('templates/searchForm.php');
+			include ('templates/LoginForm.php');
+		?>
+	</body>
+	<script 
 			src="https://code.jquery.com/jquery-3.1.1.min.js" 
 			integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 
 			crossorigin="anonymous"></script>
@@ -28,42 +42,5 @@
 			crossorigin="anonymous"></script>	
 		<script src="scripts/search.js"></script>	
 		<script src="scripts/logButtons.js"></script>
-	</head>
-	<body>
-		<header>
-			<img src="images/logo.png" alt="AELIUS"/>
-			<?php 
-				if(isset($_SESSION['username'])) {
-   					echo '<img src="'.$url.'" id="UserProfileHeader" class="ProfileHeader" onclick="showScrollDown()"/>';
-				} else 
-				 	echo '<img src="images/no-user-image-header.png"  
-				 		class="ProfileHeader" onclick="loginButton()"/>';
-			?>
-			<h1>Aelius</h1>
-		</header>
-		<?php
-			include ('templates/profileScrollDown.php');
-			include ('templates/search_form.php');
-			if (!isset($_SESSION['username'])) {
-				echo '<ul id="log_site">';
-					echo '<li>';
-						include ('templates/register.php');
-					echo '</li>';
-					echo '<li>';
-		?>
-					<div class="sexy_border"> </div>
-		<?php
-						include ('templates/login.php');
-					echo '</li>';
-				echo '</ul>';
-			} else {
-				echo '<ul id="log_site">';
-				echo '<li>';
-					include ('templates/logout.php');
-				echo '</li>';
-			}
-		include ('templates/LoginForm.php');
-		?>
-	</body>
 </html>
 

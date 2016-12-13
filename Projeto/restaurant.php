@@ -11,7 +11,7 @@
 ?>
 	<div id="content">
 <?php
-	include ('templates/search_form.php');
+	include ('templates/searchForm.php');
 	include ('templates/restaurant_page.php');
 	if(!isset($_SESSION['username']))
 		include ('templates/LoginForm.php');
