@@ -10,22 +10,22 @@
 ?>
 	<div id="content">
 <?php
-	
-	$category = $_GET['searchOption'];
-	$searchString = $_GET['searchString'];
-
-	switch ($category) {
-		case 'Name':
-			$restaurants = getRestaurantsByName($searchString);
-			break;
-		case 'Category':
-			$restaurants = getRestaurantsByCategory($searchString);
-			break;
-		case 'City':
-			//$restaurants = getRestaurantsByCity($searchString);
-			break;
-		default:
-			break;
+	if( isset($_GET['searchOption']) && isset($_GET['searchString'])) {
+		$category = $_GET['searchOption'];
+		$searchString = $_GET['searchString'];
+		switch ($category) {
+			case 'Name':
+				$restaurants = getRestaurantsByName($searchString);
+				break;
+			case 'Category':
+				$restaurants = getRestaurantsByCategory($searchString);
+				break;
+			case 'City':
+				//$restaurants = getRestaurantsByCity($searchString);
+				break;
+			default:
+				break;
+		}
 	}
 
 	include ('templates/searchForm.php');
