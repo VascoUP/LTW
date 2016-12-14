@@ -14,6 +14,8 @@
 <?php
 	include ('templates/searchForm.php');
 	include ('templates/profile_info_owner.php');
+	if(!isset($_SESSION['username']))
+		include ('templates/LoginForm.php');
 ?>
 	</div>
 <?php
