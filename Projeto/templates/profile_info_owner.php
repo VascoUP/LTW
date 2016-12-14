@@ -4,7 +4,7 @@
 
 	$username = $_GET['username'];
 	$userInfo = getUserInfoPhp($username);
-	$userRestaurants = [];
+	$userRestaurants = getUserRestaurants($username);
 ?>
 
 <div class="profile_content">
@@ -45,13 +45,7 @@
 	
 	<div class="dashboard Curved_Edges Default_Info_Box" id="main">
 	<?php			
-	
-		foreach($userRestaurants as $restaurant) {
-			$restaurant_name = getRestaurantName($restaurant['Restaurant_ID']);
-			$restaurant_nscores = $restaurant['NScores'];
-			$restaurant_total_scores = $restaurant['TotalScores'];
-			include ('templates/profile_favourite.php');
-		}
+		include ('templates/listOwnerRestaurants.php');
 	?>
 	</div>
 </div>

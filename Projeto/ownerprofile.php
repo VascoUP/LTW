@@ -12,6 +12,7 @@
 ?>
 	<div id="content" style="min-width: 1080px;">
 <?php
+	include ('templates/searchForm.php');
 	include ('templates/profile_info_owner.php');
 ?>
 	</div>

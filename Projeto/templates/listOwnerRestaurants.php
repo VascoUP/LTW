@@ -1,8 +1,7 @@
 <ul id="restaurants_list">
 
 	<?php 
-		foreach($userFavourites as $restaurantID) {
-		$restaurant = getRestaurantInfo($restaurantID['Restaurant_ID']);
+		foreach($userRestaurants as $restaurant) {
 	?>
 		<li> 
 			<a href="restaurant.php" onclick="location.href=this.href+'?id=<?=$restaurant['ID']?>';return false;" class="Hide_Link_Display">

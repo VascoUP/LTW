@@ -91,18 +91,14 @@
     $stmt = $conn->prepare('SELECT * FROM User WHERE username = ? LIMIT 1');
     $stmt->execute(array($username));
 
-    $result = $stmt->fetch();
-    
-    return $result;
+    return $stmt->fetch();
   }
 
   function isUserOwner($username) {
     global $conn;
 
-    $stmt = $conn->prepare('SELECT * FROM Owner WHERE username = ?');
+    $stmt = $conn->prepare('SELECT * FROM Owner WHERE Username = ? LIMIT 1');
     $stmt->execute(array($username));
-
-    $result = $stmt->fetch();
 
     return $stmt->fetch();
   }
@@ -110,7 +106,7 @@
   function isUserReviewer($username) {
     global $conn;
 
-    $stmt = $conn->prepare('SELECT * FROM Reviewer WHERE username = ?');
+    $stmt = $conn->prepare('SELECT * FROM Reviewer WHERE Username = ? LIMIT 1');
     $stmt->execute(array($username));
 
     return $stmt->fetch();
@@ -122,8 +118,7 @@
     $stmt = $conn->prepare('SELECT * FROM Review WHERE username = ?');
     $stmt->execute(array($username));
 
-    $result = $stmt->fetchAll();
-    return $result;
+    return $stmt->fetchAll();
   }
 
   function getUserFavourites($username) {
@@ -132,8 +127,17 @@
     $stmt = $conn->prepare('SELECT * FROM Favourite WHERE Username = ?');
     $stmt->execute(array($username));
 
-    $result = $stmt->fetchAll();
-    return $result;
+    return $stmt->fetchAll();
+  }
+
+  function getUserRestaurants($username) {
+    global $conn;
+
+    $stmt = $conn->prepare('SELECT  * FROM Restaurant WHERE Owner_Username = ?');
+    $stmt->execute(array($username));
+
+    return $stmt->fetchAll();
+
   }
 
 ?>

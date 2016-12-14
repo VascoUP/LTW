@@ -30,8 +30,7 @@
 				<p>
 				<?php 
 					echo $userInfo['Email']; 
-				?> 
-				</p>
+				?> 				</p>
 			</div>
 						
 			<div class="profile-stats">
