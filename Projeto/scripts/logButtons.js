@@ -131,12 +131,28 @@ function showScrollDown() {
 }
 
 function toggleButtons() {
-	$('#HeaderRegister').toggle(200);
-	$('#HeaderLogin').toggle(200);
+
+	$('.HeaderButton').toggle(200);
 }
 
 function showSearchDropdown() {
 	$('.searchOption').each(function(index) {
 		$(this).toggle(100);
 	});
+}
+
+function editRestaurant() {
+	$url = $(location).attr('href');
+	$restaurantID = $url.substring($url.indexOf("id") + 3, $url.indexOf("id") + 4);
+
+	$editPageUrl = (window.location.href).substring( 0, (window.location.href).lastIndexOf( "/" ) + 1) + "edit_restaurant.php?id=" + $restaurantID;
+	window.location.href = $editPageUrl;
+}
+
+function editProfile() {
+	$url = $(location).attr('href');
+	$username = $url.substring($url.indexOf("username=") + 9);
+	console.log($username);
+	$editPageUrl = (window.location.href).substring( 0, (window.location.href).lastIndexOf( "/" ) + 1) + "edit_profile.php?username=" + $username;
+	window.location.href = $editPageUrl;
 }

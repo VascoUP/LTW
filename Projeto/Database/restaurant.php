@@ -8,16 +8,17 @@
 				$content = $_POST['content'];
 				$restaurantID = $_POST['restaurantID'];
 				return $action($score, $content, $restaurantID);
-				break;
 			case 'insertReply':
 				$reviewID = $_POST['reviewID'];
 				$content = $_POST['content'];
 				return $action($reviewID, $content);
-				break;
+			case 'getRestaurantProfilePicture':
+				$restaurantID = $_POST['restaurantID'];
+				return $action($restaurantID);
 			default:
 				break;
 		}
-	} 
+	}
 
 	function getRestaurantName($restaurantID) {
 		global $conn;
@@ -72,8 +73,8 @@
 		global $conn;
 
 		$stmt = $conn->prepare('SELECT * FROM RestaurantCategory Where Restaurant_ID = ? ');
-    	$stmt->execute(array($restaurantID)); 
-		
+    	$stmt->execute(array($restaurantID));
+
 		return $stmt->fetchAll();
 	}
 
@@ -120,6 +121,15 @@
 		$stmt->execute(array($restaurantID));
 
 		return $stmt->fetchAll();
+	}
+
+	function getRestaurantProfilePicture($restaurantID) {
+		require_once('connection.php');
+
+		$stmt = $conn->prepare('SELECT * FROM Picture WHERE Restaurant_ID = ? LIMIT 1');
+		$stmt->execute(array($restaurantID));
+
+		echo json_encode($stmt->fetch());
 	}
 
 	function getRestaurantReviews($restaurantID) {
@@ -172,6 +182,16 @@
 		$answer['username'] = $username;
 
 		echo json_encode($answer);
+	}
+
+	function isRestaurantOwner($restaurantID) {
+		global $conn;
+
+		$username = $_SESSION['username'];
+		$stmt = $conn->prepare('SELECT * FROM Restaurant WHERE ID = ? AND Owner_Username = ? LIMIT 1');
+		$stmt->execute(array($restaurantID, $username));
+
+		return $stmt->fetch();
 	}
 
 ?>

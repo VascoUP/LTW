@@ -1,7 +1,8 @@
 <?php
 	$restaurantID = $_GET['id'];
-
 	$restaurant = getRestaurantInfo($restaurantID);
+	if( !$restaurant )
+		header("Location: Error.php");
 
 	$restaurantAddress = getAddress($restaurant['Address_ID']);
 	

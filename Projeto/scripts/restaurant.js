@@ -5,6 +5,8 @@ var products = [];
 $(document).ready( function() { load_restaurant(); } )
 
 function load_restaurant () {
+	load_profile_picture();
+
 	var nSelected = get_type_value('opt');
 	if( nSelected != "" )
 		show_by_id(nSelected);
@@ -15,6 +17,30 @@ function load_restaurant () {
 	$(function() {
     		$(window).scroll(sticky_relocate);
     		sticky_relocate();
+	});
+}
+
+function getRestaurantID() {
+	$url = $(location).attr('href');
+	return $url.substring($url.indexOf("id") + 3, $url.indexOf("id") + 4);
+}
+
+function load_profile_picture() {
+	var id = getRestaurantID();
+	$.ajax({
+		type:"POST",
+		url: "Database/restaurant.php",
+		data: {
+			action: 'getRestaurantProfilePicture',
+			restaurantID: id
+		},
+		success: function(result) {
+			if( !result )
+				return ;
+			$picture = JSON.parse(result).Name;
+			var url = "Database/RestaurantPictures/Originals/".concat($picture);
+			$('.Restaurant_Photo').css('background-image', "url("+url+")");
+		}
 	});
 }
 
@@ -30,12 +56,12 @@ function get_type_value (type) {
 	return "";
 }
 
-function url_add_value (type, value) {	
+function url_add_value (type, value) {
 
 	var hash = location.hash.replace(/^.*?#/, '');
 	if( hash == '' ) {
-		window.location.href = window.location.href + 
-				"#" + type + 
+		window.location.href = window.location.href +
+				"#" + type +
 				"=" + value;
 		return ;
 	}
@@ -49,17 +75,16 @@ function url_add_value (type, value) {
 		var split_pair = pairs[i].split('=');
 
 		if( split_pair[0] != type ) {
-			window.location.href = window.location.href + 
-						division_char + split_pair[0] + 
+			window.location.href = window.location.href +
+						division_char + split_pair[0] +
 						"=" + split_pair[1];
-		
 			if( division_char == '' )
 				division_char = '&';
 		}
 	}
 
-	window.location.href = window.location.href + 
-			division_char + type + 
+	window.location.href = window.location.href +
+			division_char + type +
 			"=" + value;
 }
 
@@ -103,7 +128,7 @@ function show_by_id(id) {
 function show_overview() {
 	if( selected_tab == '#Rst_Menu_Ov' )
 		return;
-	
+
 	url_add_value('opt', 'Rst_Menu_Ov');
 
 	$(selected_tab).children(".Selected_Item").attr("class","Unselected_Item");
@@ -112,7 +137,7 @@ function show_overview() {
 	$(div_id).fadeOut();
 	$(div_id).hide();
 
-	selected_tab = '#Rst_Menu_Ov';	
+	selected_tab = '#Rst_Menu_Ov';
 
 	div_id = get_info_id(selected_tab);
 	$(div_id).fadeIn();
@@ -121,7 +146,7 @@ function show_overview() {
 	$(selected_tab).children(".Unselected_Item").attr("class","Selected_Item");
 }
 
-function show_menu() {	
+function show_menu() {
 	if( selected_tab == '#Rst_Menu_Mn' )
 		return;
 
@@ -285,7 +310,7 @@ function revert_hover_score() {
 
 	var listItems = $("#Add_Score li");
 	listItems.each(function(idx, li) {
-		if($(li).attr("id") != 'Total_Score') {			
+		if($(li).attr("id") != 'Total_Score') {
 			if(isPastId)
 				select_score( $(li), '#aaa' );
 			else {
@@ -298,10 +323,9 @@ function revert_hover_score() {
 }
 
 function score_buttons() {
-	
 	$('#Add_Score li').hover( function() {
 			hover_score($(this));
-		}, function() {	
+		}, function() {
 			revert_hover_score();
 		});
 
@@ -318,7 +342,7 @@ function comment_area() {
 function review_handlers() {
 	$('#Review_Comment').click( function() {
 		comment_area();
-			
+
 	});
 	$("textarea").click( function() {
 		$(this).attr('rows', 5);
@@ -343,8 +367,7 @@ function showPicturePopUp($src, $alt) {
 function updateReviews() {
 	$score = $("#Total_Score").text();
 	$review = $("#Review_Comment").val();
-	$url = $(location).attr('href');
-	$restaurantID = $url.substring($url.indexOf("id") + 3, $url.indexOf("id") + 4);
+	$restaurantID = getRestaurantID();
 	var $result;
 
 	$.ajax({
@@ -355,7 +378,7 @@ function updateReviews() {
 			action: 'insertReviews',
 			score: $score,
 			content: $review,
-			restaurantID: $restaurantID 
+			restaurantID: $restaurantID
 		},
 		success: function(result) {
 			$result = JSON.parse(result);
@@ -430,4 +453,34 @@ function showReplyForm(elem) {
 	$reviewID = $(elem).data("id");
 
 	$("div[data-id="+$reviewID+"]").toggle(200);
+}
+
+function updateFavorite(elem) {
+	$favoriteStar = $("#favoriteStar");
+	$restaurantID = getRestaurantID();
+
+	if($(elem).is(":checked")) {
+		$favoriteStar.css("color", "yellow");
+
+		$.ajax({
+			type:"POST",
+			url: "Database/user.php",
+			data: {
+				action: 'insertFavorite',
+				restaurantID: $restaurantID
+			}
+		});
+	}
+	else {
+		$favoriteStar.css("color", "black");
+
+		$.ajax({
+			type:"POST",
+			url: "Database/user.php",
+			data: {
+				action: 'removeFavorite',
+				restaurantID: $restaurantID
+			}
+		});
+	}
 }

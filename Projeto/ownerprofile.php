@@ -10,7 +10,7 @@
 <?php
 	include ('templates/header.php');
 ?>
-	<div id="content" style="min-width: 1080px;">
+	<div id="content">
 <?php
 	include ('templates/searchForm.php');
 	include ('templates/profile_info_owner.php');

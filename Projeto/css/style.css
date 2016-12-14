@@ -12,7 +12,7 @@ header {
 	margin: 0;
 	padding: 0;
 	overflow: hidden;
-	background-color: #333;
+	background-color: transparent;
 }
 
 header img {
@@ -37,44 +37,101 @@ select:-moz-focusring {
 	padding-bottom:50px;
 }
 
-
 /* Header related */
 
-#log_site {
-	display: inline;
+/* ------------------ Header ------------------ */
+#ProfileScrollDown {
+	background: rgba(255,255,255,0.9);
+	position: absolute;
+	top: 65px;
+	right: 50px;
+	width: 150px;
+	box-shadow: 0px 0px 15px 5px #888;
+    -webkit-box-shadow: 0px 0px 15px 5px #888;
+    -moz-box-shadow: 0px 0px 15px 5px #888;
+    -o-box-shadow: 0px 0px 15px 5px #888;
+    border-radius: 10%;
+    -webkit-border-radius: 10%;
+    -moz-border-radius: 10%;
+    -o-border-radius: 10%;
+    z-index: 1;
+}
+
+#ProfileScrollDown ul {
 	list-style-type: none;
+	padding: 0;
+	margin: 10px 0;
+	border-radius: 10%;
+    -webkit-border-radius: 10%;
+    -moz-border-radius: 10%;
+    -o-border-radius: 10%;
 }
 
-#log_site li {
-	float: right;
-}
-
-#log_site li form {
+#ScrollOptionsButton {
+	background: rgba(255,255,255,0);
 	display: block;
-	color: white;
-	text-decoration: none;
+	width: 100%;
+	border: 0;
+	padding: 5px;
+	font-size: 15px;
 }
 
-#log_site input:hover {
-	background-color: #111;
+#ScrollOptionsButton:hover {
+	background: rgba(42,143,189,0.9);
+	display: block;
+	width: 100%;
+	border: 0;
+	padding: 5px;
+	font-size: 15px;
 }
 
-#log_site input:active  {
-	background-color: #000;
+#HeaderButtons {
+	position: absolute;
+	top: 20px;
+	right: 0;
 }
 
-#log_site input {
-	background-color: #333;
-	border: none;
-	color: white;
-	padding: 18px 22px;
-	text-decoration: none;
-	display: inline-block;
-	font-size: 16px;
+#HeaderOptions {
+	background: white;
+	display: inline;
 }
 
+#HeaderButtons img {
+	background-color: rgba(255,255,255,1); 
+	width: 40px;
+	height: 40px;
+	margin: 0 30px;
+
+	border-radius: 100%;
+    -webkit-border-radius: 100%;
+    -moz-border-radius: 100%;
+    -o-border-radius: 100%;
+
+    box-shadow: 0px 0px 10px 1px white;
+    -webkit-box-shadow: 0px 0px 10px 1px white;
+    -moz-box-shadow: 0px 0px 10px 1px white;
+    -o-box-shadow: 0px 0px 10px 1px white;
+
+    transition: transform .25s ease;
+}
+
+#HeaderRegister:hover,
+#HeaderLogin:hover,
+#HeaderOptions:hover,
+#UserProfileHeader:hover,
+#EditRestaurant:hover {
+	transform: scale(1.25);
+	-webkit-transform: scale(1.25);
+	-moz-transform: scale(1.25);
+	-o-transform: scale(1.25);
+
+	cursor: pointer;
+}
 
 /* Search bar related */
+#searchBar {
+	margin: 30px 0;
+}
 
 #searchBar h2 {
 	visibility: hidden;

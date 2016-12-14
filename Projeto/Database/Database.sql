@@ -31,7 +31,7 @@ CREATE TABLE Address (
 	ID INTEGER PRIMARY KEY AUTOINCREMENT,
 	StreetName CHAR[200],
 	Latitude NUMBER,
-	Longitude NUMBER 
+	Longitude NUMBER
 );
 
 CREATE TABLE Picture (
@@ -157,7 +157,7 @@ CREATE TABLE RestaurantCategory (
 );
 
 CREATE TABLE Favourite (
-    Restaurant_ID INTEGER,
+  Restaurant_ID INTEGER,
 	Username CHAR[50],
 	PRIMARY KEY(Restaurant_ID, Username),
 	FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(ID)
@@ -171,11 +171,11 @@ CREATE TABLE Favourite (
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
 /*                                                             Triggers                                                               */
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
-create trigger updateScore 
-	after insert on Review 
-	for each row 
-	begin 
-		update Restaurant 
+create trigger updateScore
+	after insert on Review
+	for each row
+	begin
+		update Restaurant1
 			set NScores = NScores + 1,
 				TotalScores = TotalScores + new.Score
 		where ID = new.Restaurant_ID;
@@ -188,9 +188,9 @@ create trigger updateScore
 
 PRAGMA FOREIGN_KEYS = ON;
 
-INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('VascoP', 'Vasco', 'Pereira', 'vascop.aluno.c.n@gmail.com', '$2y$12$U2ADM233zzMawdbvH8hKTOriD4voeC8I3OtxL17jOvtN2DKJmGY/2', 'NULL'); 
-INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('tiagobalm', 'Tiago', 'Almeida', 'tiagoalmeida.95@hotmail.com', '$2y$12$x22coDYGb9ZIl.OFUGyUq.kP146DFaFf15IrIq0/lEhO5nflFeWpK', 'tiagobalm.jpg'); 
-INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('tiago', 'Tiago', 'Almeida', 'tiagoalmeida.95@hotmail.com', '$2y$12$x22coDYGb9ZIl.OFUGyUq.kP146DFaFf15IrIq0/lEhO5nflFeWpK', 'tiagobalm.jpg'); 
+INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('VascoP', 'Vasco', 'Pereira', 'vascop.aluno.c.n@gmail.com', '$2y$12$U2ADM233zzMawdbvH8hKTOriD4voeC8I3OtxL17jOvtN2DKJmGY/2', 'NULL');
+INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('tiagobalm', 'Tiago', 'Almeida', 'tiagoalmeida.95@hotmail.com', '$2y$12$x22coDYGb9ZIl.OFUGyUq.kP146DFaFf15IrIq0/lEhO5nflFeWpK', 'tiagobalm.jpg');
+INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('tiago', 'Tiago', 'Almeida', 'tiagoalmeida.95@hotmail.com', '$2y$12$x22coDYGb9ZIl.OFUGyUq.kP146DFaFf15IrIq0/lEhO5nflFeWpK', 'tiagobalm.jpg');
 
 INSERT INTO Reviewer(Username) VALUES('tiago');
 INSERT INTO Owner(Username) VALUES ('tiagobalm');
@@ -343,11 +343,11 @@ INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (2, 3);
 INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (2, 4);
 
 INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tasty!!!', 5, '2016-12-13', 1);
-INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tas!!!', 5, '2016-12-13', 1); 
+INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tas!!!', 5, '2016-12-13', 1);
 INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very!!!', 5, '2016-12-13', 1);
 
 INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tasty!!!', 5, '2016-12-13', 2);
-INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tas!!!', 5, '2016-12-13', 2); 
+INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tas!!!', 5, '2016-12-13', 2);
 INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very!!!', 5, '2016-12-13', 2);
 
 INSERT INTO Reply (Username, Review_ID, Content, CommentDate) VALUES ('VascoP', 1, 'Thank you very much.', '2016-12-13');
