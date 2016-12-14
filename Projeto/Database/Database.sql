@@ -28,14 +28,15 @@ CREATE TABLE Reviewer (
 );
 
 CREATE TABLE Address (
-	ID NUMBER PRIMARY KEY,
+	ID INTEGER PRIMARY KEY AUTOINCREMENT,
 	StreetName CHAR[200],
 	Latitude NUMBER,
 	Longitude NUMBER 
 );
 
 CREATE TABLE Picture (
-	ID NUMBER PRIMARY KEY,
+	ID INTEGER PRIMARY KEY AUTOINCREMENT,
+	Name CHAR[50] NOT NULL,
 	Restaurant_ID NUMBER,
 	Username CHAR[50],
 	FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(ID)
@@ -47,8 +48,9 @@ CREATE TABLE Picture (
 );
 
 CREATE TABLE Review (
-	ID NUMBER PRIMARY KEY,
+	ID INTEGER PRIMARY KEY AUTOINCREMENT,
 	Username CHAR[50],
+	Content CHAR[1000],
 	Score NUMBER,
 	DateReview Date,
 	Restaurant_ID NUMBER,
@@ -60,8 +62,8 @@ CREATE TABLE Review (
 		ON UPDATE CASCADE
 );
 
-CREATE TABLE Comment (
-	ID NUMBER PRIMARY KEY,
+CREATE TABLE Reply (
+	ID INTEGER PRIMARY KEY AUTOINCREMENT,
 	Username CHAR[50],
 	Review_ID NUMBER,
 	Content CHAR[1000],
@@ -75,7 +77,7 @@ CREATE TABLE Comment (
 );
 
 CREATE TABLE Restaurant (
-	ID NUMBER PRIMARY KEY,
+	ID INTEGER PRIMARY KEY AUTOINCREMENT,
 	Name CHAR[20] NOT NULL,
 	PhoneNumber CHAR[50] NOT NULL,
 	NScores NUMBER,
@@ -94,7 +96,7 @@ CREATE TABLE Restaurant (
 );
 
 CREATE TABLE Menu (
-	ID NUMBER PRIMARY KEY,
+	ID INTEGER PRIMARY KEY AUTOINCREMENT,
 	Food CHAR[50],
 	Price NUMBER,
 	Category_ID NUMBER,
@@ -104,12 +106,12 @@ CREATE TABLE Menu (
 );
 
 CREATE TABLE Category (
-	ID NUMBER PRIMARY KEY,
+	ID INTEGER PRIMARY KEY AUTOINCREMENT,
 	Category CHAR[50]
 );
 
 CREATE TABLE OpenHour (
-	ID NUMBER PRIMARY KEY,
+	ID INTEGER PRIMARY KEY AUTOINCREMENT,
 	Day CHAR[50],
 	OpenTime CHAR[50],
 	CloseTime CHAR[50]
@@ -118,8 +120,8 @@ CREATE TABLE OpenHour (
 /* Association Tables */
 
 CREATE TABLE RestaurantOpenHours(
-	OpenHour_ID NUMBER,
-	Restaurant_ID NUMBER,
+	OpenHour_ID INTEGER,
+	Restaurant_ID INTEGER,
 	PRIMARY KEY(OpenHour_ID, Restaurant_ID),
 	FOREIGN KEY(OpenHour_ID) REFERENCES OpenHour(ID)
 		ON DELETE SET NULL
@@ -130,8 +132,8 @@ CREATE TABLE RestaurantOpenHours(
 );
 
 CREATE TABLE MenuRestaurant (
-	Restaurant_ID NUMBER,
-	Menu_ID NUMBER,
+	Restaurant_ID INTEGER,
+	Menu_ID INTEGER,
 	PRIMARY KEY(Restaurant_ID, Menu_ID),
 	FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(ID)
 		ON DELETE SET NULL
@@ -142,8 +144,8 @@ CREATE TABLE MenuRestaurant (
 );
 
 CREATE TABLE RestaurantCategory (
-	Restaurant_ID NUMBER,
-	Category_ID NUMBER,
+	Restaurant_ID INTEGER,
+	Category_ID INTEGER,
 	PRIMARY KEY(Restaurant_ID, Category_ID),
 	FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(ID)
 		ON DELETE SET NULL
@@ -152,6 +154,18 @@ CREATE TABLE RestaurantCategory (
 		ON DELETE SET NULL
 		ON UPDATE CASCADE
 
+);
+
+CREATE TABLE Favourite (
+    Restaurant_ID INTEGER,
+	Username CHAR[50],
+	PRIMARY KEY(Restaurant_ID, Username),
+	FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(ID)
+		ON DELETE SET NULL
+		ON UPDATE CASCADE,
+	FOREIGN KEY(Username) REFERENCES User(Username)
+		ON DELETE SET NULL
+		ON UPDATE CASCADE
 );
 
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
@@ -176,75 +190,86 @@ PRAGMA FOREIGN_KEYS = ON;
 
 INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('VascoP', 'Vasco', 'Pereira', 'vascop.aluno.c.n@gmail.com', '$2y$12$U2ADM233zzMawdbvH8hKTOriD4voeC8I3OtxL17jOvtN2DKJmGY/2', 'NULL'); 
 INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('tiagobalm', 'Tiago', 'Almeida', 'tiagoalmeida.95@hotmail.com', '$2y$12$x22coDYGb9ZIl.OFUGyUq.kP146DFaFf15IrIq0/lEhO5nflFeWpK', 'tiagobalm.jpg'); 
+INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('tiago', 'Tiago', 'Almeida', 'tiagoalmeida.95@hotmail.com', '$2y$12$x22coDYGb9ZIl.OFUGyUq.kP146DFaFf15IrIq0/lEhO5nflFeWpK', 'tiagobalm.jpg'); 
+
+INSERT INTO Reviewer(Username) VALUES('tiago');
 INSERT INTO Owner(Username) VALUES ('tiagobalm');
 INSERT INTO Owner(Username) VALUES ('VascoP');
 
-INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (0, 'NULL', 0, 0);
-INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (1, 'Praca da Liberdade 126, 4000 Porto', 41.1467, -8.61084);
-INSERT INTO Address (ID, StreetName, Latitude, Longitude) VALUES (2, 'Rua Ateneu Comercial do Porto , 22/24', 41.148, -8.60782);
+INSERT INTO Address (StreetName, Latitude, Longitude) VALUES ('NULL', 0, 0);
+INSERT INTO Address (StreetName, Latitude, Longitude) VALUES ('Praca da Liberdade 126, 4000 Porto', 41.1467, -8.61084);
+INSERT INTO Address (StreetName, Latitude, Longitude) VALUES ('Rua Ateneu Comercial do Porto , 22/24', 41.148, -8.60782);
 
-INSERT INTO Category (ID, Category) VALUES (1, 'Appetizers');
-INSERT INTO Category (ID, Category) VALUES (2, 'Salads');
-INSERT INTO Category (ID, Category) VALUES (3, 'Beverages');
-INSERT INTO Category (ID, Category) VALUES (4, 'Chicken');
-INSERT INTO Category (ID, Category) VALUES (5, 'Pasta');
-INSERT INTO Category (ID, Category) VALUES (6, 'Seafood');
-INSERT INTO Category (ID, Category) VALUES (7, 'Rib/Steaks');
-INSERT INTO Category (ID, Category) VALUES (8, 'Burger/Sandwiches');
-INSERT INTO Category (ID, Category) VALUES (9, 'Kids Menu');
-INSERT INTO Category (ID, Category) VALUES (10, 'Desserts');
-INSERT INTO Category (ID, Category) VALUES (11, 'Vegetarian');
+INSERT INTO Category (Category) VALUES ('Appetizers');
+INSERT INTO Category (Category) VALUES ('Salads');
+INSERT INTO Category (Category) VALUES ('Beverages');
+INSERT INTO Category (Category) VALUES ('Chicken');
+INSERT INTO Category (Category) VALUES ('Pasta');
+INSERT INTO Category (Category) VALUES ('Seafood');
+INSERT INTO Category (Category) VALUES ('Rib/Steaks');
+INSERT INTO Category (Category) VALUES ('Burger/Sandwiches');
+INSERT INTO Category (Category) VALUES ('Kids Menu');
+INSERT INTO Category (Category) VALUES ('Desserts');
+INSERT INTO Category (Category) VALUES ('Vegetarian');
 
-INSERT INTO Restaurant (ID, Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username, ProfilePicture) VALUES (1, 'MacDonalds', '915749273', 0, 0, 10, 'Bad Food', 1, 'VascoP', 'NULL');
-INSERT INTO Restaurant (ID, Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username, ProfilePicture) VALUES (2, 'Abadia do Porto', '925728472', 0, 0, 10, 'Situado na zona histórica da cidade Invicta, o restaurante Abadia do Porto, foi fundado em 1939. Diz-se que o nome terá origem nas abadias, onde os peregrinos, que demandavam de Santiago de Compostela, repousavam algumas horas, dormindo e comendo antes de encetar mais uma etapa da longa caminhada com o objectivo religioso. Desde à muitos anos que o Abadia do Porto é conhecido pelas excelentes refeições que serve, sendo local de passagem obrigatória para inúmeras individualidades, tais como: Francisco Sá Carneiro, Aníbal Cavaco Silva, José Saramago, Sophia Loren, entre muitos outros. O Abadia do Porto serve diariamente pratos como: Cabrito Assado, Bacalhau Gomes de Sá, Tripas à moda do Porto, Pataniscas de Bacalhau, Bife à Abadia, Filetes de Pescada, entre outros e a acompanhar, o seu famoso esparregado. O Restaurante Abadia do Porto tem acesso para deficientes e WC respectivo.', 2, 'tiagobalm', 'NULL');
+INSERT INTO Restaurant (Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username, ProfilePicture) VALUES ('MacDonalds', '915749273', 0, 0, 10, 'Bad Food', 2, 'VascoP', 'NULL');
+INSERT INTO Restaurant (Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username, ProfilePicture) VALUES ('Abadia do Porto', '925728472', 0, 0, 10, 'Situado na zona histórica da cidade Invicta, o restaurante Abadia do Porto, foi fundado em 1939. Diz-se que o nome terá origem nas abadias, onde os peregrinos, que demandavam de Santiago de Compostela, repousavam algumas horas, dormindo e comendo antes de encetar mais uma etapa da longa caminhada com o objectivo religioso. Desde à muitos anos que o Abadia do Porto é conhecido pelas excelentes refeições que serve, sendo local de passagem obrigatória para inúmeras individualidades, tais como: Francisco Sá Carneiro, Aníbal Cavaco Silva, José Saramago, Sophia Loren, entre muitos outros. O Abadia do Porto serve diariamente pratos como: Cabrito Assado, Bacalhau Gomes de Sá, Tripas à moda do Porto, Pataniscas de Bacalhau, Bife à Abadia, Filetes de Pescada, entre outros e a acompanhar, o seu famoso esparregado. O Restaurante Abadia do Porto tem acesso para deficientes e WC respectivo.', 3, 'tiagobalm', 'NULL');
 
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (0, 'Mini Spring Rolls', 4.80, 1);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (1, 'King Prawn Toast', 5.20, 1);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (2, 'Vegetarian Mini Spring Rolls', 4.80, 1);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (3, 'Mixed Entree', 5.20, 1);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (4, 'Prawn Chips', 2.80, 1);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (5, 'Grilled Chicken Salad', 13.95, 2);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (6, 'Smoked Salmon Salad', 14.95, 2);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (7, 'Shrimp Louie', 14.95, 2);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (8, 'Pepsi', 1.95, 3);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (9, '7-Up', 1.95, 3);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (10, 'Ice Tea', 1.95, 3);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (11,'Lemonade', 1.95, 3);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (12, 'Orange Juice', 2.50, 3);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (13, 'Bottle Water', 1.50, 3);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (14, 'Spicy Chicken Wings /5', 2.29, 4);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (15, 'Nuggets/6', 2.99, 4);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (16, 'Chicken Breast/6', 6.99, 4);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (17, 'Carbonara', 11.00, 5);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (18, 'Bolognese', 11.00, 5);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (19, 'Marinara', 11.00, 5);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (20,'Romana', 11.00, 5);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (21, 'Mediterranean', 11.00, 5);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (22, 'Shrimp', 10.99, 6);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (23, 'Atlantic Snow Crab', 9.99, 6);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (24, 'Catfish', 3.99, 6);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (25, 'Salmon', 10.49, 6);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (26, 'Oysters', 0.75, 6);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (27, 'Regular Steak Plate', 6.00, 7);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (28, 'Large Steak Plate', 10.00, 7);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (29, 'Steak & Eggs', 6.50, 7);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (30, 'Steak with Chicken', 7.00, 7);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (31, 'Classic Beef', 10.75, 8);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (32, 'Chargrilled Chicken', 9.50, 8);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (33, 'Ridiculous Salmon', 9.50, 8);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (34, 'Mac & Cheese', 3.95, 9);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (35, 'Cheese Quesadilla', 3.95, 9);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (36, 'Fish & Chips', 4.45, 9);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (37, 'Top Sirloin Steak', 6.95, 9);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (38, 'Pineapple Cheesecake', 5.25, 10);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (39, 'Peanut Butter Pie', 6.75, 10);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (40, 'Carrot Cake', 6.25, 10);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (41, 'Chocolate Mousse', 7.25, 10);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (42, 'Veggie Bean Pattie', 8.50, 11);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (43, 'Royal Fried Rice', 10.00, 11);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (44, 'House Special Rice Claypot', 11.00, 11);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (45, 'Gourmet Fried Rice', 9.00, 11);
-INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (46, 'Spicy Thai Friend Rice', 10.00, 11);
+INSERT INTO Picture (Name, Restaurant_ID, Username) VALUES ('1.jpg', 1, 'VascoP');
+INSERT INTO Picture (Name, Restaurant_ID, Username) VALUES ('2.jpg', 1, 'VascoP');
+INSERT INTO Picture (Name, Restaurant_ID, Username) VALUES ('3.jpg', 1, 'VascoP');
+
+INSERT INTO Picture (Name, Restaurant_ID, Username) VALUES ('4.jpg', 2, 'tiagobalm');
+INSERT INTO Picture (Name, Restaurant_ID, Username) VALUES ('5.jpg', 2, 'tiagobalm');
+INSERT INTO Picture (Name, Restaurant_ID, Username) VALUES ('6.jpg', 2, 'tiagobalm');
+
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Mini Spring Rolls', 4.80, 1);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('King Prawn Toast', 5.20, 1);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Vegetarian Mini Spring Rolls', 4.80, 1);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Mixed Entree', 5.20, 1);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Prawn Chips', 2.80, 1);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Grilled Chicken Salad', 13.95, 2);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Smoked Salmon Salad', 14.95, 2);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Shrimp Louie', 14.95, 2);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Pepsi', 1.95, 3);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('7-Up', 1.95, 3);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Ice Tea', 1.95, 3);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Lemonade', 1.95, 3);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Orange Juice', 2.50, 3);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Bottle Water', 1.50, 3);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Spicy Chicken Wings /5', 2.29, 4);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Nuggets/6', 2.99, 4);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Chicken Breast/6', 6.99, 4);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Carbonara', 11.00, 5);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Bolognese', 11.00, 5);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Marinara', 11.00, 5);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Romana', 11.00, 5);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Mediterranean', 11.00, 5);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Shrimp', 10.99, 6);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Atlantic Snow Crab', 9.99, 6);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Catfish', 3.99, 6);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Salmon', 10.49, 6);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Oysters', 0.75, 6);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Regular Steak Plate', 6.00, 7);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Large Steak Plate', 10.00, 7);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Steak & Eggs', 6.50, 7);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Steak with Chicken', 7.00, 7);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Classic Beef', 10.75, 8);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Chargrilled Chicken', 9.50, 8);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Ridiculous Salmon', 9.50, 8);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Mac & Cheese', 3.95, 9);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Cheese Quesadilla', 3.95, 9);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Fish & Chips', 4.45, 9);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Top Sirloin Steak', 6.95, 9);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Pineapple Cheesecake', 5.25, 10);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Peanut Butter Pie', 6.75, 10);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Carrot Cake', 6.25, 10);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Chocolate Mousse', 7.25, 10);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Veggie Bean Pattie', 8.50, 11);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Royal Fried Rice', 10.00, 11);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('House Special Rice Claypot', 11.00, 11);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Gourmet Fried Rice', 9.00, 11);
+INSERT INTO Menu (Food, Price, Category_ID) VALUES ('Spicy Thai Friend Rice', 10.00, 11);
 
 INSERT INTO MenuRestaurant(Restaurant_ID, Menu_ID) VALUES (1, 7);
 INSERT INTO MenuRestaurant(Restaurant_ID, Menu_ID) VALUES (1, 25);
@@ -287,28 +312,28 @@ INSERT INTO MenuRestaurant(Restaurant_ID, Menu_ID) VALUES (2, 8);
 INSERT INTO MenuRestaurant(Restaurant_ID, Menu_ID) VALUES (2, 24);
 INSERT INTO MenuRestaurant(Restaurant_ID, Menu_ID) VALUES (2, 21);
 
-INSERT INTO OpenHour(ID, Day, OpenTime, CloseTime) VALUES(0, 'Monday', '09:00', '20:00');
-INSERT INTO OpenHour(ID, Day, OpenTime, CloseTime) VALUES(1, 'Tuesday', '09:00', '20:00');
-INSERT INTO OpenHour(ID, Day, OpenTime, CloseTime) VALUES(2, 'Wednesday', '09:00', '20:00');
-INSERT INTO OpenHour(ID, Day, OpenTime, CloseTime) VALUES(3, 'Thursday', '09:00', '20:00');
-INSERT INTO OpenHour(ID, Day, OpenTime, CloseTime) VALUES(4, 'Friday', '09:00', '20:00');
-INSERT INTO OpenHour(ID, Day, OpenTime, CloseTime) VALUES(5, 'Saturday', '09:00', '20:00');
-INSERT INTO OpenHour(ID, Day, OpenTime, CloseTime) VALUES(6, 'Sunday', '09:00', '14:00');
+INSERT INTO OpenHour(Day, OpenTime, CloseTime) VALUES('Monday', '09:00', '20:00');
+INSERT INTO OpenHour(Day, OpenTime, CloseTime) VALUES('Tuesday', '09:00', '20:00');
+INSERT INTO OpenHour(Day, OpenTime, CloseTime) VALUES('Wednesday', '09:00', '20:00');
+INSERT INTO OpenHour(Day, OpenTime, CloseTime) VALUES('Thursday', '09:00', '20:00');
+INSERT INTO OpenHour(Day, OpenTime, CloseTime) VALUES('Friday', '09:00', '20:00');
+INSERT INTO OpenHour(Day, OpenTime, CloseTime) VALUES('Saturday', '09:00', '20:00');
+INSERT INTO OpenHour(Day, OpenTime, CloseTime) VALUES('Sunday', '09:00', '14:00');
 
-INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (0, 1);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (1, 1);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (2, 1);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (3, 1);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (4, 1);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (5, 1);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (6, 1);
-INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (0, 2);
+INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (7, 1);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (1, 2);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (2, 2);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (3, 2);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (4, 2);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (5, 2);
 INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (6, 2);
+INSERT INTO RestaurantOpenHours(OpenHour_ID, Restaurant_ID) VALUES (7, 2);
 
 INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 8);
 INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 10);
@@ -316,3 +341,18 @@ INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (1, 9);
 INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (2, 1);
 INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (2, 3);
 INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (2, 4);
+
+INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tasty!!!', 5, '2016-12-13', 1);
+INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tas!!!', 5, '2016-12-13', 1); 
+INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very!!!', 5, '2016-12-13', 1);
+
+INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tasty!!!', 5, '2016-12-13', 2);
+INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tas!!!', 5, '2016-12-13', 2); 
+INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very!!!', 5, '2016-12-13', 2);
+
+INSERT INTO Reply (Username, Review_ID, Content, CommentDate) VALUES ('VascoP', 1, 'Thank you very much.', '2016-12-13');
+INSERT INTO Reply (Username, Review_ID, Content, CommentDate) VALUES ('VascoP', 2, 'Oh, thanks I guess...', '2016-12-13');
+INSERT INTO Reply (Username, Review_ID, Content, CommentDate) VALUES ('VascoP', 3, 'Do you need help?', '2016-12-13');
+
+INSERT INTO Favourite (Restaurant_ID, Username) VALUES (1, 'tiago');
+INSERT INTO Favourite (Restaurant_ID, Username) VALUES (2, 'tiago');

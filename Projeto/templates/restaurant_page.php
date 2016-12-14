@@ -10,6 +10,10 @@
 	$restaurantOpenHours = getRestaurantOpenHours($restaurantID);
 
 	$restaurantMenus = getMenus($restaurantID);
+
+	$restaurantPictures = getRestaurantThumbnailPictures($restaurantID);
+
+	$restaurantReviews = getRestaurantReviews($restaurantID);
 ?>
 
 <div id="Restaurant_Page">
@@ -141,30 +145,104 @@
 	</div>
 
 	<div class="Curved_Edges Margin_Top_Bottom Default_Info_Box" id="Restaurant_Reviews">
-		<div class="Restaurant_Review">
-			<!-- Add comment and score -->
 
-			<div class="Review_Reply"> 
-				<!-- Add reply -->
+		<?php
+			foreach($restaurantReviews as $review) {
+		?>
+			<div class="RestaurantReview">
+				<div>
+					<p>
+						<?php
+							echo $review['Username'];
+						?>
+					</p>
+					<p>
+						<?php
+							echo $review['Score'];
+						?>
+					</p>
+					<p>
+						<?php
+							echo $review['DateReview'];
+						?>
+					</p>
+				</div>
+				<div>
+					<?php
+						echo $review['Content'];
+					?>
+				</div>
+
+				<?php 
+					$replys = getReplys($review['ID']);
+
+					foreach($replys as $reply) {
+				?>
+
+					<div class="ReviewReply">
+						<div>
+							<p>
+								<?php
+									echo $reply['Username'];
+								?>
+							</p>
+							<p>
+								<?php
+									echo $reply['CommentDate'];
+								?>
+							</p>
+						</div>
+						<div>
+							<?php
+								echo $reply['Content'];
+							?>
+						</div>
+					</div>
+				<?php } ?>
+
 			</div>
-		</div>
-		<form id="Review_Form">
-			<div id="Add_Score">
-				<ul>
-					<li id="Score1" class="Curved_Edges Unselected_Score"></li>
-					<li id="Score2" class="Curved_Edges Unselected_Score"></li>
-					<li id="Score3" class="Curved_Edges Unselected_Score"></li>
-					<li id="Score4" class="Curved_Edges Unselected_Score"></li>
-					<li id="Score5" class="Curved_Edges Unselected_Score"></li>
-					<li id="Total_Score">0</li>
-				</ul>
-			</div>
-			<textarea id="Review_Comment" rows="1" placeholder="Write a review..." class="Unselected_TextArea"></textarea>
-			<input type="button" value="Submit" id="Submit_Review" class="style_button Unselected_Button">
-		</form>
+			<?php 
+				if(isset($_SESSION['username']) && $_SESSION['username'] == $restaurant['Owner_Username']) {
+			?>
+			<input type="button" data-id=<?=$review['ID']?> onclick="showReplyForm(this)">
+				<div hidden id="ReplyWrapper" data-id=<?=$review['ID']?> >
+					<textarea id="Reply_Comment" rows="1" placeholder="Write a reply..." class="Unselected_TextArea" data-id=<?=$review['ID']?> ></textarea>
+					<input type="button" value="Submit" id="Submit_Reply" class="style_button Unselected_Button" data-id=<?=$review['ID']?> onclick="updateReplys(this)">
+				</div>
+			<?php } ?>
+			<div class='Sexy_Border'></div>
+		<?php } ?>
+
+		<?php 
+			if(isset($_SESSION['username']) && isUserReviewer($_SESSION['username'])) {
+		?>
+			<form id="Review_Form">
+				<div id="Add_Score">
+					<ul>
+						<li id="Score1" class="Curved_Edges Unselected_Score"></li>
+						<li id="Score2" class="Curved_Edges Unselected_Score"></li>
+						<li id="Score3" class="Curved_Edges Unselected_Score"></li>
+						<li id="Score4" class="Curved_Edges Unselected_Score"></li>
+						<li id="Score5" class="Curved_Edges Unselected_Score"></li>
+						<li id="Total_Score">0</li>
+					</ul>
+				</div>
+				<textarea id="Review_Comment" rows="1" placeholder="Write a review..." class="Unselected_TextArea"></textarea>
+				<input type="button" value="Submit" id="Submit_Review" class="style_button Unselected_Button" onclick="updateReviews()">
+			</form>
+		<?php } ?>
 	</div>	
 
 	<div class="Curved_Edges Margin_Top_Bottom Default_Info_Box" id="Restaurant_Photos">
 		<h2 class="Text_Align_Center">Album</h2>
+		<div>
+			<?php
+				foreach($restaurantPictures as $row) {
+					$filePath = "Database/RestaurantPictures/Thumbnail/".$row['Name'];
+					$alt = $restaurant['Name']." Image by ".$row['Username'];
+					echo '<img alt='.$alt.' src='.$filePath.' onclick="showPicturePopUp(this.src, this.alt)" />';
+				}
+			?>
+		</div>
 	</div>
 </div>

@@ -57,6 +57,7 @@ function loadFile(value) {
 				username: value
 			},
 			success: function(data) {
+				console.log(data);
 				$picture = JSON.parse(data).ProfilePicture;
 				var url = "Database/ProfilePictures/Thumbnail/".concat($picture);
 				if($picture && $picture != "NULL") {

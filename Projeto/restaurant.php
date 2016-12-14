@@ -1,6 +1,7 @@
 <?php
 	include_once('config/init.php');
 	include_once('Database/restaurant.php');
+	include_once('Database/user.php');
 	include ('templates/head.php');
 ?>
 <!-- Include scripts here -->
@@ -15,6 +16,12 @@
 	include ('templates/restaurant_page.php');
 	if(!isset($_SESSION['username']))
 		include ('templates/LoginForm.php');
+
+	echo '<div id="PopupWrapper">';
+	echo '<span id="PopupClose" onclick="hidePopup()")>&times;</span>';
+	echo '<img id="PopupImage"/>';
+	echo '<div id="PopupCaption"></div>';
+	echo '</div>';
 ?>
 	</div>
 <?php

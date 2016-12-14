@@ -313,12 +313,121 @@ function score_buttons() {
 function comment_area() {
 	$('#Add_Score').show();
 	$('#Submit_Review').show();
-	$('#Review_Comment').attr('rows', '5');
 }
 
 function review_handlers() {
 	$('#Review_Comment').click( function() {
-			comment_area();
-		});
+		comment_area();
+			
+	});
+	$("textarea").click( function() {
+		$(this).attr('rows', 5);
+	})
 	score_buttons();
+}
+
+function hidePopup() {
+	$("#PopupImage").attr("src", "");
+	$("#PopupWrapper").css("display", "none");
+}
+
+function showPicturePopUp($src, $alt) {
+	$ImageName = $src.split("/").pop();
+	$OriginalSrc = "Database/RestaurantPictures/Originals/".concat($ImageName);
+
+	$("#PopupImage").attr("src", $OriginalSrc);
+	$("PopupCaption").text($alt);
+	$("#PopupWrapper").css("display", "block");
+}
+
+function updateReviews() {
+	$score = $("#Total_Score").text();
+	$review = $("#Review_Comment").val();
+	$url = $(location).attr('href');
+	$restaurantID = $url.substring($url.indexOf("id") + 3, $url.indexOf("id") + 4);
+	var $result;
+
+	$.ajax({
+		type:"POST",
+		url: "Database/restaurant.php",
+		async: false,
+		data: {
+			action: 'insertReviews',
+			score: $score,
+			content: $review,
+			restaurantID: $restaurantID 
+		},
+		success: function(result) {
+			$result = JSON.parse(result);
+		}
+	});
+
+	$insertHtml = "<div class='RestaurantRevie'> \
+						<div>\
+							<p>\
+								" + $result['username'] + "\
+							</p>\
+							<p>\
+								" + $score + "\
+							</p>\
+							<p>\
+								" + $result['Date'] + "\
+							</p>\
+						</div>\
+						<div>\
+							" + $review + "\
+						</div>\
+					</div>";
+
+	$("#Review_Form").before($insertHtml);
+
+	$('#Add_Score .Unselected_Score').each(function() {
+		$(this).css("background-color", "#aaa");
+	});
+
+	$('#Total_Score').text(0);
+	$('#Review_Comment').val("").blur();
+}
+
+function updateReplys(elem) {
+	$reviewID = $(elem).data("id");
+	$textarea = $("textarea[data-id="+$reviewID+"]");
+	$content = $textarea.val();
+	var $result;
+
+	$.ajax({
+		type:"POST",
+		url: "Database/restaurant.php",
+		async: false,
+		data: {
+			action: 'insertReply',
+			reviewID: $reviewID,
+			content: $content
+		},
+		success: function(result) {
+			$result = JSON.parse(result);
+		}
+	});
+
+	$insertHtml = "<div class='ReviewReply'>\
+						<div>\
+							<p>\
+								" + $result['username'] + " \
+							</p>\
+							<p>\
+								" + $result['Date'] + "\
+							</p>\
+						</div>\
+						<div>\
+							" + $content + "\
+						</div>\
+					</div>";
+
+	$textarea.before($insertHtml).val("").blur();
+}
+
+function showReplyForm(elem) {
+	$reviewID = $(elem).data("id");
+
+	$("div[data-id="+$reviewID+"]").toggle(200);
 }

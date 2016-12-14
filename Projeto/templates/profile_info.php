@@ -5,6 +5,7 @@
 	$username = $_GET['username'];
 	$userInfo = getUserInfoPhp($username);
 	$userReviews = getUserReviews($username);
+	$userFavourites = getUserFavourites($username);
 ?>
 
 <div class="profile_content">
@@ -15,7 +16,7 @@
 				$picture = $userInfo['ProfilePicture'];
 				if( $picture == null )
 					$picture = "no-user-image.jpg";
-				echo "<img src='images/$picture' alt='profilePic' height='75' width='75'>";
+				echo "<img src='Database/ProfilePictures/Thumbnail/$picture' alt='profilePic' height='75' width='75'>";
 			?>
 			</div>
 			<div id="profile-username">
@@ -45,7 +46,11 @@
 					</a></li>
 					<li><a href="javascript:void(0)" class="tablinks" onclick="openTab(event, 'favourites')">
 						<p align="right">Favourites</p>
-						<p align="right">0</p>
+						<p align="right">
+							<?php
+								echo count($userFavourites);
+							?>
+						</p>
 					</a></li>
 				</ul>
 			</div>
@@ -54,6 +59,9 @@
 	
 	<div class="dashboard Curved_Edges Default_Info_Box" id="main">
 		<div class="tabcontent" id="favourites">
+			<?php 
+				include("templates/listFavourites.php");
+			?>
 		</div>
 			
 		<div class="tabcontent" id="reviews">

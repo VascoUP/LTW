@@ -9,7 +9,7 @@
 	<div class="Restaurant_Reviewed">
 		<p>
 		<?php
-			echo $restaurant_name;
+			echo $restaurant_name['Name'];
 		?>
 		</p>
 	</div>
