@@ -157,7 +157,7 @@ CREATE TABLE RestaurantCategory (
 );
 
 CREATE TABLE Favourite (
-  Restaurant_ID INTEGER,
+    Restaurant_ID INTEGER,
 	Username CHAR[50],
 	PRIMARY KEY(Restaurant_ID, Username),
 	FOREIGN KEY(Restaurant_ID) REFERENCES Restaurant(ID)
