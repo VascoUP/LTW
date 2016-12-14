@@ -1,14 +1,3 @@
-<<<<<<< HEAD
-<div class="Curved_Edges Favourite_Restaurant_Photo">
-	<!-- <img src="images/background_search.jpg" alt="restaurant" /> -->
-	<div class="Restaurant_Basic_Info">	
-		<h3 class="Restaurant_Name"> Restaurant </h3>
-		<?php
-			include ('templates/score.php');
-		?>
-	</div>
-</div>
-=======
 <?php
 	global $restaurant_name;
 	global $restaurant_total_scores;
@@ -36,4 +25,3 @@
 		</div>
 	</div>
 </div>
->>>>>>> 59cc73e2f3b0a7fdfb3e5650e4b5497612e3093a
