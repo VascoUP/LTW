@@ -58,7 +58,7 @@ function loadFile(value) {
 			},
 			success: function(data) {
 				$picture = JSON.parse(data).ProfilePicture;
-				var url = "Database/ProfilePictures/".concat($picture);
+				var url = "Database/ProfilePictures/Thumbnail/".concat($picture);
 				if($picture && $picture != "NULL") {
 					$profilePicture.fadeOut(0).attr('src', url).fadeIn(500);
 				} else {
