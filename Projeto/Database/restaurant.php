@@ -130,6 +130,15 @@
 		$stmt->execute(array($restaurantID));
 
 		echo json_encode($stmt->fetch());
+	}	
+
+	function getRestaurantThumbnailPicture($restaurantID) {
+		global $conn;
+
+		$stmt = $conn->prepare('SELECT * FROM Picture WHERE Restaurant_ID = ? LIMIT 1');
+		$stmt->execute(array($restaurantID));
+
+		return $stmt->fetch();
 	}
 
 	function getRestaurantReviews($restaurantID) {
