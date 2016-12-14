@@ -64,12 +64,14 @@
 				<input class='Form_Value' type='text'><input id="Add_Category" type="button" value="Add">
 				<ul id="Ov_Categories">
 				<?php
-					foreach($restaurantCategories as $row) {
-						$category = getCategory($row['Category_ID'])['Category'];
-						echo "<li class='Ov_Category'>";
-						echo "<h5>$category</h5>";
-						echo "<img src='images/delete_icon.png' alt='Delete'>";
-						echo "</li>";
+					if( $exists ) {
+						foreach($restaurantCategories as $row) {
+							$category = getCategory($row['Category_ID'])['Category'];
+							echo "<li class='Ov_Category'>";
+							echo "<h5>$category</h5>";
+							echo "<img src='images/delete_icon.png' alt='Delete'>";
+							echo "</li>";
+						}
 					}
 				?>
 				</ul>
@@ -143,21 +145,23 @@
 				<input id="Menu_Item_Category" class='Form_Value' type='text' placeholder="Category">
 				<input id="Add_Menu_Item" type="button" value="Add">
 				<?php
-					$category = "";
-					$class_table = "Menu_Table";
-					$class_category = "Table_Category";
-					$class_food = "Menu_Food";
-					$class_price = "Menu_Price";
+					if( $exists ) {
+						$category = "";
+						$class_table = "Menu_Table";
+						$class_category = "Table_Category";
+						$class_food = "Menu_Food";
+						$class_price = "Menu_Price";
 
-					echo "<table class='$class_table'>";
-					foreach($restaurantMenus as $row) {
-						$food = $row['Food'];
-						$price = $row['Price'];
-						echo "<tr><td class='$class_food'>$food</td>
-								<td class='$class_price'>$price</td>
-								<td><img src='images/delete_icon.png' alt='Delete'></td></tr>";
+						echo "<table class='$class_table'>";
+						foreach($restaurantMenus as $row) {
+							$food = $row['Food'];
+							$price = $row['Price'];
+							echo "<tr><td class='$class_food'>$food</td>
+									<td class='$class_price'>$price</td>
+									<td><img src='images/delete_icon.png' alt='Delete'></td></tr>";
+						}
+						echo "</table>";
 					}
-					echo "</table>";
 				?>
 			</div>
 			<input type="submit">

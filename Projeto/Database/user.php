@@ -52,6 +52,16 @@
     echo json_encode($answer);
   }
 
+  function verifyUserPhp($username, $password) {
+    global $conn;
+
+    $stmt = $conn->prepare('SELECT * FROM User WHERE username = ? LIMIT 1');
+    $stmt->execute(array($username));
+    $user = $stmt->fetch();
+
+    return ($user !== false && password_verify($password, $user['Password']));
+  }
+
   function isUserTaken($username) {
     require_once('connection.php');
 
@@ -141,7 +151,6 @@
     $stmt->execute(array($username));
 
     return $stmt->fetchAll();
-
   }
 
   function isFavorite($restaurantID) {
@@ -170,4 +179,78 @@
     $stmt->execute(array($restaurantID, $username));
 	}
 
+  function updateUsername($username) {
+    if( $username != $_SESSION['username'] || $username == "" )
+      return ;
+
+    global $conn;
+
+    $oldUsername = $_SESSION['username'];
+
+    $stmt = $conn->prepare('UPDATE User SET Username = $username WHERE Username = $oldUsername');
+    $stmt->execute();
+
+    if( isUserOwner($oldUsername) ) {
+      $stmt = $conn->prepare('UPDATE Owner SET Username = $username WHERE Username = $oldUsername');
+      $stmt->execute();
+    } else {
+      $stmt = $conn->prepare('UPDATE Reviewer SET Username = $username WHERE Username = $oldUsername');
+      $stmt->execute();
+    }
+
+    $_SESSION['username'] = $username;
+  }
+
+  function updateFirstName($firstName) {
+    $username = $_SESSION['username'];
+    $info = getUserInfoPhp($username);
+
+    if( $info['FirstName'] == $firstName || $firstName == "" )
+      return ;
+
+    global $conn;
+
+    $stmt = $conn->prepare('UPDATE User SET FirstName = $firstName WHERE Username = $username');
+    $stmt->execute();
+  }
+
+  function updateLastName($lastName) {
+    $username = $_SESSION['username'];
+    $info = getUserInfoPhp($username);
+
+    if( $info['LastName'] == $lastName || $lastName == "" )
+      return ;
+
+    global $conn;
+
+    $stmt = $conn->prepare('UPDATE User SET LastName = $lastName WHERE Username = $username');
+    $stmt->execute();
+  }
+
+  function updateEmail($email) {
+    $username = $_SESSION['username'];
+    $info = getUserInfoPhp($username);
+
+    if( $info['Email'] == $email || $email == "" )
+      return ;
+
+    global $conn;
+
+    $stmt = $conn->prepare('UPDATE User SET Email = $email WHERE Username = $username');
+    $stmt->execute();
+  }
+
+  function updatePassword($oldPass, $newPass, $confPass) {
+    if( $oldPass == "" || $newPass == "" || $confPass == "" || $newPass != $confPass )
+      return ;
+
+    $username = $_SESSION['username'];
+    verifyUserPhp($username, $oldPass);
+
+    $options = ['cost' => 12];
+    $hash = password_hash($newPass, PASSWORD_DEFAULT, $options);
+
+    $stmt = $conn->prepare('UPDATE User SET Password = $hash WHERE Username = $username');
+    $stmt->execute();
+  }
 ?>

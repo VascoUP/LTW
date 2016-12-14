@@ -5,6 +5,8 @@ var products = [];
 $(document).ready( function() { load_restaurant(); } )
 
 function load_restaurant () {
+	load_profile_picture();
+
 	var nSelected = get_type_value('opt');
 	if( nSelected != "" )
 		show_by_id(nSelected);
@@ -15,6 +17,30 @@ function load_restaurant () {
 	$(function() {
     		$(window).scroll(sticky_relocate);
     		sticky_relocate();
+	});
+}
+
+function getRestaurantID() {
+	$url = $(location).attr('href');
+	return $url.substring($url.indexOf("id") + 3, $url.indexOf("id") + 4);
+}
+
+function load_profile_picture() {
+	var id = getRestaurantID();
+	$.ajax({
+		type:"POST",
+		url: "Database/restaurant.php",
+		data: {
+			action: 'getRestaurantProfilePicture',
+			restaurantID: id
+		},
+		success: function(result) {
+			if( !result )
+				return ;
+			$picture = JSON.parse(result).Name;
+			var url = "Database/RestaurantPictures/Originals/".concat($picture);
+			$('.Restaurant_Photo').css('background-image', "url("+url+")");
+		}
 	});
 }
 
@@ -341,8 +367,7 @@ function showPicturePopUp($src, $alt) {
 function updateReviews() {
 	$score = $("#Total_Score").text();
 	$review = $("#Review_Comment").val();
-	$url = $(location).attr('href');
-	$restaurantID = $url.substring($url.indexOf("id") + 3, $url.indexOf("id") + 4);
+	$restaurantID = getRestaurantID();
 	var $result;
 
 	$.ajax({
@@ -432,8 +457,7 @@ function showReplyForm(elem) {
 
 function updateFavorite(elem) {
 	$favoriteStar = $("#favoriteStar");
-	$url = $(location).attr('href');
-	$restaurantID = $url.substring($url.indexOf("id") + 3, $url.indexOf("id") + 4);
+	$restaurantID = getRestaurantID();
 
 	if($(elem).is(":checked")) {
 		$favoriteStar.css("color", "yellow");

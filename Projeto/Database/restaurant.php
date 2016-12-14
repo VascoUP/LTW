@@ -8,12 +8,13 @@
 				$content = $_POST['content'];
 				$restaurantID = $_POST['restaurantID'];
 				return $action($score, $content, $restaurantID);
-				break;
 			case 'insertReply':
 				$reviewID = $_POST['reviewID'];
 				$content = $_POST['content'];
 				return $action($reviewID, $content);
-				break;
+			case 'getRestaurantProfilePicture':
+				$restaurantID = $_POST['restaurantID'];
+				return $action($restaurantID);
 			default:
 				break;
 		}
@@ -120,6 +121,15 @@
 		$stmt->execute(array($restaurantID));
 
 		return $stmt->fetchAll();
+	}
+
+	function getRestaurantProfilePicture($restaurantID) {
+		require_once('connection.php');
+
+		$stmt = $conn->prepare('SELECT * FROM Picture WHERE Restaurant_ID = ? LIMIT 1');
+		$stmt->execute(array($restaurantID));
+
+		echo json_encode($stmt->fetch());
 	}
 
 	function getRestaurantReviews($restaurantID) {

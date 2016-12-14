@@ -4,6 +4,8 @@
 
 	$username = $_GET['username'];
 	$userInfo = getUserInfoPhp($username);
+	if( !$userInfo )
+		header("Location: Error.php");
 	$userReviews = getUserReviews($username);
 	$userFavourites = getUserFavourites($username);
 ?>
