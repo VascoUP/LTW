@@ -16,11 +16,30 @@
 		if(isset($profilePicName)) {
 			if(!empty($profilePicName)) {
 				$extension = strtolower(substr($profilePicName, strpos($profilePicName, '.')));
-				$name = $username.$extension;
-				move_uploaded_file($profilePicTempName, 'Database/ProfilePictures/'.$name);
+				$fileName = "Database/ProfilePictures/Originals/$username$extension";
+				$thumbnailName = "Database/ProfilePictures/Thumbnail/$username$extension";
+
+				move_uploaded_file($profilePicTempName, $fileName);
+
+				if($extension == '.png')
+					$originalImage = imagecreatefrompng($fileName);
+				else 
+					$originalImage = imagecreatefromjpeg($fileName);
+				$width = imagesx($originalImage);
+  				$height = imagesy($originalImage);
+  				$square = min($width, $height);
+
+  				//Create 200x200 thumbnail
+				$thumbnail = imagecreatetruecolor(200, 200); 
+				imagecopyresized($thumbnail, $originalImage, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 200, 200, $square, $square);
+
+				if($extension == '.png')
+					imagepng($thumbnail, $thumbnailName);
+				else
+					imagejpeg($thumbnail, $thumbnailName);
 			}
 		}
-		createUser($username, $firstName, $lastName, $email, $password, $userType, $name);
+		createUser($username, $firstName, $lastName, $email, $password, $userType, $fileName);
 	} else 
 		createUser($username, $firstName, $lastName, $email, $password, $userType, "NULL");
 

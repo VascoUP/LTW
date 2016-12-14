@@ -7,7 +7,7 @@
 
 		$result = $stmt->fetch();
 
-		$url = "Database/ProfilePictures/".$result['ProfilePicture'];
+		$url = "Database/ProfilePictures/Thumbnail/".$result['ProfilePicture'];
 	}
 ?>
 <!DOCTYPE html>
@@ -19,6 +19,16 @@
 		<link rel="stylesheet" href="css/initialStyle.css">
 		<link href="https://fonts.googleapis.com/css?family=Quicksand" rel="stylesheet">
 		<link rel="stylesheet" href="css/loginForm.css">
+		<script 
+			src="https://code.jquery.com/jquery-3.1.1.min.js" 
+			integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 
+			crossorigin="anonymous"></script>
+		<script
+			src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
+			integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
+			crossorigin="anonymous"></script>	
+		<script src="scripts/search.js"></script>	
+		<script src="scripts/logButtons.js"></script>
 	</head>
 	<body>
 		<header>
@@ -32,15 +42,5 @@
 			include ('templates/LoginForm.php');
 		?>
 	</body>
-	<script 
-			src="https://code.jquery.com/jquery-3.1.1.min.js" 
-			integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" 
-			crossorigin="anonymous"></script>
-		<script
-			src="http://code.jquery.com/ui/1.12.0/jquery-ui.min.js"
-			integrity="sha256-eGE6blurk5sHj+rmkfsGYeKyZx3M4bG+ZlFyA7Kns7E="
-			crossorigin="anonymous"></script>	
-		<script src="scripts/search.js"></script>	
-		<script src="scripts/logButtons.js"></script>
 </html>
 
