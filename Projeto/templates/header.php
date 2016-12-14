@@ -6,8 +6,10 @@
 		$stmt->execute(array($_SESSION['username']));
 
 		$result = $stmt->fetch();
-
-		$url = "Database/ProfilePictures/Thumbnail/".$result['ProfilePicture'];
+		if( !$result['ProfilePicture'] )
+			$url = "images/no-user-image.jpg";
+		else
+			$url = "Database/ProfilePictures/Thumbnail/".$result['ProfilePicture'];
 	}
 ?>
 
