@@ -175,7 +175,7 @@ create trigger updateScore
 	after insert on Review
 	for each row
 	begin
-		update Restaurant
+		update Restaurant1
 			set NScores = NScores + 1,
 				TotalScores = TotalScores + new.Score
 		where ID = new.Restaurant_ID;

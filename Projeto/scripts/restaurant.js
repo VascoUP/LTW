@@ -52,7 +52,6 @@ function url_add_value (type, value) {
 			window.location.href = window.location.href +
 						division_char + split_pair[0] +
 						"=" + split_pair[1];
-
 			if( division_char == '' )
 				division_char = '&';
 		}
@@ -298,7 +297,6 @@ function revert_hover_score() {
 }
 
 function score_buttons() {
-
 	$('#Add_Score li').hover( function() {
 			hover_score($(this));
 		}, function() {

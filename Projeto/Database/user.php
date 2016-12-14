@@ -124,6 +124,7 @@
     return $stmt->fetchAll();
   }
 
+
   function getUserFavourites($username) {
     global $conn;
 
