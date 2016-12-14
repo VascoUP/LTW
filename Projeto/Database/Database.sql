@@ -82,6 +82,7 @@ CREATE TABLE Restaurant (
 	TotalScores NUMBER,
 	Price NUMBER,
 	Description CHAR[5000],
+    ProfilePicture CHAR[60],
 	Address_ID NUMBER,
 	Owner_Username CHAR[50] NOT NULL,
 	FOREIGN KEY(Address_ID) REFERENCES Address(ID)
@@ -194,8 +195,8 @@ INSERT INTO Category (ID, Category) VALUES (9, 'Kids Menu');
 INSERT INTO Category (ID, Category) VALUES (10, 'Desserts');
 INSERT INTO Category (ID, Category) VALUES (11, 'Vegetarian');
 
-INSERT INTO Restaurant (ID, Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username) VALUES (1, 'MacDonalds', '915749273', 0, 0, 10, 'Bad Food', 1, 'VascoP');
-INSERT INTO Restaurant (ID, Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username) VALUES (2, 'Abadia do Porto', '925728472', 0, 0, 10, 'Situado na zona histórica da cidade Invicta, o restaurante Abadia do Porto, foi fundado em 1939. Diz-se que o nome terá origem nas abadias, onde os peregrinos, que demandavam de Santiago de Compostela, repousavam algumas horas, dormindo e comendo antes de encetar mais uma etapa da longa caminhada com o objectivo religioso. Desde à muitos anos que o Abadia do Porto é conhecido pelas excelentes refeições que serve, sendo local de passagem obrigatória para inúmeras individualidades, tais como: Francisco Sá Carneiro, Aníbal Cavaco Silva, José Saramago, Sophia Loren, entre muitos outros. O Abadia do Porto serve diariamente pratos como: Cabrito Assado, Bacalhau Gomes de Sá, Tripas à moda do Porto, Pataniscas de Bacalhau, Bife à Abadia, Filetes de Pescada, entre outros e a acompanhar, o seu famoso esparregado. O Restaurante Abadia do Porto tem acesso para deficientes e WC respectivo.', 2, 'tiagobalm');
+INSERT INTO Restaurant (ID, Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username, ProfilePicture) VALUES (1, 'MacDonalds', '915749273', 0, 0, 10, 'Bad Food', 1, 'VascoP', 'NULL');
+INSERT INTO Restaurant (ID, Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username, ProfilePicture) VALUES (2, 'Abadia do Porto', '925728472', 0, 0, 10, 'Situado na zona histórica da cidade Invicta, o restaurante Abadia do Porto, foi fundado em 1939. Diz-se que o nome terá origem nas abadias, onde os peregrinos, que demandavam de Santiago de Compostela, repousavam algumas horas, dormindo e comendo antes de encetar mais uma etapa da longa caminhada com o objectivo religioso. Desde à muitos anos que o Abadia do Porto é conhecido pelas excelentes refeições que serve, sendo local de passagem obrigatória para inúmeras individualidades, tais como: Francisco Sá Carneiro, Aníbal Cavaco Silva, José Saramago, Sophia Loren, entre muitos outros. O Abadia do Porto serve diariamente pratos como: Cabrito Assado, Bacalhau Gomes de Sá, Tripas à moda do Porto, Pataniscas de Bacalhau, Bife à Abadia, Filetes de Pescada, entre outros e a acompanhar, o seu famoso esparregado. O Restaurante Abadia do Porto tem acesso para deficientes e WC respectivo.', 2, 'tiagobalm', 'NULL');
 
 INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (0, 'Mini Spring Rolls', 4.80, 1);
 INSERT INTO Menu (ID, Food, Price, Category_ID) VALUES (1, 'King Prawn Toast', 5.20, 1);
