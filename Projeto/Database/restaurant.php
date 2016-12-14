@@ -2,9 +2,31 @@
 
 	if(isset($_POST['action']) && function_exists($_POST['action'])) {
 		$action = $_POST['action'];
-		$restaurant = $_POST['restaurant'];
-		return $action($restaurant);
-	} 
+		switch($action) {
+			case 'insertReviews':
+				$score = $_POST['score'];
+				$content = $_POST['content'];
+				$restaurantID = $_POST['restaurantID'];
+				return $action($score, $content, $restaurantID);
+				break;
+			case 'insertReply':
+				$reviewID = $_POST['reviewID'];
+				$content = $_POST['content'];
+				return $action($reviewID, $content);
+				break;
+			default:
+				break;
+		}
+	}
+
+	function getRestaurantName($restaurantID) {
+		global $conn;
+
+		$stmt = $conn->prepare('SELECT Name FROM Restaurant WHERE ID = ? LIMIT 1');
+		$stmt->execute(array($restaurantID));
+
+		return $stmt->fetch();
+	}
 
 	function getRestaurantInfo($restaurantID) {
 		global $conn;
@@ -50,8 +72,8 @@
 		global $conn;
 
 		$stmt = $conn->prepare('SELECT * FROM RestaurantCategory Where Restaurant_ID = ? ');
-    	$stmt->execute(array($restaurantID)); 
-		
+    	$stmt->execute(array($restaurantID));
+
 		return $stmt->fetchAll();
 	}
 
@@ -89,6 +111,67 @@
 		$stmt->execute(array($ID));
 
 		return $stmt->fetchAll();
+	}
+
+	function getRestaurantThumbnailPictures($restaurantID) {
+		global $conn;
+
+		$stmt = $conn->prepare('SELECT * FROM Picture WHERE Restaurant_ID = ?');
+		$stmt->execute(array($restaurantID));
+
+		return $stmt->fetchAll();
+	}
+
+	function getRestaurantReviews($restaurantID) {
+		global $conn;
+
+		$stmt = $conn->prepare('SELECT * FROM Review WHERE Restaurant_ID = ?');
+		$stmt->execute(array($restaurantID));
+
+		return $stmt->fetchAll();
+	}
+
+	function getReplys($reviewID) {
+		global $conn;
+
+		$stmt = $conn->prepare('SELECT * FROM Reply WHERE Review_ID = ?');
+		$stmt->execute(array($reviewID));
+
+		return $stmt->fetchAll();
+	}
+
+	function insertReviews($score, $content, $restaurantID) {
+		require_once('connection.php');
+		$answer = array();
+
+		$currentDate = getdate();
+		$insertDate = $currentDate['year']."-".$currentDate['mon']."-".$currentDate['mday'];
+		$username = $_SESSION['username'];
+
+		$stmt = $conn->prepare('INSERT INTO Review (ID, Username, Content, Score, DateReview, Restaurant_ID) VALUES (NULL, ?, ?, ?, ?, ?)');
+		$stmt->execute(array($username, $content, $score, $insertDate, $restaurantID));
+
+		$answer['Date'] = $insertDate;
+		$answer['username'] = $username;
+
+		echo json_encode($answer);
+	}
+
+	function insertReply($reviewID, $content) {
+		require_once('connection.php');
+		$answer = array();
+
+		$currentDate = getdate();
+		$insertDate = $currentDate['year']."-".$currentDate['mon']."-".$currentDate['mday'];
+		$username = $_SESSION['username'];
+
+		$stmt = $conn->prepare('INSERT INTO Reply (Username, Review_ID, Content, CommentDate) VALUES (?, ?, ?, ?)');
+		$stmt->execute(array($username, $reviewID, $content, $insertDate,));
+
+		$answer['Date'] = $insertDate;
+		$answer['username'] = $username;
+
+		echo json_encode($answer);
 	}
 
 ?>

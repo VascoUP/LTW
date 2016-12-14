@@ -30,12 +30,12 @@ function get_type_value (type) {
 	return "";
 }
 
-function url_add_value (type, value) {	
+function url_add_value (type, value) {
 
 	var hash = location.hash.replace(/^.*?#/, '');
 	if( hash == '' ) {
-		window.location.href = window.location.href + 
-				"#" + type + 
+		window.location.href = window.location.href +
+				"#" + type +
 				"=" + value;
 		return ;
 	}
@@ -49,17 +49,17 @@ function url_add_value (type, value) {
 		var split_pair = pairs[i].split('=');
 
 		if( split_pair[0] != type ) {
-			window.location.href = window.location.href + 
-						division_char + split_pair[0] + 
+			window.location.href = window.location.href +
+						division_char + split_pair[0] +
 						"=" + split_pair[1];
-		
+
 			if( division_char == '' )
 				division_char = '&';
 		}
 	}
 
-	window.location.href = window.location.href + 
-			division_char + type + 
+	window.location.href = window.location.href +
+			division_char + type +
 			"=" + value;
 }
 
@@ -103,7 +103,7 @@ function show_by_id(id) {
 function show_overview() {
 	if( selected_tab == '#Rst_Menu_Ov' )
 		return;
-	
+
 	url_add_value('opt', 'Rst_Menu_Ov');
 
 	$(selected_tab).children(".Selected_Item").attr("class","Unselected_Item");
@@ -112,7 +112,7 @@ function show_overview() {
 	$(div_id).fadeOut();
 	$(div_id).hide();
 
-	selected_tab = '#Rst_Menu_Ov';	
+	selected_tab = '#Rst_Menu_Ov';
 
 	div_id = get_info_id(selected_tab);
 	$(div_id).fadeIn();
@@ -121,7 +121,7 @@ function show_overview() {
 	$(selected_tab).children(".Unselected_Item").attr("class","Selected_Item");
 }
 
-function show_menu() {	
+function show_menu() {
 	if( selected_tab == '#Rst_Menu_Mn' )
 		return;
 
@@ -285,7 +285,7 @@ function revert_hover_score() {
 
 	var listItems = $("#Add_Score li");
 	listItems.each(function(idx, li) {
-		if($(li).attr("id") != 'Total_Score') {			
+		if($(li).attr("id") != 'Total_Score') {
 			if(isPastId)
 				select_score( $(li), '#aaa' );
 			else {
@@ -298,10 +298,10 @@ function revert_hover_score() {
 }
 
 function score_buttons() {
-	
+
 	$('#Add_Score li').hover( function() {
 			hover_score($(this));
-		}, function() {	
+		}, function() {
 			revert_hover_score();
 		});
 
@@ -313,12 +313,152 @@ function score_buttons() {
 function comment_area() {
 	$('#Add_Score').show();
 	$('#Submit_Review').show();
-	$('#Review_Comment').attr('rows', '5');
 }
 
 function review_handlers() {
 	$('#Review_Comment').click( function() {
-			comment_area();
-		});
+		comment_area();
+
+	});
+	$("textarea").click( function() {
+		$(this).attr('rows', 5);
+	})
 	score_buttons();
+}
+
+function hidePopup() {
+	$("#PopupImage").attr("src", "");
+	$("#PopupWrapper").css("display", "none");
+}
+
+function showPicturePopUp($src, $alt) {
+	$ImageName = $src.split("/").pop();
+	$OriginalSrc = "Database/RestaurantPictures/Originals/".concat($ImageName);
+
+	$("#PopupImage").attr("src", $OriginalSrc);
+	$("PopupCaption").text($alt);
+	$("#PopupWrapper").css("display", "block");
+}
+
+function updateReviews() {
+	$score = $("#Total_Score").text();
+	$review = $("#Review_Comment").val();
+	$url = $(location).attr('href');
+	$restaurantID = $url.substring($url.indexOf("id") + 3, $url.indexOf("id") + 4);
+	var $result;
+
+	$.ajax({
+		type:"POST",
+		url: "Database/restaurant.php",
+		async: false,
+		data: {
+			action: 'insertReviews',
+			score: $score,
+			content: $review,
+			restaurantID: $restaurantID
+		},
+		success: function(result) {
+			$result = JSON.parse(result);
+		}
+	});
+
+	$insertHtml = "<div class='RestaurantRevie'> \
+						<div>\
+							<p>\
+								" + $result['username'] + "\
+							</p>\
+							<p>\
+								" + $score + "\
+							</p>\
+							<p>\
+								" + $result['Date'] + "\
+							</p>\
+						</div>\
+						<div>\
+							" + $review + "\
+						</div>\
+					</div>";
+
+	$("#Review_Form").before($insertHtml);
+
+	$('#Add_Score .Unselected_Score').each(function() {
+		$(this).css("background-color", "#aaa");
+	});
+
+	$('#Total_Score').text(0);
+	$('#Review_Comment').val("").blur();
+}
+
+function updateReplys(elem) {
+	$reviewID = $(elem).data("id");
+	$textarea = $("textarea[data-id="+$reviewID+"]");
+	$content = $textarea.val();
+	var $result;
+
+	$.ajax({
+		type:"POST",
+		url: "Database/restaurant.php",
+		async: false,
+		data: {
+			action: 'insertReply',
+			reviewID: $reviewID,
+			content: $content
+		},
+		success: function(result) {
+			$result = JSON.parse(result);
+		}
+	});
+
+	$insertHtml = "<div class='ReviewReply'>\
+						<div>\
+							<p>\
+								" + $result['username'] + " \
+							</p>\
+							<p>\
+								" + $result['Date'] + "\
+							</p>\
+						</div>\
+						<div>\
+							" + $content + "\
+						</div>\
+					</div>";
+
+	$textarea.before($insertHtml).val("").blur();
+}
+
+function showReplyForm(elem) {
+	$reviewID = $(elem).data("id");
+
+	$("div[data-id="+$reviewID+"]").toggle(200);
+}
+
+function updateFavorite(elem) {
+	$favoriteStar = $("#favoriteStar");
+	$url = $(location).attr('href');
+	$restaurantID = $url.substring($url.indexOf("id") + 3, $url.indexOf("id") + 4);
+
+	if($(elem).is(":checked")) {
+		$favoriteStar.css("color", "yellow");
+
+		$.ajax({
+			type:"POST",
+			url: "Database/user.php",
+			data: {
+				action: 'insertFavorite',
+				restaurantID: $restaurantID
+			}
+		});
+	}
+	else {
+		$favoriteStar.css("color", "black");
+
+		$.ajax({
+			type:"POST",
+			url: "Database/user.php",
+			data: {
+				action: 'removeFavorite',
+				restaurantID: $restaurantID
+			}
+		});
+	}
 }

@@ -12,8 +12,10 @@
 ?>
 	<div id="content" style="min-width: 1080px;">
 <?php
-	include ('templates/search_form.php');
+	include ('templates/searchForm.php');
 	include ('templates/profile_info_owner.php');
+	if(!isset($_SESSION['username']))
+		include ('templates/LoginForm.php');
 ?>
 	</div>
 <?php

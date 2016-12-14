@@ -5,7 +5,11 @@
 	$username = $_GET['username'];
 	$isOwner = isUserOwner($username);
 
-	if($isOwner != "false")
+	echo $username;
+
+	echo $isOwner['Username'];
+
+	if($isOwner)
   		header ("Location: ownerprofile.php?username=$username");
 	else
   		header ("Location: userprofile.php?username=$username");

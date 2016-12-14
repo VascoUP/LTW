@@ -1,1 +1,1 @@
-<input type="button" value="Register">
+<input id="Reg_Button" type="button" value="Register">
