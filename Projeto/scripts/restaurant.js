@@ -416,6 +416,8 @@ function updateReplys(elem) {
 	$reviewID = $(elem).data("id");
 	$showmoreButton = $("input[data-id="+$reviewID+"]");
 	$content = $textarea.val();
+	if( $content == "" )
+		return ;
 	var $result;
 
 	$.ajax({
@@ -433,15 +435,15 @@ function updateReplys(elem) {
 	});
 
 	$insertHtml = "<div class='ReviewReply'>\
-						<div>\
-							<p>\
+						<div class='CommentInfo'>\
+							<p class='CommentUsername'>\
 								" + $result['username'] + " \
 							</p>\
-							<p>\
+							<p class='GeneralDate'>\
 								" + $result['Date'] + "\
 							</p>\
 						</div>\
-						<div>\
+						<div class='GeneralContent'>\
 							" + $content + "\
 						</div>\
 					</div>";

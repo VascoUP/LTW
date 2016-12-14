@@ -65,8 +65,13 @@
 				<p class="Overview_Title" id="Categories_Title">Categories</p>
 				<ul id="Ov_Categories">   
 					<?php
-						foreach($restaurantCategories as $row)
-							echo "<li class='Ov_Category'>".getCategory($row['Category_ID'])['Category']."</li>";
+						foreach($restaurantCategories as $row) {
+							$category = getCategory($row['Category_ID'])['Category'];
+							echo "<li class='Ov_Category'>
+								<a href='search.php?searchOption=Category&searchString=$category'>
+								$category</a>
+								</li>";
+						}
 					?>
 				</ul>
 			</div>
@@ -148,30 +153,35 @@
 	<div class="Curved_Edges Margin_Top_Bottom Default_Info_Box" id="Restaurant_Reviews">
 
 		<?php
+			$index = 0;
 			foreach($restaurantReviews as $review) {
+				if( $index != 0 ) {
+		?>
+					<div class='Sexy_Border'></div>
+		<?php		}
 		?>
 			<div class="RestaurantReview">
-				<div>
-					<p>
-						<?php
-							echo $review['Username'];
-						?>
+				<div class="ReviewInfo">
+					<p class="ReviewUsername">
+					<?php
+						echo $review['Username'];
+					?>
 					</p>
-					<p>
-						<?php
-							echo $review['Score'];
-						?>
+					<p class="ReviewScore">
+					<?php
+						echo $review['Score'];
+					?>
 					</p>
-					<p>
-						<?php
-							echo $review['DateReview'];
-						?>
+					<p class="GeneralDate">
+					<?php
+						echo $review['DateReview'];
+					?>
 					</p>
-				</div>
-				<div>
+					<div class="GeneralContent">
 					<?php
 						echo $review['Content'];
 					?>
+					</div>
 				</div>
 
 				<?php 
@@ -181,41 +191,45 @@
 				?>
 
 					<div class="ReviewReply">
-						<div>
-							<p>
-								<?php
-									echo $reply['Username'];
-								?>
+						<div class="CommentInfo">
+							<p class="CommentUsername" >
+							<?php
+								echo $reply['Username'];
+							?>
 							</p>
-							<p>
-								<?php
-									echo $reply['CommentDate'];
-								?>
+							<p class="GeneralDate">
+							<?php
+								echo $reply['CommentDate'];
+							?>
 							</p>
 						</div>
-						<div>
-							<?php
-								echo $reply['Content'];
-							?>
+						<div class="GeneralContent">
+						<?php
+							echo $reply['Content'];
+						?>
 						</div>
 					</div>
 				<?php } ?>
 
-			</div>
 			<?php 
 				if(isset($_SESSION['username']) && $_SESSION['username'] == $restaurant['Owner_Username']) {
 			?>
-			<input type="button" data-id=<?=$review['ID']?> onclick="showReplyForm(this)">
-				<div hidden id="ReplyWrapper" data-id=<?=$review['ID']?> >
+			<input class="AddCommentButton" type="button" value="Add Comment" data-id=<?=$review['ID']?> onclick="showReplyForm(this)">
+				<div hidden class="ReplyWrapper" data-id=<?=$review['ID']?> >
 					<textarea id="Reply_Comment" rows="1" placeholder="Write a reply..." class="Unselected_TextArea" data-id=<?=$review['ID']?> ></textarea>
 					<input type="button" value="Submit" id="Submit_Reply" class="style_button Unselected_Button" data-id=<?=$review['ID']?> onclick="updateReplys(this)">
 				</div>
-			<?php } ?>
-			<div class='Sexy_Border'></div>
-		<?php } ?>
+				<?php
+				}
+				?>
+			</div>
+		<?php 
+			$index++; 
+		} 
+		?>
 
 		<?php 
-			if(isset($_SESSION['username']) && isUserReviewer($_SESSION['username'])) {
+			//if(isset($_SESSION['username']) && isUserReviewer($_SESSION['username'])) {
 		?>
 			<form id="Review_Form">
 				<div id="Add_Score">
@@ -231,17 +245,25 @@
 				<textarea id="Review_Comment" rows="1" placeholder="Write a review..." class="Unselected_TextArea"></textarea>
 				<input type="button" value="Submit" id="Submit_Review" class="style_button Unselected_Button" onclick="updateReviews()">
 			</form>
-		<?php } ?>
+		<?php 
+			//} 
+		?>
 	</div>	
 
 	<div class="Curved_Edges Margin_Top_Bottom Default_Info_Box" id="Restaurant_Photos">
 		<h2 class="Text_Align_Center">Album</h2>
-		<div>
+		<div id="RestaurantImages">
 			<?php
 				foreach($restaurantPictures as $row) {
 					$filePath = "Database/RestaurantPictures/Thumbnail/".$row['Name'];
 					$alt = $restaurant['Name']." Image by ".$row['Username'];
+			?>
+					<div class="RestaurantImage">
+				<?php
 					echo '<img alt='.$alt.' src='.$filePath.' onclick="showPicturePopUp(this.src, this.alt)" />';
+				?>
+					</div>
+			<?php
 				}
 			?>
 		</div>

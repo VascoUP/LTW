@@ -19,10 +19,8 @@
 	<div id="wrapper">
 		<header>
 			<img src="images/logo.png" alt="AELIUS"/>
-			<ul id="log_site">
-				<?php
-					include ("templates/HeaderButtons.php");
-					include ('templates/HeaderScrollDown.php');
-				?>
-			</ul>    
+			<?php
+				include ("templates/HeaderButtons.php");
+				include ('templates/HeaderScrollDown.php');
+			?>  
 		</header>

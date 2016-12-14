@@ -2,12 +2,24 @@
 <ul id="restaurants_list">
 
 	<?php 
-		foreach($restaurants as $restaurant) {
+		if( isset($restaurants) ) {
+			$index = 0;
+			foreach($restaurants as $restaurant) {
+				if( $index != 0 ) { 
 	?>
+				<div class="Sexy_Border">
+				</div>
+				<?php 
+				} 
+				?>
 		<li> 
 			<a href="restaurant.php" onclick="location.href=this.href+'?id=<?=$restaurant['ID']?>';return false;" class="Hide_Link_Display">
 				<div class="Restaurant_Opt">
-					<img src="images/logo.png" alt="photo">
+					<?php
+						$thumbnail = "Database/RestaurantPictures/Thumbnail/".
+								getRestaurantThumbnailPicture($restaurant['ID'])['Name'];
+					?>
+					<img src=<?=$thumbnail?> alt="photo">
 					<h3 class="Restaurant_Name"> <?php echo $restaurant['Name']?> </h3>
 					<?php
 						include('templates/score.php');
@@ -18,8 +30,10 @@
 					?></p>
 				</div>	
 			</a>
-			<div class="Sexy_Border">
-			</div>
 		</li>
-	<?php } ?>	
+	<?php
+				$index++;
+			} 
+		}
+	?>	
 </ul>
