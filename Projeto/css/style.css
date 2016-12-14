@@ -119,7 +119,8 @@ select:-moz-focusring {
 #HeaderLogin:hover,
 #HeaderOptions:hover,
 #UserProfileHeader:hover,
-#EditRestaurant:hover {
+#EditRestaurant:hover,
+#EditProfile:hover {
 	transform: scale(1.25);
 	-webkit-transform: scale(1.25);
 	-moz-transform: scale(1.25);

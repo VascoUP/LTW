@@ -13,7 +13,12 @@
 	<div class="dashboard" id="left-dashboard">
 		<div class="Curved_Edges Default_Info_Box">
 			<div id="profile-photo">
-				<img src="images/default_profile_picture.png" alt="profilePic" height="75" width="75">
+			<?php
+				$picture = $userInfo['ProfilePicture'];
+				if( $picture == null )
+					$picture = "no-user-image.jpg";
+				echo "<img src='Database/ProfilePictures/Thumbnail/$picture' alt='profilePic' height='75' width='75'>";
+			?>
 			</div>
 			<div id="profile-username">
 				<h3> 

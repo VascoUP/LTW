@@ -21,7 +21,7 @@
 					$username = substr($currentURL, strripos($currentURL, "?") + 10);
 					if($_SESSION['username'] == $username) {
 		?>
-					<img src="images/MainIcon.png" class="HeaderButton" onclick="editProfile()" />
+					<img id="EditProfile" src="images/MainIcon.png" class="HeaderButton" onclick="editProfile()" />
 		<?php } } ?>
 
 		<img src=<?=$url?> id="UserProfileHeader" class="HeaderButton" onclick="showScrollDown()"/>
