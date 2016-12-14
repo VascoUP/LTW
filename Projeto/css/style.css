@@ -115,12 +115,8 @@ select:-moz-focusring {
     transition: transform .25s ease;
 }
 
-#HeaderRegister:hover,
-#HeaderLogin:hover,
-#HeaderOptions:hover,
-#UserProfileHeader:hover,
-#EditRestaurant:hover,
-#EditProfile:hover {
+.HeaderButton:hover,
+#HeaderOptions:hover {
 	transform: scale(1.25);
 	-webkit-transform: scale(1.25);
 	-moz-transform: scale(1.25);

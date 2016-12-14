@@ -16,12 +16,16 @@
 				$restaurantID = substr($currentURL, strripos($currentURL, "?") + 4, 1);
 				if(isRestaurantOwner($restaurantID)) {
 		?>
-					<img src="images/ResgisterIcon.png" class="HeaderButton" id="EditRestaurant" onclick="editRestaurant()"/>
+					<img src="images/edit.png" class="HeaderButton" id="EditRestaurant" onclick="editRestaurant()"/>
 		<?php } } else if($pageType == "ownerprofile" || $pageType == "userprofile") {
 					$username = substr($currentURL, strripos($currentURL, "?") + 10);
 					if($_SESSION['username'] == $username) {
 		?>
-					<img id="EditProfile" src="images/MainIcon.png" class="HeaderButton" onclick="editProfile()" />
+					<img id="AddRestaurant" src="images/add-restaurant.png" class="HeaderButton" onclick="addRestaurant()" />
+
+					<img id="EditProfile" src="images/edit.png" class="HeaderButton" onclick="editProfile()" />
+
+
 		<?php } } ?>
 
 		<img src=<?=$url?> id="UserProfileHeader" class="HeaderButton" onclick="showScrollDown()"/>

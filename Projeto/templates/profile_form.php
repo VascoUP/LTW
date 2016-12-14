@@ -11,7 +11,7 @@
 ?>
 
 <div id="reg-form">
-    <form method="POST" action="action_register.php" enctype="multipart/form-data" onsubmit="return Validate()" name="vform">
+    <form enctype="multipart/form-data" onsubmit="" name="vform">
         <div hidden id='img-error'></div>
 
         <div id="img-reg-div">
@@ -48,7 +48,7 @@
         </div>
 
         <div id="input-reg-div">
-            <input id="signup-button" type="submit" value="✓" />
+            <input id="" type="submit" value="✓" />
         </div>
     </form>
 </div>

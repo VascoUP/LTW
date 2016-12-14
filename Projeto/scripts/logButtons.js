@@ -131,7 +131,6 @@ function showScrollDown() {
 }
 
 function toggleButtons() {
-
 	$('.HeaderButton').toggle(200);
 }
 
@@ -152,7 +151,15 @@ function editRestaurant() {
 function editProfile() {
 	$url = $(location).attr('href');
 	$username = $url.substring($url.indexOf("username=") + 9);
-	console.log($username);
+
 	$editPageUrl = (window.location.href).substring( 0, (window.location.href).lastIndexOf( "/" ) + 1) + "edit_profile.php?username=" + $username;
+	window.location.href = $editPageUrl;
+}
+
+function addRestaurant() {
+	$url = $(location).attr('href');
+	$username = $url.substring($url.indexOf("username=") + 9);
+
+	$editPageUrl = (window.location.href).substring( 0, (window.location.href).lastIndexOf( "/" ) + 1) + "addRestaurant.php?username=" + $username;
 	window.location.href = $editPageUrl;
 }
