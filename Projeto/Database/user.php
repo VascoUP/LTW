@@ -93,7 +93,7 @@
 
     $stmt = $conn->prepare('SELECT * FROM User WHERE username = ? LIMIT 1');
     $stmt->execute(array($username));
-
+    
     return $stmt->fetch();
   }
 
