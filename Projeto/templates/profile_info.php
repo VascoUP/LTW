@@ -16,9 +16,11 @@
 			<div id="profile-photo">
 			<?php
 				$picture = $userInfo['ProfilePicture'];
-				if( $picture == null )
-					$picture = "no-user-image.jpg";
-				echo "<img src='Database/ProfilePictures/Thumbnail/$picture' alt='profilePic' height='75' width='75'>";
+				if($picture = 'NULL') {
+					echo "<img src='images/no-user-image.jpg' alt='profilePic' height='75' width='75'>";
+				}
+				else 
+					echo "<img src='Database/ProfilePictures/Thumbnail/$picture' alt='profilePic' height='75' width='75'>";
 			?>
 			</div>
 			<div id="profile-username">
