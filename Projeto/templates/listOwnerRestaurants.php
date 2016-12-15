@@ -3,7 +3,7 @@
 	<?php 
 		$index = 0;
 		foreach($userRestaurants as $restaurant) {
-			if( index != 0 ) {
+			if( $index != 0 ) {
 				echo '<div class="Sexy_Border"></div>';
 			}
 	?>

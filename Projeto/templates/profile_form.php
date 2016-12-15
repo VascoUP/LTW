@@ -9,8 +9,7 @@
 ?>
 
 <div id="reg-form">
-    <form name="vform">
-        <input hidden type="text" name="action" value="updateProfile" />
+    <form method="POST" action="Database/updateProfile.php" name="vform" onsubmit="return updateProfile()">
         <div hidden id='img-error'></div>
 
         <div id="img-reg-div">
@@ -47,7 +46,7 @@
         </div>
 
         <div id="input-reg-div">
-            <input id="update" type="button" onclick="updateProfile()" value="✓" />
+            <input id="update" type="submit" value="✓" />
         </div>
     </form>
 </div>

@@ -109,9 +109,11 @@ function updateProfile() {
 			return false;
 	}
 
+	console.log("0.5");
 	//Check is username is valid
 	if(!checkUser(document.getElementById('reg-username').value))
 		return false;
+
 
 	//Check if the First Name and the Last Name is valid
 	if(!checkFirstName(document.getElementById('reg-first-name').value))
@@ -123,6 +125,7 @@ function updateProfile() {
 	//Checks if email is valid
 	if(!checkEmail(document.getElementById('reg-email').value))
 		return false;
+
 
 	if(password.value != "" && confirmPassword != "") {
 		if(!checkOldPassword(oldpassword.value)) return false;
@@ -136,26 +139,7 @@ function updateProfile() {
 		}
 	}
 
-	$.ajax({
-		type:"POST",
-		url:"Database/user.php",
-		async: false,
-		data:{
-			action: 'updateProfile',
-			regProfilePic: document.getElementById('reg-file').files[0],
-			username: document.getElementById('reg-username').value,
-			password: password.value,
-			firstname: document.getElementById('reg-first-name').value,
-			lastname: document.getElementById('reg-last-name').value,
-			email: document.getElementById('reg-email').value
-		}, success: function() {
-			console.log("Success");
-			
-		}, error: function(exception){
-			alert('Exeption:'+exception);
-		}
-	});
-	console.log("2");
+	console.log("1");
 
 	return true;
 }
@@ -181,25 +165,27 @@ function checkUser(value) {
 					username: value
 				},
 				success: function(isValid) {
-					$validUser = JSON.parse(isValid).success;
+					$valid = JSON.parse(isValid).success;
 				}
 			});
 
-			if($validUser) {
+			if($valid) {
+				console.log("here");
 				$.ajax({
 					type:"POST",
 					url:"Database/user.php",
+					async: false,
 					data:{
 						action: 'isUserTaken',
 						username: value
 					},
 					success: function(data) {
 						if(data == 'This username is available.') {
+							$validUser = true;
 							$username.css('box-shadow', '0px 0px 5px green');
 							$usernameError.css('color', 'green');
 						}
 						else {
-							$validUser = false;
 							$username.css('box-shadow', '0px 0px 5px red');
 							$usernameError.css('color', 'red');
 						}
@@ -218,7 +204,7 @@ function checkUser(value) {
 		$usernameError.css('color', 'red');
 		$usernameError.text('Please enter an username.');
 	}
-	return $validUser;
+ 	return $validUser;
 }
 
 function checkEmail(value) {
