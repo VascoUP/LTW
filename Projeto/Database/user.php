@@ -65,15 +65,33 @@
   function isUserTaken($username) {
     require_once('connection.php');
 
-    $stmt = $conn->prepare('SELECT * FROM User WHERE Username = ? LIMIT 1');
-    $stmt->execute(array($username));
+    if(isset($_SESSION['username'])) {
+      $activeUser = $_SESSION['username'];
+      if($activeUser === $username)
+        echo 'This username is available.';
+      else {
+        $stmt = $conn->prepare('SELECT * FROM User WHERE Username = ? LIMIT 1');
+        $stmt->execute(array($username));
 
-    $results = $stmt->fetch();
+        $results = $stmt->fetch();
 
-    if(!$results)
-      echo 'This username is available.';
-    else
-      echo 'This username is taken.';
+        if(!$results)
+          echo 'This username is available.';
+        else
+          echo 'This username is taken.';
+        }
+
+    } else {
+        $stmt = $conn->prepare('SELECT * FROM User WHERE Username = ? LIMIT 1');
+        $stmt->execute(array($username));
+
+        $results = $stmt->fetch();
+
+        if(!$results)
+          echo 'This username is available.';
+        else
+          echo 'This username is taken.';
+    }
   }
 
   function getProfilePicture($username) {
@@ -172,12 +190,12 @@
   }
 
   function removeFavorite($restaurantID) {
-		require_once('connection.php');
+    require_once('connection.php');
 
     $username = $_SESSION['username'];
     $stmt = $conn->prepare('DELETE FROM Favourite WHERE Restaurant_ID = ? AND Username = ?');
     $stmt->execute(array($restaurantID, $username));
-	}
+  }
 
   function updateUsername($username) {
     if( $username != $_SESSION['username'] || $username == "" )

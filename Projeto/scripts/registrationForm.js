@@ -32,7 +32,6 @@ function Validate() {
 	//Get the password values
 	var password = document.forms['vform']['password'];
 	var confirmPassword = document.forms['vform']['passwordConfirm'];
-	console.log("1");
 
 	var username = document.forms['vform']['username'];
 

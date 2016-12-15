@@ -14,6 +14,7 @@
 <?php
 	include ('templates/searchForm.php');
 	include ('templates/profile_info.php');
+	include ('templates/LoginForm.php');
 ?>
 	</div>
 <?php

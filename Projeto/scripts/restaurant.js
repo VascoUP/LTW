@@ -414,7 +414,7 @@ function updateReviews() {
 
 function updateReplys(elem) {
 	$reviewID = $(elem).data("id");
-	$textarea = $("textarea[data-id="+$reviewID+"]");
+	$showmoreButton = $("input[data-id="+$reviewID+"]");
 	$content = $textarea.val();
 	if( $content == "" )
 		return ;

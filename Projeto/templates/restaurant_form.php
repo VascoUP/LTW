@@ -1,16 +1,20 @@
 <?php
-	$restaurantID = $_GET['id'];
-	if( $restaurantID )
+	if(isset($_GET['id']))
 		$exists = true;
 	else 
 		$exists = false;
 
-	if( $exists ) {
+	if(isset($_GET['id'])) {
+		$restaurantID = $_GET['id'];
 		$restaurant = getRestaurantInfo($restaurantID);
 		$restaurantAddress = getAddress($restaurant['Address_ID']);
 		$restaurantCategories = getRestaurantCategories($restaurantID);
 		$restaurantOpenHours = getRestaurantOpenHours($restaurantID);
 		$restaurantMenus = getMenus($restaurantID);
+	}
+
+	if(isset($_GET['username'])) {
+		$username = $_GET['username'];
 	}
 ?>
 

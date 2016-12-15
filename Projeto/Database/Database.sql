@@ -31,7 +31,7 @@ CREATE TABLE Address (
 	ID INTEGER PRIMARY KEY AUTOINCREMENT,
 	StreetName CHAR[200],
 	Latitude NUMBER,
-	Longitude NUMBER
+	Longitude NUMBER 
 );
 
 CREATE TABLE Picture (
@@ -84,7 +84,6 @@ CREATE TABLE Restaurant (
 	TotalScores NUMBER,
 	Price NUMBER,
 	Description CHAR[5000],
-    ProfilePicture CHAR[60],
 	Address_ID NUMBER,
 	Owner_Username CHAR[50] NOT NULL,
 	FOREIGN KEY(Address_ID) REFERENCES Address(ID)
@@ -171,11 +170,11 @@ CREATE TABLE Favourite (
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
 /*                                                             Triggers                                                               */
 /* ---------------------------------------------------------------------------------------------------------------------------------- */
-create trigger updateScore
-	after insert on Review
-	for each row
-	begin
-		update Restaurant1
+create trigger updateScore 
+	after insert on Review 
+	for each row 
+	begin 
+		update Restaurant 
 			set NScores = NScores + 1,
 				TotalScores = TotalScores + new.Score
 		where ID = new.Restaurant_ID;
@@ -188,9 +187,9 @@ create trigger updateScore
 
 PRAGMA FOREIGN_KEYS = ON;
 
-INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('VascoP', 'Vasco', 'Pereira', 'vascop.aluno.c.n@gmail.com', '$2y$12$U2ADM233zzMawdbvH8hKTOriD4voeC8I3OtxL17jOvtN2DKJmGY/2', 'NULL');
-INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('tiagobalm', 'Tiago', 'Almeida', 'tiagoalmeida.95@hotmail.com', '$2y$12$x22coDYGb9ZIl.OFUGyUq.kP146DFaFf15IrIq0/lEhO5nflFeWpK', 'tiagobalm.jpg');
-INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('tiago', 'Tiago', 'Almeida', 'tiagoalmeida.95@hotmail.com', '$2y$12$x22coDYGb9ZIl.OFUGyUq.kP146DFaFf15IrIq0/lEhO5nflFeWpK', 'tiagobalm.jpg');
+INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('VascoP', 'Vasco', 'Pereira', 'vascop.aluno.c.n@gmail.com', '$2y$12$U2ADM233zzMawdbvH8hKTOriD4voeC8I3OtxL17jOvtN2DKJmGY/2', 'NULL'); 
+INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('tiagobalm', 'Tiago', 'Almeida', 'tiagoalmeida.95@hotmail.com', '$2y$12$x22coDYGb9ZIl.OFUGyUq.kP146DFaFf15IrIq0/lEhO5nflFeWpK', 'tiagobalm.jpg'); 
+INSERT INTO User (Username, FirstName, LastName, Email, Password, ProfilePicture) VALUES ('tiago', 'Tiago', 'Almeida', 'tiagoalmeida.95@hotmail.com', '$2y$12$x22coDYGb9ZIl.OFUGyUq.kP146DFaFf15IrIq0/lEhO5nflFeWpK', 'tiago.jpg'); 
 
 INSERT INTO Reviewer(Username) VALUES('tiago');
 INSERT INTO Owner(Username) VALUES ('tiagobalm');
@@ -212,8 +211,8 @@ INSERT INTO Category (Category) VALUES ('Kids Menu');
 INSERT INTO Category (Category) VALUES ('Desserts');
 INSERT INTO Category (Category) VALUES ('Vegetarian');
 
-INSERT INTO Restaurant (Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username, ProfilePicture) VALUES ('MacDonalds', '915749273', 0, 0, 10, 'Bad Food', 2, 'VascoP', 'NULL');
-INSERT INTO Restaurant (Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username, ProfilePicture) VALUES ('Abadia do Porto', '925728472', 0, 0, 10, 'Situado na zona histórica da cidade Invicta, o restaurante Abadia do Porto, foi fundado em 1939. Diz-se que o nome terá origem nas abadias, onde os peregrinos, que demandavam de Santiago de Compostela, repousavam algumas horas, dormindo e comendo antes de encetar mais uma etapa da longa caminhada com o objectivo religioso. Desde à muitos anos que o Abadia do Porto é conhecido pelas excelentes refeições que serve, sendo local de passagem obrigatória para inúmeras individualidades, tais como: Francisco Sá Carneiro, Aníbal Cavaco Silva, José Saramago, Sophia Loren, entre muitos outros. O Abadia do Porto serve diariamente pratos como: Cabrito Assado, Bacalhau Gomes de Sá, Tripas à moda do Porto, Pataniscas de Bacalhau, Bife à Abadia, Filetes de Pescada, entre outros e a acompanhar, o seu famoso esparregado. O Restaurante Abadia do Porto tem acesso para deficientes e WC respectivo.', 3, 'tiagobalm', 'NULL');
+INSERT INTO Restaurant (Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username) VALUES ('MacDonalds', '915749273', 0, 0, 10, 'Bad Food', 2, 'VascoP');
+INSERT INTO Restaurant (Name, PhoneNumber, NScores, TotalScores, Price, Description, Address_ID, Owner_Username) VALUES ('Abadia do Porto', '925728472', 0, 0, 10, 'Situado na zona histórica da cidade Invicta, o restaurante Abadia do Porto, foi fundado em 1939. Diz-se que o nome terá origem nas abadias, onde os peregrinos, que demandavam de Santiago de Compostela, repousavam algumas horas, dormindo e comendo antes de encetar mais uma etapa da longa caminhada com o objectivo religioso. Desde à muitos anos que o Abadia do Porto é conhecido pelas excelentes refeições que serve, sendo local de passagem obrigatória para inúmeras individualidades, tais como: Francisco Sá Carneiro, Aníbal Cavaco Silva, José Saramago, Sophia Loren, entre muitos outros. O Abadia do Porto serve diariamente pratos como: Cabrito Assado, Bacalhau Gomes de Sá, Tripas à moda do Porto, Pataniscas de Bacalhau, Bife à Abadia, Filetes de Pescada, entre outros e a acompanhar, o seu famoso esparregado. O Restaurante Abadia do Porto tem acesso para deficientes e WC respectivo.', 3, 'tiagobalm');
 
 INSERT INTO Picture (Name, Restaurant_ID, Username) VALUES ('1.jpg', 1, 'VascoP');
 INSERT INTO Picture (Name, Restaurant_ID, Username) VALUES ('2.jpg', 1, 'VascoP');
@@ -343,11 +342,11 @@ INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (2, 3);
 INSERT INTO RestaurantCategory (Restaurant_ID, Category_ID) VALUES (2, 4);
 
 INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tasty!!!', 5, '2016-12-13', 1);
-INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tas!!!', 5, '2016-12-13', 1);
+INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tas!!!', 5, '2016-12-13', 1); 
 INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very!!!', 5, '2016-12-13', 1);
 
 INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tasty!!!', 5, '2016-12-13', 2);
-INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tas!!!', 5, '2016-12-13', 2);
+INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very tas!!!', 5, '2016-12-13', 2); 
 INSERT INTO Review (Username, Content, Score, DateReview, Restaurant_ID) VALUES ('tiago', 'Very!!!', 5, '2016-12-13', 2);
 
 INSERT INTO Reply (Username, Review_ID, Content, CommentDate) VALUES ('VascoP', 1, 'Thank you very much.', '2016-12-13');
