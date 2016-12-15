@@ -5,7 +5,7 @@
 </head>
 <body>
     <div id="reg-form">
-        <form method="POST" action="action_register.php" enctype="multipart/form-data" onsubmit="return Validate()" name="vform">
+        <form method="POST" action="action_register.php" enctype="multipart/form-data" onsubmit="return ValidateRegister()" name="vform">
             <div hidden id='img-error'></div>
             <div id="img-reg-div">
                 <img id="reg-profile-picture" src="images/no-user-image.jpg">

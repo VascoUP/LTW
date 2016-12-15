@@ -1,6 +1,4 @@
 <?php
-	include('Database/user.php');
-
 	$username = $_SESSION['username'];
 	if( !$username )
         header ('Location: initial.php');
@@ -11,7 +9,8 @@
 ?>
 
 <div id="reg-form">
-    <form enctype="multipart/form-data" onsubmit="" name="vform">
+    <form name="vform">
+        <input hidden type="text" name="action" value="updateProfile" />
         <div hidden id='img-error'></div>
 
         <div id="img-reg-div">
@@ -35,7 +34,7 @@
         </div>
 
         <div id="input-reg-div">
-            <input id="reg-old-password" type="password" name="password" placeholder="Old Password" maxlength="20"/>
+            <input id="reg-old-password" type="password" name="oldpassword" placeholder="Old Password" maxlength="20"/>
         </div>
 
         <div id="input-reg-div">
@@ -48,7 +47,7 @@
         </div>
 
         <div id="input-reg-div">
-            <input id="" type="submit" value="✓" />
+            <input id="update" type="button" onclick="updateProfile()" value="✓" />
         </div>
     </form>
 </div>

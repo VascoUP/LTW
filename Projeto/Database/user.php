@@ -1,19 +1,31 @@
 <?php
-
   if(isset($_POST['action']) && function_exists($_POST['action'])) {
     $action = $_POST['action'];
-    $username = $_POST['username'];
-
+    echo $action;
     switch($action) {
 
       case 'verifyUser':
+        $username = $_POST['username'];
         $password = $_POST['password'];
         return $action($username, $password);
       case 'removeFavorite':
       case 'insertFavorite':
         $restaurantID = $_POST['restaurantID'];
         return $action($restaurantID);
+      case 'updateProfile':
+        $image = $_POST['regProfilePic'];
+        $username = trim(strip_tags($_POST['username']));
+        $password = $_POST['password'];
+        $firstName = $_POST['firstname'];
+        $lastName = $_POST['lastname'];
+        $email = $_POST['email'];
+
+        return $action($image, $username, $firstName, $lastName, $email, $password);
+        case 'validateCurrentUser':
+          $password = $_POST['password'];
+          return $action($password);
       default:
+        $username = $_POST['username'];
         return $action($username);
     }
   }
@@ -62,36 +74,43 @@
     return ($user !== false && password_verify($password, $user['Password']));
   }
 
-  function isUserTaken($username) {
+
+  function validateCurrentUser($password) {
     require_once('connection.php');
 
-    if(isset($_SESSION['username'])) {
-      $activeUser = $_SESSION['username'];
-      if($activeUser === $username)
-        echo 'This username is available.';
-      else {
-        $stmt = $conn->prepare('SELECT * FROM User WHERE Username = ? LIMIT 1');
-        $stmt->execute(array($username));
+    $username = $_SESSION['username'];
+    $answer = array();
 
-        $results = $stmt->fetch();
+    $stmt = $conn->prepare('SELECT * FROM User WHERE username = ? LIMIT 1');
+    $stmt->execute(array($username));
+    $user = $stmt->fetch();
 
-        if(!$results)
-          echo 'This username is available.';
-        else
-          echo 'This username is taken.';
-        }
+    if($user !== false && password_verify($password, $user['Password']))
+      $answer['success'] = true;
+    else
+      $answer['success'] = false;
 
-    } else {
-        $stmt = $conn->prepare('SELECT * FROM User WHERE Username = ? LIMIT 1');
-        $stmt->execute(array($username));
+    echo json_encode($answer); 
+  }
 
-        $results = $stmt->fetch();
+  function isUserTaken($username) {
+    require_once('connection.php');
+    echo "Linked in isUserTaken";
 
-        if(!$results)
-          echo 'This username is available.';
-        else
-          echo 'This username is taken.';
+    if(isset($_SESSION['username']) && $username == $_SESSION['username']) {
+      echo 'This username is available.';
+      return;
     }
+
+    $stmt = $conn->prepare('SELECT * FROM User WHERE Username = ? LIMIT 1');
+    $stmt->execute(array($username));
+
+     $results = $stmt->fetch();
+
+    if(!$results)
+      echo 'This username is available.';
+    else
+      echo 'This username is taken.';
   }
 
   function getProfilePicture($username) {
@@ -198,10 +217,9 @@
   }
 
   function updateUsername($username) {
-    if( $username != $_SESSION['username'] || $username == "" )
+    require_once('connection.php');
+    if( $username == $_SESSION['username'] || $username == "" )
       return ;
-
-    global $conn;
 
     $oldUsername = $_SESSION['username'];
 
@@ -221,54 +239,104 @@
 
   function updateFirstName($firstName) {
     $username = $_SESSION['username'];
-    $info = getUserInfoPhp($username);
 
-    if( $info['FirstName'] == $firstName || $firstName == "" )
+    if( $firstName == "" )
       return ;
-
-    global $conn;
 
     $stmt = $conn->prepare('UPDATE User SET FirstName = $firstName WHERE Username = $username');
     $stmt->execute();
   }
 
   function updateLastName($lastName) {
+    require_once('connection.php');
     $username = $_SESSION['username'];
-    $info = getUserInfoPhp($username);
 
-    if( $info['LastName'] == $lastName || $lastName == "" )
+    if( $lastName == "" )
       return ;
-
-    global $conn;
 
     $stmt = $conn->prepare('UPDATE User SET LastName = $lastName WHERE Username = $username');
     $stmt->execute();
   }
 
   function updateEmail($email) {
+    require_once('connection.php');
     $username = $_SESSION['username'];
-    $info = getUserInfoPhp($username);
 
-    if( $info['Email'] == $email || $email == "" )
+    if( $email == "" )
       return ;
-
-    global $conn;
 
     $stmt = $conn->prepare('UPDATE User SET Email = $email WHERE Username = $username');
     $stmt->execute();
   }
 
-  function updatePassword($oldPass, $newPass, $confPass) {
-    if( $oldPass == "" || $newPass == "" || $confPass == "" || $newPass != $confPass )
+  function updatePassword($password) {
+    require_once('connection.php');
+    if($password == "")
       return ;
-
-    $username = $_SESSION['username'];
-    verifyUserPhp($username, $oldPass);
 
     $options = ['cost' => 12];
     $hash = password_hash($newPass, PASSWORD_DEFAULT, $options);
 
     $stmt = $conn->prepare('UPDATE User SET Password = $hash WHERE Username = $username');
     $stmt->execute();
+  }
+
+  function updateProfilePicture($image) {
+    require_once('connection.php');
+
+    $username = $_SESSION['username'];
+    $stmt = $conn->prepare('UPDATE User SET ProfilePicture = $image WHERE Username = $username');
+    $stmt->execute();
+  }
+
+  function updateProfile($image, $username, $firstName, $lastName, $email, $password) {
+    echo "updateProfile";
+    require_once('connection.php');
+
+    if($conn)
+      echo "Linked in updateProfile!";
+
+    $extension = "";
+    if (isset($image)) {
+      $profilePicName = $_FILES['regProfilePic']['name'];
+      $profilePicTempName = $_FILES['regProfilePic']['tmp_name'];
+
+      if(isset($profilePicName)) {
+        if(!empty($profilePicName)) {
+          $extension .= strtolower(substr($profilePicName, strpos($profilePicName, '.')));
+          $fileName = "Database/ProfilePictures/Originals/$username$extension";
+          $thumbnailName = "Database/ProfilePictures/Thumbnail/$username$extension";
+
+          move_uploaded_file($profilePicTempName, $fileName);
+
+          if($extension == '.png')
+            $originalImage = imagecreatefrompng($fileName);
+          else 
+            $originalImage = imagecreatefromjpeg($fileName);
+          $width = imagesx($originalImage);
+            $height = imagesy($originalImage);
+            $square = min($width, $height);
+
+            //Create 200x200 thumbnail
+          $thumbnail = imagecreatetruecolor(200, 200); 
+          imagecopyresized($thumbnail, $originalImage, 0, 0, ($width>$square)?($width-$square)/2:0, ($height>$square)?($height-$square)/2:0, 200, 200, $square, $square);
+
+          if($extension == '.png')
+            imagepng($thumbnail, $thumbnailName);
+          else
+            imagejpeg($thumbnail, $thumbnailName);
+        }
+      }
+      updateProfilePicture("$username$extension");
+    }
+
+    echo "$extension";
+    updateFirstName($firstName);
+    updateLastName($lastName);
+    updateEmail($email);
+    updatePassword($password);
+    updateUsername($username);
+
+    header("Location: profile.php?username=$username");
   }
 ?>

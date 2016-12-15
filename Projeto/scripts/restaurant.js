@@ -416,9 +416,26 @@ function updateReplys(elem) {
 	$reviewID = $(elem).data("id");
 	$showmoreButton = $("input[data-id="+$reviewID+"]");
 	$content = $textarea.val();
+	$restaurantID = getRestaurantID();
+
 	if( $content == "" )
 		return ;
+	
 	var $result;
+
+	$.ajax({
+		type:"POST",
+		url: "Database/restaurant.php",
+		async: false,
+		data: {
+			action: 'insertReply',
+			reviewID: $reviewID,
+			content: $content
+		},
+		success: function(result) {
+			$result = JSON.parse(result);
+		}
+	});
 
 	$.ajax({
 		type:"POST",

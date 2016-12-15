@@ -28,7 +28,7 @@ function loadFile(event) {
 		}
 }
 
-function Validate() {
+function ValidateRegister() {
 	//Get the password values
 	var password = document.forms['vform']['password'];
 	var confirmPassword = document.forms['vform']['passwordConfirm'];
@@ -75,6 +75,82 @@ function Validate() {
 		passwordConfirmError.innerHTML = "The two passwords do not match.";
 		return false;
 	}
+
+	return true;
+}
+
+function updateProfile() {
+	//Get the password values
+	console.log("0");
+	var oldpassword = document.forms['vform']['oldpassword'];
+	var password = document.forms['vform']['password'];
+	var confirmPassword = document.forms['vform']['passwordConfirm'];
+
+	var username = document.forms['vform']['username'];
+
+
+
+	//Get div for error display
+	var $oldPassword = $('#reg-old-password');
+	var $passwordbox = $('#reg-password');
+	var $confirmPasswordbox = $('#reg-confirm-password');
+	var passwordConfirmError = document.getElementById('password-confirm-error');
+	var $imageError = document.getElementById('img-error');
+	//Allowed file extensions
+
+	if(document.getElementById('reg-file').value) {
+		var imageExtension = document.getElementById('reg-file').value.split('.').pop().toLowerCase();
+		if(!checkImageExtension(imageExtension))
+			return false;
+
+		//Check image size
+		var imageFile = document.getElementById('reg-file').files[0].size;
+		if(!checkImageSize(imageFile))
+			return false;
+	}
+
+	//Check is username is valid
+	if(!checkUser(document.getElementById('reg-username').value))
+		return false;
+
+	//Check if the First Name and the Last Name is valid
+	if(!checkFirstName(document.getElementById('reg-first-name').value))
+		return false;
+
+	if(!checkLastName(document.getElementById('reg-last-name').value))
+		return false;
+
+	//Checks if email is valid
+	if(!checkEmail(document.getElementById('reg-email').value))
+		return false;
+
+	if(password.value != "" && confirmPassword != "") {
+		if(!checkOldPassword(oldpassword.value)) return false;
+
+		//Validate Password
+		if(password.value != confirmPassword.value) {
+			$passwordbox.css('box-shadow', '0px 0px 5px red');
+			$confirmPasswordbox.css('box-shadow', '0px 0px 5px red');
+			passwordConfirmError.innerHTML = "The two passwords do not match.";
+			return false;
+		}
+	}
+	console.log("1");
+
+	$.ajax({
+		type:"POST",
+		url:"Database/user.php",
+		async: false,
+		data:{
+			action: 'updateProfile',
+			regProfilePic: document.getElementById('reg-file').files[0],
+			username: document.getElementById('reg-username').value,
+			password: password.value,
+			firstname: document.getElementById('reg-first-name').value,
+			lastname: document.getElementById('reg-last-name').value,
+			email: document.getElementById('reg-email').value
+		}, success: function() {}
+	});
 
 	return true;
 }
@@ -238,4 +314,30 @@ function checkImageSize(size) {
 		return true;
 	else
 		return false;
+}
+
+function checkOldPassword(oldpassword) {
+	var $oldPassword = $('#reg-old-password');
+	var $valid = false;
+
+	if(oldpassword != '')
+		$.ajax({
+				type:"POST",
+				url:"Database/user.php",
+				async:false,
+				data:{
+					action: 'validateCurrentUser',
+					password: oldpassword
+				},
+				success: function(isValid) {
+					$valid = JSON.parse(isValid).success;
+					console.log(JSON.parse(isValid));
+					if($valid)
+						$oldPassword.css('box-shadow', '0px 0px 5px green');
+					else { 
+						$oldPassword.css('box-shadow', '0px 0px 5px red');
+					}
+				}
+		});
+	return $valid;
 }
