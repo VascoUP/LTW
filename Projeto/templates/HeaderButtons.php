@@ -30,10 +30,10 @@
 
 		<?php } } ?>
 
-		<img src=<?=$url?> id="UserProfileHeader" class="HeaderButton" onclick="showScrollDown()"/>
+		<img src=<?=$url?> alt="ProfilePic" id="UserProfileHeader" class="HeaderButton" onclick="showScrollDown()"/>
 	<?php
 		}
 	?>
 
-	<img id="HeaderOptions" src="images/MainIcon.png" onclick="toggleButtons()">
+	<img id="HeaderOptions" alt="Options" src="images/MainIcon.png" onclick="toggleButtons()">
 </div>
