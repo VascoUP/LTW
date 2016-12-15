@@ -12,7 +12,7 @@
 
 <div class="profile_content">
 	<div class="dashboard" id="left-dashboard">
-		<div class="Curved_Edges Default_Info_Box">
+		<div id="UserGeneralInfo"  class="Curved_Edges Default_Info_Box">
 			<div id="profile-photo">
 			<?php
 				$picture = $userInfo['ProfilePicture'];
@@ -58,23 +58,44 @@
 		</div>
 	</div>
 	
-	<div class="dashboard Curved_Edges Default_Info_Box" id="main">
+	<div class="dashboard Curved_Edges" id="main">
 		<div class="tabcontent" id="favourites">
 			<?php 
 				include("templates/listFavourites.php");
 			?>
 		</div>
 			
-		<div class="tabcontent" id="reviews">
+		<div class="tabcontent Default_Info_Box" id="reviews">
 		<?php
 			foreach($userReviews as $review) {
-				$restaurant_name = getRestaurantName($review['Restaurant_ID']);
+				$restaurant_name = getRestaurantName($review['Restaurant_ID'])['Name'];
 				$review_date = $review['DateReview'];
 				$review_score = $review['Score'];
-
-				// TEM DE SER ALTERADO
-				$review_text = "Oi";
-				include ('templates/profile_review.php');
+				$review_content = $review['Content'];	
+		?>			
+				<div class="ReviewInfo">
+					<p class="ReviewUsername">
+					<?php
+						echo $restaurant_name;
+					?>
+					</p>
+					<p class="ReviewScore">
+					<?php
+						echo $review_score;
+					?>
+					</p>
+					<p class="GeneralDate">
+					<?php
+						echo $review_date;
+					?>
+					</p>
+					<div class="GeneralContent">
+					<?php
+						echo $review_content;
+					?>
+					</div>
+				</div>
+		<?php
 			}
 		?>
 		</div>
