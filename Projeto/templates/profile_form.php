@@ -1,6 +1,4 @@
 <?php
-	include('Database/user.php');
-
 	$username = $_SESSION['username'];
 	if( !$username )
         header ('Location: initial.php');

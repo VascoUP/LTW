@@ -20,7 +20,7 @@
 <body>
 	<div id="wrapper">
 		<header>
-			<img src="images/logo.png" alt="AELIUS"/>
+			<a href="initial.php"><img src="images/logo.png" alt="AELIUS"/></a>
 			<?php
 				include ("templates/HeaderButtons.php");
 				include ('templates/HeaderScrollDown.php');

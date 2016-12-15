@@ -973,3 +973,25 @@ footer #google_translate_element {
 #PopupClose:hover {
     cursor: pointer;
 }
+
+/* -----------------------
+	Edit Restaurant
+   ----------------------- */
+.Form_Param {
+	text-align: center;
+}
+
+.Form_Specify {
+	font-size: 120%;
+	font-weight: bold;
+	color: #005DD8;
+}
+
+.Day_Of_Week input{
+	width: 10%;
+}
+
+.FormCategory h5 {
+	display: inline-block;
+}
+
