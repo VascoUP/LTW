@@ -220,8 +220,6 @@ select:-moz-focusring {
 	width: 70%;
 	background: white;
 	margin: 0 auto;
-	margin-bottom: 1em;
-	margin-top: 1em;
 	padding: 0em;
 	list-style-type: none;
 
@@ -591,6 +589,10 @@ select:-moz-focusring {
 
 .RestaurantImage img:hover {
 	opacity: 0.7;
+}
+
+#reviews {
+	padding: 10px;
 }
 
 footer {	
@@ -971,3 +973,25 @@ footer #google_translate_element {
 #PopupClose:hover {
     cursor: pointer;
 }
+
+/* -----------------------
+	Edit Restaurant
+   ----------------------- */
+.Form_Param {
+	text-align: center;
+}
+
+.Form_Specify {
+	font-size: 120%;
+	font-weight: bold;
+	color: #005DD8;
+}
+
+.Day_Of_Week input{
+	width: 10%;
+}
+
+.FormCategory h5 {
+	display: inline-block;
+}
+

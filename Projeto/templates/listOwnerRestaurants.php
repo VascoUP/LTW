@@ -1,7 +1,11 @@
 <ul id="restaurants_list">
 
 	<?php 
+		$index = 0;
 		foreach($userRestaurants as $restaurant) {
+			if( index != 0 ) {
+				echo '<div class="Sexy_Border"></div>';
+			}
 	?>
 		<li> 
 			<a href="restaurant.php" onclick="location.href=this.href+'?id=<?=$restaurant['ID']?>';return false;" class="Hide_Link_Display">
@@ -17,8 +21,9 @@
 					?></p>
 				</div>	
 			</a>
-			<div class="Sexy_Border">
-			</div>
 		</li>
-	<?php } ?>	
+	<?php 
+		$index++;
+	}
+	?>	
 </ul>

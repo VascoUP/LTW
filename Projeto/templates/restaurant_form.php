@@ -46,7 +46,7 @@
 				<?php
 					if( $exists ) {
 						$value = $restaurant['Description'];
-						echo "<textarea class='Form_Value'>$value</textarea>"; 
+						echo "<textarea class='Form_Value' rows='4' cols='50'>$value</textarea>"; 
 					} else
 						echo "<textarea class='Form_Value'></textarea>"; 
 				?>
@@ -71,7 +71,7 @@
 					if( $exists ) {
 						foreach($restaurantCategories as $row) {
 							$category = getCategory($row['Category_ID'])['Category'];
-							echo "<li class='Ov_Category'>";
+							echo "<li class='Ov_Category FormCategory'>";
 							echo "<h5>$category</h5>";
 							echo "<img src='images/delete_icon.png' alt='Delete'>";
 							echo "</li>";
@@ -97,38 +97,80 @@
 				<p class="Form_Specify">Open Hours: </p>
 				<div class="Day_Of_Week">
 					Monday<br>
-					From <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
-					To <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
+					<p class="FromTime"> 
+						From <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
+					<p class="ToTime"> 
+					To <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
 				</div>				
 				<div class="Day_Of_Week">
 					Tuesday<br>
-					From <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
-					To <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
+					<p class="FromTime"> 
+						From <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
+					<p class="ToTime"> 
+					To <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
 				</div>
 				<div class="Day_Of_Week">
 					Wednesday<br>
-					From <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
-					To <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
+					<p class="FromTime"> 
+						From <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
+					<p class="ToTime"> 
+					To <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
 				</div>
 				<div class="Day_Of_Week">
 					Thursday<br>
-					From <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
-					To <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
+					<p class="FromTime"> 
+						From <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
+					<p class="ToTime"> 
+					To <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
 				</div>
 				<div class="Day_Of_Week">
 					Friday<br>
-					From <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
-					To <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
+					<p class="FromTime"> 
+						From <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
+					<p class="ToTime"> 
+					To <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
 				</div>
 				<div class="Day_Of_Week">
 					Saturday<br>
-					From <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
-					To <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
+					<p class="FromTime"> 
+						From <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
+					<p class="ToTime"> 
+					To <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
 				</div>
 				<div class="Day_Of_Week">
 					Sunday<br>
-					From <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
-					To <input class='Form_Value' type='number'>:<input class='Form_Value' type='number'>
+					<p class="FromTime"> 
+						From <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
+					<p class="ToTime"> 
+					To <input class='Form_Value' type='number' min='0' max='23'>:
+							<input class='Form_Value' type='number' min='0' max='59'>
+					</p>
 				</div>
 			</div>
 

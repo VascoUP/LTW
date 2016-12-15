@@ -385,19 +385,44 @@ function updateReviews() {
 		}
 	});
 
-	$insertHtml = "<div class='RestaurantRevie'> \
-						<div>\
-							<p>\
+/*
+<div class="ReviewInfo">
+	<p class="ReviewUsername">
+	<?php
+		echo $review['Username'];
+	?>
+	</p>
+	<p class="ReviewScore">
+	<?php
+		echo $review['Score'];
+	?>
+	</p>
+	<p class="GeneralDate">
+	<?php
+		echo $review['DateReview'];
+	?>
+	</p>
+	<div class="GeneralContent">
+	<?php
+		echo $review['Content'];
+	?>
+	</div>
+</div>
+
+*/
+	$insertHtml = "<div class='RestaurantReview'> \
+						<div class='ReviewInfo'>\
+							<p class='ReviewUsername'>\
 								" + $result['username'] + "\
 							</p>\
-							<p>\
+							<p class='ReviewScore'>\
 								" + $score + "\
 							</p>\
-							<p>\
+							<p class='GeneralDate'>\
 								" + $result['Date'] + "\
 							</p>\
 						</div>\
-						<div>\
+						<div class='GeneralContent'>\
 							" + $review + "\
 						</div>\
 					</div>";

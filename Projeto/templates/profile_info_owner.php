@@ -8,7 +8,7 @@
 
 <div class="profile_content">
 	<div class="dashboard" id="left-dashboard">
-		<div class="Curved_Edges Default_Info_Box">
+		<div id="UserGeneralInfo" class="Curved_Edges Default_Info_Box">
 			<div id="profile-photo">
 			<?php
 				$picture = $userInfo['ProfilePicture'];
@@ -49,7 +49,7 @@
 		</div>
 	</div>
 	
-	<div class="dashboard Curved_Edges Default_Info_Box" id="main">
+	<div class="dashboard Curved_Edges" id="main">
 	<?php			
 		include ('templates/listOwnerRestaurants.php');
 	?>
