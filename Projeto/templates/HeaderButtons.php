@@ -20,8 +20,10 @@
 		<?php } } else if($pageType == "ownerprofile" || $pageType == "userprofile") {
 					$username = substr($currentURL, strripos($currentURL, "?") + 10);
 					if($_SESSION['username'] == $username) {
+						if(isUserOwner($username)) {
 		?>
 					<img id="AddRestaurant" src="images/add-restaurant.png" class="HeaderButton" onclick="addRestaurant()" />
+		<?php } ?>
 
 					<img id="EditProfile" src="images/edit.png" class="HeaderButton" onclick="editProfile()" />
 

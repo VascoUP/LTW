@@ -1,7 +1,6 @@
 <?php
 	include_once('config/init.php');  
 	include ('templates/head.php');
-	include ('Database/restaurant.php');
 ?>
 <!-- Include scripts here -->
 	<script src="scripts/search.js"></script>	

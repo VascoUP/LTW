@@ -1,5 +1,7 @@
 <?php
 	include_once('config/init.php');
+	include_once('Database/restaurant.php');
+	include_once('Database/user.php');
 
 	if(isset($_SESSION['username'])) {
 		$stmt = $conn->prepare('SELECT ProfilePicture FROM User WHERE username = ? LIMIT 1');

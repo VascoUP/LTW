@@ -1,7 +1,4 @@
 <?php
-	include('Database/user.php');
-	include('Database/restaurant.php');
-
 	$username = $_GET['username'];
 	$userInfo = getUserInfoPhp($username);
 	if( !$userInfo )
@@ -16,7 +13,7 @@
 			<div id="profile-photo">
 			<?php
 				$picture = $userInfo['ProfilePicture'];
-				if($picture = 'NULL') {
+				if($picture == 'NULL') {
 					echo "<img src='images/no-user-image.jpg' alt='profilePic' height='75' width='75'>";
 				}
 				else 
