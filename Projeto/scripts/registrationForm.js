@@ -135,7 +135,6 @@ function updateProfile() {
 			return false;
 		}
 	}
-	console.log("1");
 
 	$.ajax({
 		type:"POST",
@@ -149,8 +148,14 @@ function updateProfile() {
 			firstname: document.getElementById('reg-first-name').value,
 			lastname: document.getElementById('reg-last-name').value,
 			email: document.getElementById('reg-email').value
-		}, success: function() {}
+		}, success: function() {
+			console.log("Success");
+			
+		}, error: function(exception){
+			alert('Exeption:'+exception);
+		}
 	});
+	console.log("2");
 
 	return true;
 }

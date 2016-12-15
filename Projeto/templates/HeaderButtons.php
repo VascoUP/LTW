@@ -2,9 +2,9 @@
 	<?php 
 		if(!isset($_SESSION['username'])) {
 	?>
-			<img id="HeaderRegister" class="HeaderButton" src="images/ResgisterIcon.png" onclick="registerButton()">
+			<img id="HeaderRegister" alt="Register" class="HeaderButton" src="images/ResgisterIcon.png" onclick="registerButton()">
 
-			<img id="HeaderLogin" class="HeaderButton" src="images/LoginIcon.png" onclick="loginButton()">
+			<img id="HeaderLogin" alt="Login" class="HeaderButton" src="images/LoginIcon.png" onclick="loginButton()">
 	<?php
 		} else {
 	?>
@@ -22,10 +22,10 @@
 					if($_SESSION['username'] == $username) {
 						if(isUserOwner($username)) {
 		?>
-					<img id="AddRestaurant" src="images/add-restaurant.png" class="HeaderButton" onclick="addRestaurant()" />
+					<img id="AddRestaurant" alt="Add Restaurant" src="images/add-restaurant.png" class="HeaderButton" onclick="addRestaurant()" />
 		<?php } ?>
 
-					<img id="EditProfile" src="images/edit.png" class="HeaderButton" onclick="editProfile()" />
+					<img id="EditProfile" alt="Edit profile" src="images/edit.png" class="HeaderButton" onclick="editProfile()" />
 
 
 		<?php } } ?>

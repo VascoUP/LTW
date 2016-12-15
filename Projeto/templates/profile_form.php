@@ -1,7 +1,7 @@
 <?php
 	$username = $_SESSION['username'];
-	if( !$username )
-        header ('Location: initial.php');
+	if( !$username || $username != $_GET['username'])
+        	header ('Location: Error.php');
 
 	$userInfo = getUserInfoPhp($username);
 	$userReviews = getUserReviews($username);

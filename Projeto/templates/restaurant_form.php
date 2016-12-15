@@ -1,20 +1,20 @@
 <?php
+		
 	if(isset($_GET['id']))
 		$exists = true;
 	else 
 		$exists = false;
 
-	if(isset($_GET['id'])) {
+	if( !isset($_SESSION['username']) || ( $exists && !isRestaurantOwner($_SESSION['username']) ) )
+		header ('Location: Error.php');
+
+	if($exists) {			
 		$restaurantID = $_GET['id'];
 		$restaurant = getRestaurantInfo($restaurantID);
 		$restaurantAddress = getAddress($restaurant['Address_ID']);
 		$restaurantCategories = getRestaurantCategories($restaurantID);
 		$restaurantOpenHours = getRestaurantOpenHours($restaurantID);
 		$restaurantMenus = getMenus($restaurantID);
-	}
-
-	if(isset($_GET['username'])) {
-		$username = $_GET['username'];
 	}
 ?>
 

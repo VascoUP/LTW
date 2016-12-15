@@ -8,7 +8,7 @@
 		$stmt->execute(array($_SESSION['username']));
 
 		$result = $stmt->fetch();
-		if( !$result['ProfilePicture'] )
+		if( !$result['ProfilePicture'] || $result['ProfilePicture'] == "NULL" )
 			$url = "images/no-user-image.jpg";
 		else
 			$url = "Database/ProfilePictures/Thumbnail/".$result['ProfilePicture'];

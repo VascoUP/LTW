@@ -1,7 +1,6 @@
 <?php
   if(isset($_POST['action']) && function_exists($_POST['action'])) {
     $action = $_POST['action'];
-    echo $action;
     switch($action) {
 
       case 'verifyUser':
@@ -95,7 +94,6 @@
 
   function isUserTaken($username) {
     require_once('connection.php');
-    echo "Linked in isUserTaken";
 
     if(isset($_SESSION['username']) && $username == $_SESSION['username']) {
       echo 'This username is available.';
@@ -290,11 +288,7 @@
   }
 
   function updateProfile($image, $username, $firstName, $lastName, $email, $password) {
-    echo "updateProfile";
     require_once('connection.php');
-
-    if($conn)
-      echo "Linked in updateProfile!";
 
     $extension = "";
     if (isset($image)) {
@@ -330,7 +324,6 @@
       updateProfilePicture("$username$extension");
     }
 
-    echo "$extension";
     updateFirstName($firstName);
     updateLastName($lastName);
     updateEmail($email);
